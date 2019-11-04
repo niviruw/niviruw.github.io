@@ -1,0 +1,363 @@
+html body{
+   height: 100%;
+    font-family: sans-serif;
+}
+*{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+  background-image: white;
+}
+.menu ul{
+    display: table;
+    top: 0;
+    right: 0;
+    margin: 50px;
+    position: absolute;
+}
+.menu ul li{
+    display: table-cell;
+    margin: 0 20px;
+    color: black;
+    cursor: pointer;
+    position: relative;
+}
+.menu ul li a{
+    display: inline-block;
+    margin: 0 20px;
+    color: black;
+    cursor: pointer;
+    position: relative;
+}
+.menu ul li a:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: black;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.menu ul li a:hover:after {
+  width: 100%;
+  left: 0;
+}
+/*
+.logo img{
+  width: 30px;
+  margin-top: -7px;
+  margin-right: 48px;
+}
+*/
+.active {
+  color: blue;
+}
+/*
+.signup-btn {
+  top: 40px;
+  right: 80px;
+  position: absolute;
+  text-decoration: none;
+  color: #fff;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background-image: linear-gradient(#42455A, #42455A), radial-gradient(circle at top left, #fd00da, #19d7f8);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+.signup-btn span{
+    display: block;
+    padding: 8px 22px;
+}
+*/
+.banner {
+/*    text-align: center;*/
+    width: 80%;
+    height: 70%;
+    top: 35%;
+    left: 130px;
+    position: absolute;
+    color: #fff;
+}
+.app-text h1{
+    font-size: 43px;
+    width: 640px;
+    position: relative;
+    margin-left: 500px;
+    color: black;
+}
+/*
+.typewriter {
+    font-family: Courier, monospace;
+	display: inline-block;
+}
+
+.typewriter h1{
+    display: inline-block;
+  	overflow: hidden;
+  	letter-spacing: 2px;
+ 	animation: typing 1s steps(30, end), blink .75s step-end infinite;
+    white-space: nowrap;
+    font-size: 35px;
+    font-weight: 700;
+    border-right: 4px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    height: 7%;
+}
+
+@keyframes typing {
+    from {
+        width: 0%
+    }
+    to {
+        width: 100%
+    }
+}
+
+@keyframes blink {
+    from, to {
+        border-color: transparent
+    }
+    50% {
+        border-color: crimson;
+    }
+}
+*/
+.app-text p{
+    width: 650px;
+    font-size: 15px;
+    line-height: 25px;
+    color: #000000;
+    margin: 20px 500px;
+/*
+    margin-left: 28%;
+    margin-top: 1%;
+*/
+
+}
+.profile-pic {
+    position: relative;
+    top: -50%;
+/*
+    top: -30%;
+    left: 35%;
+*/
+}
+.profile-pic img {
+    border-radius: 15px;
+    width: 25%;
+    margin-top: -40px;
+    margin-left: 50px;
+}
+
+.about: link {
+    color: black;
+    text-decoration: none;
+}
+.about:visited {
+    color: black;
+    text-decoration: none;
+}
+.about:hover {
+    color: red;
+}
+.about:active {
+    color: red;
+}
+.experience:link {
+    color: black;
+    text-decoration: none;
+}
+.experience:visited {
+    color: black;
+    text-decoration: none;
+}
+.experience:hover {
+    color:red;
+}
+.experience:active {
+    color: red;
+}
+.contact:link {
+    color: black;
+    text-decoration: none;
+}
+.contact:visited {
+    color: black;
+    text-decoration: none;
+}
+.contact:hover {
+    color:red;
+}
+.contact:active {
+    color: red;
+}
+
+
+/*
+.play-btn-inner {
+    height: 50px;
+    width: 50px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background-image: linear-gradient(#42455A, #42455A), radial-gradient(circle at top left, #fd00da, #19d7f8);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    text-align: center;
+}
+.play-btn-inner .fa{
+    padding: 18px 0;
+    font-size: 13px;
+    cursor: pointer;
+}
+small {
+    margin: auto 20px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #19dafa;
+
+}
+*/
+*/
+/*
+.quick-links {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(to right, #db1bf6, #19d7f8);
+}
+.quick-links ul{
+    display: inline-flex;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.quick-links ul li{
+    list-style: none;
+    margin: 0 50px;
+    cursor: pointer;
+}
+.quick-links ul li .fa{
+    font-size: 25px;
+    color: #fff;
+}
+.quick-links ul li p{
+    margin-top: 15px;
+    font-size: 10px;
+    color: #000000;
+}
+*/
+/*
+.social-icons {
+    position: absolute;
+    color: #000000;
+}
+.social-icons ul li {
+    font-size: 30px;
+    display: inline-block;
+    margin-left: 20px;
+}
+.social-icons ul li a{
+    top: 50%;
+    color: black;
+    border-radius: 60px;
+    border: 1px solid black;
+    padding: 7px;
+    display: block;
+}
+*/
+.fa-envelope:hover {
+    background-color: lightcoral;
+    border-radius: 60px;
+    border: 1px solid black;
+    padding: 7px;
+}
+/*
+.fa-twitter:hover {
+    background-color:dodgerblue;
+    border-radius: 60px;
+    border: 1px solid black;
+    padding: 7px;
+}
+*/
+/*
+.fa-instagram:hover {
+    background-image: linear-gradient(#7e2eeb, #faa837);
+    border-radius: 60px;
+    border: 1px solid black;
+    padding: 7px;
+}
+*/
+/*
+.fa-linkedin:hover {
+    background-color:dodgerblue;
+    border-radius: 60px;
+    border: 1px solid black;
+    padding: 7px;
+}
+*/
+
+#Capa_1 {
+    width: 100px;
+    left: 47%;
+    top: 32%;
+    position: absolute;
+    display: block;
+}
+.glasses {
+    fill-opacity: 10%;
+    stroke: red;
+    stroke-width: 1px;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 2000;
+}
+.glasses {
+    animation: man 6s ease-in-out;
+}
+@keyframes man
+{
+    0%
+    {
+        stroke-dashoffset: 2000;
+    }
+    100%
+    {
+        stroke-dashoffset: 0;
+    }
+}
+
+/*
+.sm {
+    position: absolute;
+    right:37%;
+    bottom: 35%;
+
+}
+.sm a {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    background: black;
+    color: white;
+    margin: -30 6px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    font-size: 24px;
+}
+
+.sm a:hover{
+    background: red;
+    transform: scale(1.3);
+}
+*/
