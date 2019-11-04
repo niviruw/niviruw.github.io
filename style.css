@@ -145,6 +145,7 @@ html body{
     display: block;
 }
 .glasses {
+    position: relative;
     fill-opacity: 10%;
     stroke: red;
     stroke-width: 1px;
