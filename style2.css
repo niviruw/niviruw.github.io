@@ -7,7 +7,7 @@ body {
   background: #000;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
   top:50vh;
-  left: 30vh;
+  left: 15vh;
   position: fixed;
   border-radius: 10px;
   overflow: hidden;
@@ -184,7 +184,7 @@ body {
   background: black;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
   top: 50vh;
-  left: 66vw;
+  left: 65vw;
   position: fixed;
   border-radius: 10px;
   overflow: hidden;
