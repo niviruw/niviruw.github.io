@@ -139,12 +139,12 @@ html body{
     color: red;
 }
 
-.fa-envelope:hover {
+/* .fa-envelope:hover {
     background-color: lightcoral;
     border-radius: 60px;
     border: 1px solid black;
     padding: 7px;
-}
+} */
 #Capa_1 {
     width: 100px;
     position: fixed;
