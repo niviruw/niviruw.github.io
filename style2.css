@@ -85,13 +85,13 @@ body {
   background-image: linear-gradient(#ffffff, #000);
 }
 .card2 {
-  width: 360px;
+  width: 400px;
   height: 360px;
   background: #000;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
   top: 50vh;
   left: 40vw;
-  
+
   border-radius: 10px;
   overflow: hidden;
 }
