@@ -87,7 +87,7 @@ html body{
 }
 .profile-pic {
     position: relative;
-    top: -10vh;
+    top: 0vh;
 }
 .profile-pic img {
     border-radius: 15px;
