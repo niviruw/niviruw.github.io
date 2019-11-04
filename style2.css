@@ -6,14 +6,14 @@ body {
     height: 360px;
     background: #000;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    margin: 28% 15%;
-    position: relative;
+    top:50vh;
+    left: 30vh;
+    position: fixed;
     border-radius: 10px;
     overflow: hidden;
 }
 .card1 span {
     height: 100%;
-    left: 0;
     background: url(boardwalk.jpg);
     position: absolute;
     transition: 1s;
@@ -92,14 +92,14 @@ body {
     height: 360px;
     background: #000;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    margin: -49.6% 40%;
-    position: relative;
+    top: 50vh;
+    left: 40vw;
+    position: fixed;
     border-radius: 10px;
     overflow: hidden;
 }
 .card2 span {
     height: 100%;
-    left: 0;
     background: url(neuron.jpg);
     position: absolute;
     transition: 1s;
@@ -170,13 +170,22 @@ body {
 .read-more:hover {
     background-image: linear-gradient(#ffffff, #000);
 }
+
+
+
+
+
+
+
+
 .card3 {
     width: 360px;
     height: 360px;
     background: black;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    margin: 28% 65%;
-    position: relative;
+    top: 50vh;
+    left: 66vw;
+    position: fixed;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -253,6 +262,8 @@ body {
 .read-more:hover {
     background-image: linear-gradient(#ffffff, #000);
 }
+
+
 .experience {
     top:10%;
     left: 10%;
