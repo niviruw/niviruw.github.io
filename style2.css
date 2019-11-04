@@ -87,12 +87,11 @@ body {
 .card2 {
   width: 360px;
   height: 360px;
-  background: #000;
+  background: black;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-  position: fixed;
   top: 50vh;
   left: 40vw;
-
+  position: fixed;
   border-radius: 10px;
   overflow: hidden;
 }
