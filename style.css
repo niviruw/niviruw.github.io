@@ -158,6 +158,7 @@ html body{
     margin-top: -40px;
     margin-left: 50px;
 }
+
 .about: link {
     color: black;
     text-decoration: none;
@@ -334,10 +335,11 @@ small {
     }
 }
 
+/*
 .sm {
     position: absolute;
     right:37%;
-    bottom: 28%;
+    bottom: 35%;
 
 }
 .sm a {
@@ -358,3 +360,4 @@ small {
     background: red;
     transform: scale(1.3);
 }
+*/
