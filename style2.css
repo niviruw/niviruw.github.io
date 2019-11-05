@@ -1,270 +1,578 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 body {
-    font-family: sans-serif;
+    font-family: Helvetica;
 }
+.box {
+    border-radius: 50px;
+    position: relative;
+    left: 50vw;
+    width: 360px;
+    height: 360px;
+    background: white;
+    box-shadow: 0 30px 30px rgba(0,0,0,0.5)
+}
+.box .imgBx {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.box .imgBx img {
+    border-radius: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+.box:hover .imgBx img {
+    opacity: 0;
+}
+.box .imgcontent {
+    position: absolute;
+    height: 60px;
+    left: 10%;
+    width: 80%;
+    bottom: 20px;
+    height: 60px;
+    background: white;
+    transition: 0.5s;
+    overflow: hidden;
+    border-radius: 50px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+.box:hover .imgcontent {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+}
+.box .imgcontent h1 {
+    color: black;
+    position: relative;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+.box .imgcontent p{
+    color: grey;
+    margin: 70px 0 0;
+    padding: 0;
+    opacity: 0;
+    line-height: 1.2em;
+    transition: 0.5s;
+    text-align: justify;
+
+}
+.box:hover .imgcontent p {
+    opacity: 1;
+    transition-delay: 0.5s;
+}
+
+
+/*
+ hover blur effect
+.cards:hover .card1 {
+    filter: blur(5px);
+    transform: scale(0.8);
+}
+.cards:hover .card2 {
+    filter: blur(5px);
+    transform: scale(0.8);
+}
+.cards:hover .card3 {
+    filter: blur(5px);
+    transform: scale(0.8);
+}
+.cards .card1:hover {
+    filter: blur(0);
+    transform: scale(1.15);
+}
+.cards .card2:hover {
+    filter: blur(0);
+    transform: scale(1.15);
+}
+.cards .card3:hover {
+    filter: blur(0);
+    transform: scale(1.15);
+}
+
+ hover blur effect
+.cards2:hover .card4 {
+    filter: blur(5px);
+    transform: scale(0.8);
+}
+.cards2:hover .card5 {
+    filter: blur(5px);
+    transform: scale(0.8);
+}
+.cards2 .card4:hover {
+    filter: blur(0px);
+    transform: scale(1.15);
+}
+.cards2 .card5:hover {
+    filter: blur(0);
+    transform: scale(1.15);
+}
+*/
+
+
+/* actual cards */
 .card1 {
-  width: 360px;
-  height: 360px;
-  background: #000;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-  top:50vh;
-  left: 15vw;
-  position: fixed;
-  border-radius: 10px;
-  overflow: hidden;
+    width: 360px;
+    height: 360px;
+    background: #000;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    top:52vh;
+    left: 15vw;
+    position: absolute;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.card1:hover {
+    transform: scale(1.15);
 }
 .card1 span {
-  height: 100%;
-  background: url(boardwalk.jpg);
-  position: absolute;
-  transition: 1s;
+    height: 100%;
+    background: url(boardwalk.jpg);
+    position: absolute;
+    transition: 1s;
 }
 .card1 span:nth-child(1) {
-  z-index: 10;
-  width: 25%;
-  transition-delay: 0s;
+    z-index: 10;
+    width: 25%;
+    transition-delay: 0s;
 }
 .card1 span:nth-child(2) {
-  z-index: 9;
-  width: 50%;
-  transition-delay: 0;
+    z-index: 9;
+    width: 50%;
+    transition-delay: 0;
 }
 .card1 span:nth-child(3) {
-  z-index: 8;
-  width: 75%;
-  transition-delay: 0;
+    z-index: 8;
+    width: 75%;
+    transition-delay: 0;
 }
 .card1 span:nth-child(4) {
-  z-index: 7;
-  width: 100%;
-  transition-delay: 0;
+    z-index: 7;
+    width: 100%;
+    transition-delay: 0;
 }
 .card1:hover span {
-  transform: translateY(-100%);
-  transition: 1s;
+    transform: translateY(-100%);
+    transition: 1s;
 }
 .card1:hover span:nth-child(1){
-  transition-delay: 0s;
+    transition-delay: 0s;
 }
 .card1:hover span:nth-child(2){
-  transition-delay: 0s;
+    transition-delay: 0s;
 }
 .card1:hover span:nth-child(3){
-  transition-delay: 0s;
+    transition-delay: 0s;
 }
 .card1:hover span:nth-child(4){
-  transition-delay: 0s;
+    transition-delay: 0s;
 }
 .content1 {
-  color: white;
-  text-align: center;
-  padding: 100px 30px;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  transform: translateY(100%);
-  transition: 2s;
+    color: white;
+    text-align: center;
+    padding: 100px 30px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: 2s;
 }
 .content1 p {
-  margin: 20px auto;
-  color: grey;
+    margin: 20px auto;
+    color: grey;
 }
 .content1 a {
-  width: 100px;
-  text-decoration: none;
-  border-radius: 50px;
-  border: 1px solid white;
-  display: block;
-  margin: 20px auto;
-  padding: 10px;
-  color: white;
+    width: 100px;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 1px solid white;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    color: white;
 }
 .card1:hover .content1 {
-  transform: translateY(0%);
+    transform: translateY(0%);
 }
 .read-more:hover {
-  background-image: linear-gradient(#ffffff, #000);
+    background-image: linear-gradient(#ffffff, #000);
 }
+
+
+
 .card2 {
-  width: 360px;
-  height: 360px;
-  background: #000;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-  top:50vh;
-  left: 40vw;
-  position: fixed;
-  border-radius: 10px;
-  overflow: hidden;
+    width: 360px;
+    height: 360px;
+    background: #000;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    top: 52vh;
+    left: 40vw;
+    position: absolute;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.card2:hover {
+    transform: scale(1.15);
 }
 .card2 span {
-  height: 100%;
-  background: url(neuron.jpg);
-  position: absolute;
-  transition: 1s;
+    height: 100%;
+    background: url(neuron.jpg);
+    position: absolute;
+    transition: 1s;
 }
 .card2 span:nth-child(1) {
-  z-index: 10;
-  width: 25%;
-  transition-delay: 0s;
+    z-index: 10;
+    width: 25%;
+    transition-delay: 0s;
 }
 .card2 span:nth-child(2) {
-  z-index: 9;
-  width: 50%;
-  transition-delay: 0.3s;
+    z-index: 9;
+    width: 50%;
+    transition-delay: 0.3s;
 }
 .card2 span:nth-child(3) {
-  z-index: 8;
-  width: 75%;
-  transition-delay: 0.6s;
+    z-index: 8;
+    width: 75%;
+    transition-delay: 0.6s;
 }
 .card2 span:nth-child(4) {
-  z-index: 7;
-  width: 100%;
-  transition-delay: 0.8s;
+    z-index: 7;
+    width: 100%;
+    transition-delay: 0.8s;
 }
 .card2:hover span {
-  transform: translateY(-100%);
-  transition: 1s;
+    transform: translateY(-100%);
+    transition: 1s;
 }
 .card2:hover span:nth-child(1){
-  transition-delay: 0.8s;
+    transition-delay: 0.8s;
 }
 .card2:hover span:nth-child(2){
-  transition-delay: 0.6s;
+    transition-delay: 0.6s;
 }
 .card2:hover span:nth-child(3){
-  transition-delay: 0.3s;
+    transition-delay: 0.3s;
 }
 .card2:hover span:nth-child(4){
-  transition-delay: 0;
+    transition-delay: 0;
 }
 .content2 {
-  color: white;
-  text-align: center;
-  padding: 50px 30px;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  transform: translateY(100%);
-  transition: 2s;
+    color: white;
+    text-align: center;
+    padding: 50px 30px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: 2s;
 }
 .content2 p {
-  margin: 20px auto;
-  color: grey;
+    margin: 20px auto;
+    color: grey;
 }
 .content2 a {
-  width: 100px;
-  text-decoration: none;
-  border-radius: 50px;
-  border: 1px solid white;
-  display: block;
-  margin: 20px auto;
-  padding: 10px;
-  color: white;
+    width: 100px;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 1px solid white;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    color: white;
 }
 .card2:hover .content2 {
-  transform: translateY(0%);
+    transform: translateY(0%);
 }
 .read-more:hover {
-  background-image: linear-gradient(#ffffff, #000);
+    background-image: linear-gradient(#ffffff, #000);
 }
+
 .card3 {
-  width: 360px;
-  height: 360px;
-  background: black;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-  top: 50vh;
-  left: 65vw;
-  position: fixed;
-  border-radius: 10px;
-  overflow: hidden;
+    width: 360px;
+    height: 360px;
+    background: black;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    top: 52vh;
+    left: 65vw;
+    position: absolute;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.card3:hover {
+    transform: scale(1.15);
 }
 .card3 span {
-  height: 100%;
-  left: 0;
-  background: url(cogwebsite.jpg);
-  position: absolute;
-  transition: 1s;
+    height: 100%;
+    left: 0;
+    background: url(cogwebsite.jpg);
+    position: absolute;
+    transition: 1s;
 }
 .card3 span:nth-child(1) {
-  z-index: 10;
-  width: 25%;
-  transition-delay: 0s;
+    z-index: 10;
+    width: 25%;
+    transition-delay: 0s;
 }
 .card3 span:nth-child(2) {
-  z-index: 9;
-  width: 50%;
-  transition-delay: 0.3s;
+    z-index: 9;
+    width: 50%;
+    transition-delay: 0.3s;
 }
 .card3 span:nth-child(3) {
-  z-index: 8;
-  width: 75%;
-  transition-delay: 0.6s;
+    z-index: 8;
+    width: 75%;
+    transition-delay: 0.6s;
 }
 .card3 span:nth-child(4) {
-  z-index: 7;
-  width: 100%;
-  transition-delay: 0.8s;
+    z-index: 7;
+    width: 100%;
+    transition-delay: 0.8s;
 }
 .card3:hover span {
-  transform: translateY(-100%);
-  transition: 1s;
+    transform: translateY(-100%);
+    transition: 1s;
 }
 .card3:hover span:nth-child(1){
-  transition-delay: 0.8s;
+    transition-delay: 0.8s;
 }
 .card3:hover span:nth-child(2){
-  transition-delay: 0.6s;
+    transition-delay: 0.6s;
 }
 .card3:hover span:nth-child(3){
-  transition-delay: 0.3s;
+    transition-delay: 0.3s;
 }
 .card3:hover span:nth-child(4){
-  transition-delay: 0;
+    transition-delay: 0;
 }
 .content3 {
-  color: white;
-  text-align: center;
-  padding: 50px 30px;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  transform: translateY(100%);
-  transition: 2s;
+    color: white;
+    text-align: center;
+    padding: 50px 30px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: 2s;
 }
 .content3 p {
-  margin: 20px auto;
-  color: grey;
+    margin: 20px auto;
+    color: grey;
 }
 .content3 a {
-  width: 100px;
-  text-decoration: none;
-  border-radius: 50px;
-  border: 1px solid white;
-  display: block;
-  margin: 20px auto;
-  padding: 10px;
-  color: white;
+    width: 100px;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 1px solid white;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    color: white;
 }
 .card3:hover .content3 {
-  transform: translateY(0%);
+    transform: translateY(0%);
 }
 .read-more:hover {
-  background-image: linear-gradient(#ffffff, #000);
+    background-image: linear-gradient(#ffffff, #000);
 }
 
+
+.card4 {
+    width: 360px;
+    height: 360px;
+    background: black;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    top: 110vh;
+    left: 15vw;
+    position: absolute;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.card4:hover {
+    transform: scale(1.15);
+}
+.card4 span {
+    height: 100%;
+    left: 0;
+    background: url(cogwebsite.jpg);
+    position: absolute;
+    transition: 1s;
+}
+.card4 span:nth-child(1) {
+    z-index: 10;
+    width: 25%;
+    transition-delay: 0s;
+}
+.card4 span:nth-child(2) {
+    z-index: 9;
+    width: 50%;
+    transition-delay: 0.3s;
+}
+.card4 span:nth-child(3) {
+    z-index: 8;
+    width: 75%;
+    transition-delay: 0.6s;
+}
+.card4 span:nth-child(4) {
+    z-index: 7;
+    width: 100%;
+    transition-delay: 0.8s;
+}
+.card4:hover span {
+    transform: translateY(-100%);
+    transition: 1s;
+}
+.card4:hover span:nth-child(1){
+    transition-delay: 0.8s;
+}
+.card4:hover span:nth-child(2){
+    transition-delay: 0.6s;
+}
+.card4:hover span:nth-child(3){
+    transition-delay: 0.3s;
+}
+.card4:hover span:nth-child(4){
+    transition-delay: 0;
+}
+.content4 {
+    color: white;
+    text-align: center;
+    padding: 50px 30px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: 2s;
+}
+.content4 p {
+    margin: 20px auto;
+    color: grey;
+}
+.content4 a {
+    width: 100px;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 1px solid white;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    color: white;
+}
+.card4:hover .content4 {
+    transform: translateY(0%);
+}
+.read-more:hover {
+    background-image: linear-gradient(#ffffff, #000);
+}
 
 .experience {
-  top:10%;
-  left: 10%;
-  position: absolute;
+    top:10vh;
+    left: 10vw;
+    position: absolute;
 }
 .clubs {
-  top: 40%;
-  left: 10%;
-  position: absolute;
+    top: 40vh;
+    left: 10vw;
+    position: absolute;
 }
-.hover {
-  top: 40%;
-  left: 20%;
-  position: absolute;
+.projects {
+    top: 100vh;
+    left: 10vw;
+    position: absolute;
+}
+
+.card5 {
+    width: 360px;
+    height: 360px;
+    background: black;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    top: 110vh;
+    left: 40vw;
+    position: absolute;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.card5:hover {
+    transform: scale(1.15);
+}
+.card5 span {
+    height: 100%;
+    left: 0;
+    background: url(cogwebsite.jpg);
+    position: absolute;
+    transition: 1s;
+}
+.card5 span:nth-child(1) {
+    z-index: 10;
+    width: 25%;
+    transition-delay: 0s;
+}
+.card5 span:nth-child(2) {
+    z-index: 9;
+    width: 50%;
+    transition-delay: 0.3s;
+}
+.card5 span:nth-child(3) {
+    z-index: 8;
+    width: 75%;
+    transition-delay: 0.6s;
+}
+.card5 span:nth-child(4) {
+    z-index: 7;
+    width: 100%;
+    transition-delay: 0.8s;
+}
+.card5:hover span {
+    transform: translateY(-100%);
+    transition: 1s;
+}
+.card5:hover span:nth-child(1){
+    transition-delay: 0.8s;
+}
+.card5:hover span:nth-child(2){
+    transition-delay: 0.6s;
+}
+.card5:hover span:nth-child(3){
+    transition-delay: 0.3s;
+}
+.card5:hover span:nth-child(4){
+    transition-delay: 0;
+}
+.content5 {
+    color: white;
+    text-align: center;
+    padding: 50px 30px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: 2s;
+}
+.content5 p {
+    margin: 20px auto;
+    color: grey;
+}
+.content5 a {
+    width: 100px;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 1px solid white;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    color: white;
+}
+.card5:hover .content5 {
+    transform: translateY(0%);
 }

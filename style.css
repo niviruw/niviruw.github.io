@@ -1,38 +1,37 @@
 html body{
    height: 100%;
-    font-family: sans-serif;
+    font-family: Helvetica;
 }
 *{
   margin: auto;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Helvetica;
 }
-
 .container{
-  width: 100%;
-  height: 100%;
-  background-image: white;
+    width: 100%;
+    height: 100%;
+    background-image: white;
 }
 .menu ul{
-  display: table;
-  top: 0;
-  right: 0;
-  margin: 50px;
-  position: absolute;
+    display: table;
+    top: 0;
+    right: 0;
+    margin: 50px;
+    position: absolute;
 }
 .menu ul li{
-  display: table-cell;
-  margin: 0 20px;
-  color: black;
-  cursor: pointer;
-  position: relative;
+    display: table-cell;
+    margin: 0 20px;
+    color: black;
+    cursor: pointer;
+    position: relative;
 }
 .menu ul li a{
-  display: inline-block;
-  margin: 0 20px;
-  color: black;
-  cursor: pointer;
-  position: relative;
+    display: inline-block;
+    margin: 0 20px;
+    color: black;
+    cursor: pointer;
+    position: relative;
 }
 .menu ul li a:after {
   background: none repeat scroll 0 0 transparent;
@@ -60,108 +59,107 @@ html body{
 
 .banner {
 /*    text-align: center;*/
-  width: 80%;
-  height: 70%;
-  top: 15vw;
-  left: 10vw;
-  position: absolute;
-  color: #fff;
+    width: 80%;
+    height: 70%;
+    top: 15vw;
+    left: 10vw;
+    position: absolute;
+    color: #fff;
 }
 .app-text h1{
-  font-size: 43px;
-  width: 640px;
-  position: fixed;
-  left: 37.5vw;
-  top: 30vh;
-  color: black;
+    font-size: 43px;
+    width: 640px;
+    position: fixed;
+    left: 37.5vw;
+    top: 30vh;
+    color: black;
 }
 
 .app-text p{
-  width: 650px;
-  font-size: 15px;
-  line-height: 25px;
-  color: #000000;
-  left: 37.5vw;
-  top: 40vh;
-  position: fixed;
+    width: 650px;
+    font-size: 15px;
+    line-height: 25px;
+    color: #000000;
+    left: 37.5vw;
+    top: 40vh;
+    position: fixed;
 }
 .profile-pic {
-  position: relative;
-  top: 0vh;
+    position: relative;
+    top: 0vh;
 }
 .profile-pic img {
-  border-radius: 15px;
-  width: 25%;
-  margin-top: -40px;
-  margin-left: 50px;
+    border-radius: 15px;
+    width: 25%;
+    margin-top: -40px;
+    margin-left: 50px;
 }
 
 .about: link {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 .about:visited {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 .about:hover {
-  color: red;
+    color: red;
 }
 .about:active {
-  color: red;
+    color: red;
 }
 .experience:link {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 .experience:visited {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 .experience:hover {
-  color:red;
+    color:red;
 }
 .experience:active {
-  color: red;
+    color: red;
 }
 .contact:link {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 .contact:visited {
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 .contact:hover {
-  color:red;
+    color:red;
 }
 .contact:active {
-  color: red;
+    color: red;
 }
 
-/* .fa-envelope:hover {
+.fa-envelope:hover {
     background-color: lightcoral;
     border-radius: 60px;
     border: 1px solid black;
     padding: 7px;
-} */
-
+}
 #Capa_1 {
-  width: 100px;
-  position: fixed;
-  left: 48vw;
-  top: 26.5vh;
-  display: block;
+    width: 100px;
+    position: fixed;
+    left: 48vw;
+    top: 26.5vh;
+    display: block;
 }
 .glasses {
-  fill-opacity: 10%;
-  stroke: red;
-  stroke-width: 1px;
-  stroke-dashoffset: 0;
-  stroke-dasharray: 2000;
+    fill-opacity: 10%;
+    stroke: red;
+    stroke-width: 1px;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 2000;
 }
 .glasses {
-  animation: man 6s ease-in-out;
+    animation: man 6s ease-in-out;
 }
 @keyframes man
 {
@@ -175,27 +173,108 @@ html body{
     }
 }
 
-.sm {
-  position: absolute;
-  right:37%;
-  bottom: 30%;
-
+.sm ul {
+    list-style: none;
+    position: absolute;
+    left:43vw;
+    bottom: 30vh;
+    display: flex
 }
-.sm a {
-  display: inline-flex;
-  width: 50px;
-  height: 50px;
-  background: black;
-  color: white;
-  margin: -30 6px;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-  transition: 0.4s;
-  font-size: 24px;
+.sm ul li a {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    background: red;
+    color: white;
+    margin: 25px;
+    border-radius: 0;
+
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    font-size: 30px;
+    transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(0,0);
+    transition: 0.5s;
+    box-shadow: -20px 20px 10px #434343;
+}
+.sm ul li a:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    height: 100%;
+    width: 20px;
+    background: #b10202;
+    transition: 0.5s;
+    transform: rotate(0deg) skewY(-45deg)
+}
+
+.sm ul li a:after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -10px;
+    height: 20px;
+    width: 100%;
+    background: #b10202;
+    transition: 0.5s;
+    transform: rotate(0deg) skewX(-45deg)
+}
+.sm ul li a:after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: -10px;
+    height: 20px;
+    width: 100%;
+    background: #b10202;
+    transition: 0.5s;
+    transform: rotate(0deg) skewX(-45deg)
 }
 
 .sm a:hover{
-  background: red;
-  transform: scale(1.3);
+    transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px);
+    box-shadow: -50px 50px 50px #434343;
+/*
+    background: red;
+    transform: scale(1.3);
+*/
+
+}
+
+.sm ul li:hover:nth-child(1) a {
+    background:#3b5999;
+}
+.sm ul li:hover:nth-child(1) a:before {
+    background:#2e4a86;
+}
+.sm ul li:hover:nth-child(1) a:after {
+    background:#2e4a86;
+}
+.sm ul li:hover:nth-child(2) a {
+    background:#1da1f2;
+}
+.sm ul li:hover:nth-child(2) a:before {
+    background:#4184b7;
+}
+.sm ul li:hover:nth-child(2) a:after {
+    background:#4d9fde;
+}
+.sm ul li:hover:nth-child(3) a{
+    background: #007bb5;
+}
+.sm ul li:hover:nth-child(3) a:before {
+    background:#036aa0;
+}
+.sm ul li:hover:nth-child(3) a:after {
+    background:#0d82bf;
+}
+.sm ul li:hover:nth-child(4) a{
+    background: black;
+}
+.sm ul li:hover:nth-child(4) a:before {
+    background:#141414;
+}
+.sm ul li:hover:nth-child(4) a:after {
+    background:#141414;
 }
