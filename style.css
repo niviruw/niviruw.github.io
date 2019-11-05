@@ -1,11 +1,12 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 html body{
    height: 100%;
-    font-family: Helvetica;
+    font-family: Montserrat, sans-serif;
 }
 *{
   margin: auto;
   padding: 0;
-  font-family: Helvetica;
+  font-family: Montserrat, sans-serif;
 }
 .container{
     width: 100%;
@@ -13,9 +14,10 @@ html body{
     background-image: white;
 }
 .menu ul{
+    font-size: 17px;
     display: table;
-    top: 0;
-    right: 0;
+    top: -5vh;
+    right: 0vw;
     margin: 50px;
     position: absolute;
 }
@@ -49,13 +51,12 @@ html body{
   width: 100%;
   left: 0;
 }
-/*
 .logo img{
-  width: 30px;
-  margin-top: -7px;
-  margin-right: 48px;
+    width: 50px;
+    position: relative;
+    top: 2vh;
+    left: -70vw;
 }
-*/
 
 .banner {
 /*    text-align: center;*/
@@ -69,29 +70,33 @@ html body{
 .app-text h1{
     font-size: 43px;
     width: 640px;
-    position: fixed;
-    left: 37.5vw;
-    top: 30vh;
+    position: absolute;
+    left: 27.5vw;
+    top: 0vh;
     color: black;
 }
+.app-text .bio{
 
-.app-text p{
-    width: 650px;
-    font-size: 15px;
-    line-height: 25px;
-    color: #000000;
-    left: 37.5vw;
-    top: 40vh;
-    position: fixed;
+    font-size: 18px;
+    line-height: 20px;
+    color: black;
+    left: 27.5vw;
+    top: 10vh;
+    position: absolute;
 }
+
+.app-text a:hover {
+    color: red;
+}
+
 .profile-pic {
     position: relative;
     top: 0vh;
 }
 .profile-pic img {
     border-radius: 15px;
-    width: 25%;
-    margin-top: -40px;
+    width: 28%;
+    margin-top: -80px;
     margin-left: 50px;
 }
 
@@ -138,17 +143,19 @@ html body{
     color: red;
 }
 
+/*
 .fa-envelope:hover {
     background-color: lightcoral;
     border-radius: 60px;
     border: 1px solid black;
     padding: 7px;
 }
+*/
 #Capa_1 {
     width: 100px;
-    position: fixed;
+    position: absolute;
     left: 48vw;
-    top: 26.5vh;
+    top: 26vh;
     display: block;
 }
 .glasses {
@@ -177,14 +184,14 @@ html body{
     list-style: none;
     position: absolute;
     left:43vw;
-    bottom: 30vh;
+    bottom: 38vh;
     display: flex
 }
 .sm ul li a {
     display: inline-flex;
     width: 50px;
     height: 50px;
-    background: red;
+    background: black;
     color: white;
     margin: 25px;
     border-radius: 0;
@@ -204,10 +211,11 @@ html body{
     left: -20px;
     height: 100%;
     width: 20px;
-    background: #b10202;
+    background: #1f1f1f;
     transition: 0.5s;
     transform: rotate(0deg) skewY(-45deg)
 }
+
 
 .sm ul li a:after {
     content: '';
@@ -216,25 +224,14 @@ html body{
     left: -10px;
     height: 20px;
     width: 100%;
-    background: #b10202;
-    transition: 0.5s;
-    transform: rotate(0deg) skewX(-45deg)
-}
-.sm ul li a:after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: -10px;
-    height: 20px;
-    width: 100%;
-    background: #b10202;
+    background: #1f1f1f;
     transition: 0.5s;
     transform: rotate(0deg) skewX(-45deg)
 }
 
 .sm a:hover{
     transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px);
-    box-shadow: -50px 50px 50px #434343;
+    box-shadow: -50px 50px 50px #000;
 /*
     background: red;
     transform: scale(1.3);
@@ -242,39 +239,48 @@ html body{
 
 }
 
-.sm ul li:hover:nth-child(1) a {
-    background:#3b5999;
+.sm ul li:hover:nth-child(1) a{
+    background: #2b6910;
 }
 .sm ul li:hover:nth-child(1) a:before {
-    background:#2e4a86;
+    background:#1e480b;
 }
 .sm ul li:hover:nth-child(1) a:after {
-    background:#2e4a86;
+    background:#1e480b;
 }
 .sm ul li:hover:nth-child(2) a {
-    background:#1da1f2;
+    background:#3b5999;
 }
 .sm ul li:hover:nth-child(2) a:before {
-    background:#4184b7;
+    background:#2e4a86;
 }
 .sm ul li:hover:nth-child(2) a:after {
-    background:#4d9fde;
+    background:#2e4a86;
 }
-.sm ul li:hover:nth-child(3) a{
-    background: #007bb5;
+.sm ul li:hover:nth-child(3) a {
+    background:#b23121;
 }
 .sm ul li:hover:nth-child(3) a:before {
-    background:#036aa0;
+    background:#a02b1c;
 }
 .sm ul li:hover:nth-child(3) a:after {
-    background:#0d82bf;
+    background:#a02b1c;
 }
 .sm ul li:hover:nth-child(4) a{
-    background: black;
+    background: #007bb5;
 }
 .sm ul li:hover:nth-child(4) a:before {
-    background:#141414;
+    background:#036aa0;
 }
 .sm ul li:hover:nth-child(4) a:after {
-    background:#141414;
+    background:#0d82bf;
+}
+.sm ul li:hover:nth-child(5) a{
+    background: #2b6910;
+}
+.sm ul li:hover:nth-child(5) a:before {
+    background:#1e480b;
+}
+.sm ul li:hover:nth-child(5) a:after {
+    background:#1e480b;
 }

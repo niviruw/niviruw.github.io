@@ -1,7 +1,57 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 body {
-    font-family: Helvetica;
+    font-family: Montserrat, sans-serif;
 }
+.menu ul{
+    font-size: 17px;
+    display: table;
+    top: -5vh;
+    right: 0vw;
+    margin: 50px;
+    position: absolute;
+}
+.menu ul li{
+    display: table-cell;
+    margin: 0 20px;
+    color: black;
+    cursor: pointer;
+    position: relative;
+}
+.menu ul li a{
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 20px;
+    color: black;
+    cursor: pointer;
+    position: relative;
+}
+.menu ul li a:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: black;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.menu ul li a:hover:after {
+  width: 100%;
+  left: 0;
+}
+.logo img{
+    width: 50px;
+    position: relative;
+    top: 2vh;
+    left: -70vw;
+}
+.menu ul li a:hover {
+    color: red;
+}
+/*
 .box {
     border-radius: 50px;
     position: relative;
@@ -73,6 +123,7 @@ body {
     opacity: 1;
     transition-delay: 0.5s;
 }
+*/
 
 
 /*
@@ -134,9 +185,7 @@ body {
     border-radius: 30px;
     overflow: hidden;
 }
-.card1:hover {
-    transform: scale(1.15);
-}
+
 .card1 span {
     height: 100%;
     background: url(boardwalk.jpg);
@@ -151,30 +200,30 @@ body {
 .card1 span:nth-child(2) {
     z-index: 9;
     width: 50%;
-    transition-delay: 0;
+    transition-delay: 0.3s;
 }
 .card1 span:nth-child(3) {
     z-index: 8;
     width: 75%;
-    transition-delay: 0;
+    transition-delay: 0.6s;
 }
 .card1 span:nth-child(4) {
     z-index: 7;
     width: 100%;
-    transition-delay: 0;
+    transition-delay: 0.8s;
 }
 .card1:hover span {
     transform: translateY(-100%);
     transition: 1s;
 }
 .card1:hover span:nth-child(1){
-    transition-delay: 0s;
+    transition-delay: 0.8s;
 }
 .card1:hover span:nth-child(2){
-    transition-delay: 0s;
+    transition-delay: 0.6s;
 }
 .card1:hover span:nth-child(3){
-    transition-delay: 0s;
+    transition-delay: 0.3s;
 }
 .card1:hover span:nth-child(4){
     transition-delay: 0s;
@@ -223,9 +272,7 @@ body {
     border-radius: 30px;
     overflow: hidden;
 }
-.card2:hover {
-    transform: scale(1.15);
-}
+
 .card2 span {
     height: 100%;
     background: url(neuron.jpg);
@@ -310,9 +357,7 @@ body {
     border-radius: 30px;
     overflow: hidden;
 }
-.card3:hover {
-    transform: scale(1.15);
-}
+
 .card3 span {
     height: 100%;
     left: 0;
@@ -399,9 +444,7 @@ body {
     border-radius: 30px;
     overflow: hidden;
 }
-.card4:hover {
-    transform: scale(1.15);
-}
+
 .card4 span {
     height: 100%;
     left: 0;
@@ -476,8 +519,15 @@ body {
     background-image: linear-gradient(#ffffff, #000);
 }
 
-.experience {
+.headers .experience {
     top:10vh;
+    left: 10vw;
+    position: absolute;
+}
+.headers .experience-p {
+
+    font-size: 20px;
+    top: 15vh;
     left: 10vw;
     position: absolute;
 }
@@ -503,9 +553,7 @@ body {
     border-radius: 30px;
     overflow: hidden;
 }
-.card5:hover {
-    transform: scale(1.15);
-}
+
 .card5 span {
     height: 100%;
     left: 0;
