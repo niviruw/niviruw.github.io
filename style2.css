@@ -10,8 +10,11 @@ body {
     display: flex;
     flex-wrap: wrap;
     left: 17vw;
-    top: 45vh;
-    align-items:center;
+    top: 55vh;
+    justify-content: center;
+    align-content: center;
+
+
 }
 .header-text {
     color: white;
@@ -237,5 +240,5 @@ body {
 .headers .clubs {
     position: absolute;
     left: 10vw;
-    top: 40vh;
+    top: 50vh;
 }

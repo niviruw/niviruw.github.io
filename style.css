@@ -53,13 +53,36 @@ html body{
 }
 
 /*------------Social Media-----------------_*/
+/*
+.sm {
+    position: sticky;
+
+}
+*/
+/*
+.sm {
+    position: fixed;
+    top: 27vh;
+    height: auto;
+    width: auto;
+
+}
+*/
 .sm ul {
     list-style: none;
-    position: absolute;
-    left:44vw;
-    bottom: 25vh;
     display: flex;
-    margin: 0 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 80vh;
+    left: 25vw;
+/*
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+*/
+/*    display: flex;*/
+/*    margin: 0 auto;*/
 }
 .sm ul li a {
     text-decoration: none;
@@ -103,7 +126,7 @@ html body{
 }
 
 .sm a:hover{
-    transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px);
+    transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, 20px);
     box-shadow: -50px 50px 50px #000;
 }
 .sm ul li:hover:nth-child(1) a{
