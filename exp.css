@@ -1,0 +1,287 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+body {
+    background: white;
+    font-family: 'Montserrat', sans-serif;
+
+}
+/*
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #FFFF00;
+    color: #FFC0CB;
+}
+*/
+.nav-item a:hover {
+    color: #f03c3c !important;
+}
+.navbar-brand img {
+    width: 40px;
+}
+.cards {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    left: 17vw;
+    top: 55vh;
+    justify-content: center;
+    align-content: center;
+
+
+}
+.header-text {
+    color: white;
+}
+.cards p {
+    color: white;
+}
+.cardASME {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+    height: 360px;
+    border-radius: 30px;
+    background-color: black;
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    transition: 0.3s;
+    overflow: hidden;
+}
+.cardASME #image {
+    border-radius: 30px;
+/*
+    height: 100%;
+    background: url(boardwalk.jpg);
+    position: absolute;
+    transition: 1s;
+*/
+    height:100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: url(cogwebsite.jpg);
+    transition:1s;
+
+}
+.cards #image:nth-child(1) {
+    z-index: 10;
+    width: 25%;
+    transition-delay: 0s;
+}
+.cards #image:nth-child(2) {
+    z-index: 9;
+    width: 50%;
+    transition-delay: 0.3s;
+}
+.cards #image:nth-child(3) {
+    z-index: 8;
+    width: 75%;
+    transition-delay: 0.6s;
+}
+.cards #image:nth-child(4) {
+    z-index: 7;
+    width: 100%;
+    transition-delay: 0.8s;
+}
+.cardASME:hover #image {
+    transform: translateY(-100%);
+    transition: 1s;
+}
+.cardASME:hover #image:nth-child(1){
+    transition-delay: 0.8s;
+}
+.cardASME:hover #image:nth-child(2){
+    transition-delay: 0.6s;
+}
+.cardASME:hover #image:nth-child(3){
+    transition-delay: 0.3s;
+}
+.cardASME:hover #image:nth-child(4){
+    transition-delay: 0s;
+}
+.cardNEURO {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+    height: 360px;
+    border-radius: 30px;
+    background-color: black;
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    transition: 0.3s;
+    overflow: hidden;
+}
+.cardNEURO #image {
+    border-radius: 30px;
+/*
+    height: 100%;
+    background: url(boardwalk.jpg);
+    position: absolute;
+    transition: 1s;
+*/
+    height:100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: url(neuron.jpg);
+    transition:1s;
+}
+.cardNEURO:hover #image {
+    transform: translateY(-100%);
+    transition: 1s;
+}
+.cardNEURO:hover #image:nth-child(1){
+    transition-delay: 0.8s;
+}
+.cardNEURO:hover #image:nth-child(2){
+    transition-delay: 0.6s;
+}
+.cardNEURO:hover #image:nth-child(3){
+    transition-delay: 0.3s;
+}
+.cardNEURO:hover #image:nth-child(4){
+    transition-delay: 0s;
+}
+.cardMECH {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+    height: 360px;
+    border-radius: 30px;
+    background-color: black;
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    transition: 0.3s;
+    overflow: hidden;
+}
+.cardMECH #image {
+    border-radius: 30px;
+/*
+    height: 100%;
+    background: url(boardwalk.jpg);
+    position: absolute;
+    transition: 1s;
+*/
+    height:100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: url(boardwalk.jpg);
+    transition:1s;
+}
+.cardMECH:hover #image {
+    transform: translateY(-100%);
+    transition: 1s;
+}
+.cardMECH:hover #image:nth-child(1){
+    transition-delay: 0.8s;
+}
+.cardMECH:hover #image:nth-child(2){
+    transition-delay: 0.6s;
+}
+.cardMECH:hover #image:nth-child(3){
+    transition-delay: 0.3s;
+}
+.cardMECH:hover #image:nth-child(4){
+    transition-delay: 0s;
+}
+/*
+.img-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border: 6px solid #ddd;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    padding: 20px;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+}
+*/
+.header-text {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 48px;
+}
+.img-text {
+    font-family: 'Poppins';font-size: 22px;
+    padding-top: 20px;
+}
+.img-text p {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 30px;
+
+}
+.single-box:hover {
+    background: pink;
+}
+
+
+.headers .experience {
+    font-family: 'Poppins';font-size: 40px;
+    top:10vh;
+    left: 10vw;
+    position: absolute;
+    color: #f03c3c;
+    font-weight: 700;
+}
+.headers .experience-p {
+    font-size: 20px;
+    top: 18vh;
+    left: 10vw;
+    position: absolute;
+}
+.headers .clubs {
+    position: absolute;
+    left: 10vw;
+    top: 50vh;
+}
+
+
+@media (max-width:375px) {
+    .headers .experience {
+        font-family: 'Poppins';font-size: 40px;
+        top:10vh;
+        left: 23vw;
+        position: absolute;
+        color: #f03c3c;
+        font-weight: 700;
+    }
+    .headers .experience-p {
+        font-size: 20px;
+        top: 18vh;
+        left: 14vw;
+        position: absolute;
+    }
+    .headers .clubs {
+        position: absolute;
+        left: 35vw;
+        top: 60vh;
+    }
+    .cards {
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+        left: 0vw;
+        top: 68vh;
+        justify-content: center;
+        align-content: center;
+    }
+}
