@@ -48,7 +48,7 @@ html body{
 
 .profile-pic {
     position: relative;
-    top: 0vh;
+    top: -15vh;
     left: 5vw;
 }
 .img-responsive {
@@ -57,14 +57,14 @@ html body{
     height: auto;
 }
 .img-responsive-2 {
-    width: 50%
+    width: 50%;
     visibility: hidden;
 }
 #Capa_1 {
     width: 100px;
     position: absolute;
     left: 47vw;
-    top: 24vh;
+    top: 25vh;
     display: block;
 }
 .glasses {
