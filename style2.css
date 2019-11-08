@@ -1,6 +1,17 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 body {
     background: white;
+    font-family: 'Montserrat', sans-serif;
 
+}
+/*
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #FFFF00;
+    color: #FFC0CB;
+}
+*/
+.nav-item a:hover {
+    color: #f03c3c !important;
 }
 .navbar-brand img {
     width: 40px;
@@ -228,7 +239,7 @@ body {
     top:10vh;
     left: 10vw;
     position: absolute;
-    color: #c30000;
+    color: #f03c3c;
     font-weight: 700;
 }
 .headers .experience-p {
@@ -241,4 +252,36 @@ body {
     position: absolute;
     left: 10vw;
     top: 50vh;
+}
+
+
+@media (max-width:375px) {
+    .headers .experience {
+        font-family: 'Poppins';font-size: 40px;
+        top:10vh;
+        left: 23vw;
+        position: absolute;
+        color: #f03c3c;
+        font-weight: 700;
+    }
+    .headers .experience-p {
+        font-size: 20px;
+        top: 18vh;
+        left: 14vw;
+        position: absolute;
+    }
+    .headers .clubs {
+        position: absolute;
+        left: 35vw;
+        top: 60vh;
+    }
+    .cards {
+        position: absolute;
+        display: flex;
+        flex-wrap: wrap;
+        left: 0vw;
+        top: 68vh;
+        justify-content: center;
+        align-content: center;
+    }
 }
