@@ -1,0 +1,248 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+html body{
+   height: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+.navbar-brand img {
+    width: 40px;
+}
+.title {
+    font-size: 50px;
+    color: #f03c3c;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding-top: 10px;
+
+}
+.title-content {
+    font-size: 20px;
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.model-gel {
+    position: absolute;
+    left: 32vw;
+    top: 25vh;
+}
+.model-nogel {
+    position: absolute;
+    left: 47.15vw;
+    top: 25vh;
+}
+.model-frontview {
+    position: absolute;
+    left: 47vw;
+    top: 64.2vh;
+}
+.model-sideview {
+    position: absolute;
+    left: 58vw;
+    top: 64.2vh;
+}
+.problem {
+    color:#f03c3c;
+     display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding-top: 73vh;
+    padding-bottom: 2vh;
+}
+.problem-content {
+/*
+    position: absolute;
+    left: 20vw;
+    top: 105vh;
+*/
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.problem-content b {
+    color: #f03c3c;
+}
+.model-details {
+    font-size: 20px;
+    position: absolute;
+    left: 70vw;
+}
+.md1 {
+    font-size: 15px;
+    position: absolute;
+    left: 72vw;
+    top: 119vh;
+    padding-right: 8%;
+
+}
+.md2 {
+    position: absolute;
+    left: 72vw;
+    top: 159vh;
+    padding-right: 10%;
+
+}
+.md1 b{
+    color:#f03c3c;
+}
+.sphere {
+    width: 200px;
+    height: 210px;
+}
+.model {
+    position: absolute;
+    left: 32vw;
+    margin-bottom: 50px;
+
+}
+.function-details {
+    position: absolute;
+    left: 8vw;
+}
+
+.mf1 {
+    position: absolute;
+    left: 10vw;
+    top: 119vh;
+    padding-right: 70%;
+    padding-bottom: 10px;
+}
+.mf2 {
+    padding-top: 10px;
+    position: absolute;
+    left: 10vw;
+    top: 127vh;
+    padding-right: 70%;
+}
+.mf2 b {
+    color: #f03c3c;
+}
+
+@media (max-width:1200px) {
+    .model-gel {
+        position: absolute;
+        left: 26vw;
+        top: 25vh;
+    }
+    .model-nogel {
+        position: absolute;
+        left: 47.15vw;
+        top: 25vh;
+    }
+    .model-frontview {
+        position: absolute;
+        left: 47vw;
+        top: 67.7vh;
+    }
+    .model-sideview {
+        position: absolute;
+        left: 62.25vw;
+        top: 67.7vh;
+    }
+    .md1 {
+        font-size: 15px;
+        position: absolute;
+        left: 72vw;
+        top: 125vh;
+        padding-right: 8%;
+
+    }
+    .md2 {
+        position: absolute;
+        left: 72vw;
+        top: 176vh;
+        padding-right: 10%;
+
+    }
+    .mf1 {
+        position: absolute;
+        left: 10vw;
+        top: 125vh;
+        padding-right: 70%;
+        padding-bottom: 10px;
+    }
+    .mf2 {
+        padding-top: 10px;
+        position: absolute;
+        left: 10vw;
+        top: 135vh;
+        padding-right: 70%;
+    }
+    .model {
+        width: 440px;
+    }
+    .function-details {
+        position: absolute;
+        left: 8vw;
+        top: 120vh;
+    }
+    .model-details {
+        position: absolute;
+        top: 120vh;
+    }
+}
+.mf3 {
+    position: absolute;
+    top: 157vh;
+    left: 10vw;
+    padding-right: 70%;
+}
+.red {
+    font-weight: 400;
+    position: absolute;
+    color: red;
+    left: 12vw;
+    top: 162vh;
+}
+.blue {
+    font-weight: 400;
+    position: absolute;
+    color: blue;
+    left: 12vw;
+    top: 164vh;
+}
+.green {
+    font-weight: 400;
+    position: absolute;
+    color: green;
+    left: 12vw;
+    top: 166vh;
+}
+.salmon {
+    font-weight: 400;
+    position: absolute;
+    color: salmon;
+    left: 12vw;
+    top: 168vh;
+}
+.grey {
+    font-weight: 400;
+    position: absolute;
+    color: grey;
+    left: 12vw;
+    top: 170vh;
+}
+.yellow {
+    font-weight: 400;
+    position: absolute;
+    color: #c1c10d;
+    left: 12vw;
+    top: 172vh;
+}

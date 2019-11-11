@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <Title>Niviru's Website</Title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="genusim.css">
+        <script src="three.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    </head>
+
+    <body>
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"><img src="icon.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="exp.html">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Contact</a>
+                </li>
+                </ul>
+                <span class="navbar-text">
+                Niviru Wijayaratne
+                </span>
+            </div>
+        </nav>
+        <div class="headers">
+            <h1 class="title">GenuSim</h1>
+                <p class="title-content">An innovative teaching device that simulates the structure of the knee <br>to improve medical professionals' ability to diagnose ACL and Meniscus tear injuries.</p>
+            <h2 class="problem">Functionality/Model</h2>
+                <p class="problem-content"> New medical students are often unable to diagnose knee injuries due to a lack of exposure and experience <br>to these injuries as well as a lack of training/practice for knee specific injuries, primarily ACL and Meniscus tears. It is <br> crucial that medical students be able to practice and learn how to diagnose knee injuries before working on human patients.<br></p>
+            <h5 class="model-details">Model</h5>
+                <ul class="model-list">
+                    <li class="md1">Aside from the motors mounted on top of the femur, everything in this model is modeled from scratch. Every bone you see <b>began with a sphere</b> (shown below). Through extensive surface modeling, I was able to model these spheres into relatively accurate bones.<br> <img class="sphere" src="sphere.png"></li>
+                    <li class="md2">Each wire was first sketched as a spline on an offset plane. It was then swept using a sketched circle as the profile.</li>
+                </ul>
+            <h5 class="function-details">Function</h5>
+                <ul class="function-list">
+                    <li class="mf1">The basic function of ligaments in the human body is to provide tension on bones to restrict ROM<br></li>
+                    <li class="mf2">To recreate this basic function, we connected six elastic wires to individual harmonic drive motors each of which can alter the tension in the wires. A <b>taut wire indicates a healthy ligament, while a slack wire would indicate a complete tear </b>. Because there aren't only two scenarios when it comes to ligament tears, each <b> motor can drive to multiple positions to simulate a gradient of tear severity.</b></li>
+                    <li class="mf3">Each color coded wire represents a major ligament in the knee</li>
+                        <ul>
+                            <li class="red">Red = Meniscus</li>
+                            <li class="yellow">Yellow = ACL</li>
+                            <li class="green">Green = MCL</li>
+                            <li class="blue">Blue = LCL</li>
+                            <li class="salmon">Salmon = Patellar Tendon</li>
+                            <li class="grey">Grey = PCL</li>
+                        </ul>
+                </ul>
+
+        </div>
+        <button class="images">
+            <img class="model-gel" src="model-static.png">
+            <img class="model-nogel" src="genusim.png">
+            <img class="model-frontview" src="model-vsrealknee.png">
+            <img class="model-sideview" src="model-sideview.png">
+        </button>
+
+
+        <iframe class="model"src="https://myhub.autodesk360.com/ue2fef286/shares/public/SH919a0QTf3c32634dcf9df34f4cd2235c54?mode=embed" width="600" height="600" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
+
+    </body>
