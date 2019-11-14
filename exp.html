@@ -9,10 +9,11 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/exp.css">
+    <link rel="stylesheet" href="exp.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
@@ -40,7 +41,305 @@
                 </span>
             </div>
         </nav>
-    <div class="headers">
+        <section class="bg-light page-section" id="portfolio">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Portfolio</h2>
+                <h3 class="section-subheading text-muted">Click for more!</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                  </div>
+                  <img class="img-fluid" src="brainfinal.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                  <h4>NeuroTech @ UIUC</h4>
+                  <p class="text-muted">Innovative and impactful software and hardware solutions using the brain.</p>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal2">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                  </div>
+                  <img class="img-fluid" src="knee7.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                  <h4>GenuSim</h4>
+                  <p class="text-muted">Winner of UIUC Autodesk Designathon 2019 </p>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                  </div>
+                  <img class="img-fluid" src="canefinal.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                  <h4>Tremor Resistant Cane</h4>
+                  <p class="text-muted">A self-stabilizing cane for people with severe tremors</p>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                  </div>
+                  <img class="img-fluid" src="asmefinal.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                  <h4>ASME</h4>
+                  <p class="text-muted">American Society of Mechanical Engineers</p>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal5">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                  </div>
+                  <img class="img-fluid" src="rubikscubefinal.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                  <h4>Redesign for Recylability</h4>
+                  <p class="text-muted">Redesigned Rubik's Cube for assembly efficiency and improved reprocessability.</p>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" data-toggle="modal" href="#portfolioModal6">
+                  <div class="portfolio-hover">
+                    <div class="portfolio-hover-content">
+                      <i class="fa fa-plus fa-3x"></i>
+                    </div>
+                  </div>
+                  <img class="img-fluid" src="manufacturingfinal.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                  <h4>Manufacturing Portfolio</h4>
+                  <p class="text-muted">A compilation of reports on various manufacturing processes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h2 class="text-uppercase">Project Name</h2>
+                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                      <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
+                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <ul class="list-inline">
+                        <li>Date: January 2017</li>
+                        <li>Client: Threads</li>
+                        <li>Category: Illustration</li>
+                      </ul>
+                      <button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <i class="fa fa-times"></i>
+                        Close Project</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Modal 2 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h2 class="text-uppercase">Project Name</h2>
+                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                      <img class="img-fluid d-block mx-auto" src="img/portfolio/02-full.jpg" alt="">
+                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <ul class="list-inline">
+                        <li>Date: January 2017</li>
+                        <li>Client: Explore</li>
+                        <li>Category: Graphic Design</li>
+                      </ul>
+                      <button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <i class="fa fa-times"></i>
+                        Close Project</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Modal 3 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h2 class="text-uppercase">Project Name</h2>
+                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                      <img class="img-fluid d-block mx-auto" src="img/portfolio/03-full.jpg" alt="">
+                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <ul class="list-inline">
+                        <li>Date: January 2017</li>
+                        <li>Client: Finish</li>
+                        <li>Category: Identity</li>
+                      </ul>
+                      <button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <i class="fa fa-times"></i>
+                        Close Project</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Modal 4 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h2 class="text-uppercase">Project Name</h2>
+                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                      <img class="img-fluid d-block mx-auto" src="img/portfolio/04-full.jpg" alt="">
+                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <ul class="list-inline">
+                        <li>Date: January 2017</li>
+                        <li>Client: Lines</li>
+                        <li>Category: Branding</li>
+                      </ul>
+                      <button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <i class="fa fa-times"></i>
+                        Close Project</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Modal 5 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h2 class="text-uppercase">Project Name</h2>
+                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                      <img class="img-fluid d-block mx-auto" src="img/portfolio/05-full.jpg" alt="">
+                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <ul class="list-inline">
+                        <li>Date: January 2017</li>
+                        <li>Client: Southwest</li>
+                        <li>Category: Website Design</li>
+                      </ul>
+                      <button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <i class="fa fa-times"></i>
+                        Close Project</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Modal 6 -->
+        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h2 class="text-uppercase">Project Name</h2>
+                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                      <img class="img-fluid d-block mx-auto" src="neuron.jpg" alt="">
+                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <ul class="list-inline">
+                        <li>Date: January 2017</li>
+                        <li>Client: Window</li>
+                        <li>Category: Photography</li>
+                      </ul>
+                      <button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <i class="fa fa-times"></i>
+                        Close Project</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <!-- <div class="headers">
         <h1 class="experience">Experience</h1>
         <p class="experience-p">Check out some of my past technical experience. <br>Hovering over cards will reveal additional information and links to either the projects or their pages. <br>Make sure to scroll!</p>
         <h2 class="clubs">Outside Involvement</h2>
@@ -49,26 +348,28 @@
     <div class="cards">
         <div class="cardNEURO">
             <span id="image"></span><span id="image"></span><span id="image"></span><span id="image"></span>
-<!--            <div class="img-area"></div>-->
+
             <div class="img-text">
                 <span class="header-text"><strong>NeuroTech @ UIUC</strong></span>
                 <p>Lead and manage the hardware division. Primary focus on signal processing of electroencephalograph (EEG) data using Python/MATLAB, to transform raw signals into useful data that can be mapped to a Brain Computer Interface (BCI). Will compete in NeuroTechX’s 2019-2020 fixed and open competitions.<a href="home.html"> Read More</a></p>
-
+                
             </div>
 
         </div>
         <div class="cardASME">
             <span id="image"></span><span id="image"></span><span id="image"></span><span id="image"></span>
-<!--            <div class="img-area"></div>-->
+
             <div class="img-text">
                 <span class="header-text"><strong>ASME UIUC</strong></span>
                 <p>Communicate with other UIUC engineering organizations, professors, and external professionals to organize technical workshops for students in mechanical engineering.<a href="home.html"> Read More</a></p>
             </div>
         </div>
+    </div>
+    <div class="cards3">
         <div class="cardMECH">
             <span id="image"></span><span id="image"></span><span id="image"></span><span id="image"></span>
-<!--            <div class="img-area"></div>-->
-            <div class="img-text">
+
+            <div class="img-text3">
                 <span class="header-text"><strong>Mechanical Engineering</strong></span>
                 <p>Lead and manage the hardware division. Primary focus on signal processing of electroencephalograph (EEG) data using Python/MATLAB, to transform raw signals into useful data that can be mapped to a Brain Computer Interface (BCI). Will compete in NeuroTechX’s 2019-2020 fixed and open competitions.<a href="home.html"> Read More</a></p>
             </div>
@@ -77,7 +378,7 @@
         <div class="cards2">
             <div class="cardGENUSIM">
                 <span id="image2"></span><span id="image2"></span><span id="image2"></span><span id="image2"></span>
-    <!--            <div class="img-area"></div>-->
+
                 <div class="img-text">
                     <span class="header-text"><strong>GenuSim</strong></span>
                     <p>Lead and manage the hardware division. Primary focus on signal processing of electroencephalograph (EEG) data using Python/MATLAB, to transform raw signals into useful data that can be mapped to a Brain Computer Interface (BCI). Will compete in NeuroTechX’s 2019-2020 fixed and open competitions.<a href="genusim.html"> Read More</a></p>
@@ -85,7 +386,7 @@
             </div>
             <div class="cardRECYLABILITY">
                 <span id="image2"></span><span id="image2"></span><span id="image2"></span><span id="image2"></span>
-    <!--            <div class="img-area"></div>-->
+   
                 <div class="img-text">
                     <span class="header-text"><strong>Recylability</strong></span>
                     <p>Communicate with other UIUC engineering organizations, professors, and external professionals to organize technical workshops for students in mechanical engineering.<a href="home.html"> Read More</a></p>
@@ -93,13 +394,13 @@
             </div>
             <div class="cardCANE">
                 <span id="image2"></span><span id="image2"></span><span id="image2"></span><span id="image2"></span>
-    <!--            <div class="img-area"></div>-->
+    
                 <div class="img-text">
                     <span class="header-text"><strong>Tremor Resistant Self-Stabilizing Cane</strong></span>
                     <p>Lead and manage the hardware division. Primary focus on signal processing of electroencephalograph (EEG) data using Python/MATLAB, to transform raw signals into useful data that can be mapped to a Brain Computer Interface (BCI). Will compete in NeuroTechX’s 2019-2020 fixed and open competitions.<a href="home.html"> Read More</a></p>
                 </div>
             </div>
-        </div>
+        </div> -->
+    
 
-
-</body>
+</body>    
