@@ -2,7 +2,6 @@
 body {
     background: white;
     font-family: 'Montserrat', sans-serif;
-    
 }
 /*
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
@@ -88,7 +87,7 @@ body {
   
   #portfolio * {
     border-radius: 5%;
-    z-index: 2;
+    z-index: 20;
   }
   
   @media (min-width: 767px) {
@@ -105,6 +104,9 @@ body {
   .portfolio-modal .modal-content {
     padding: 100px 0;
     text-align: center;
+  }
+  .content-content {
+      text-align: left;
   }
   
   .portfolio-modal .modal-content h2 {
@@ -129,10 +131,14 @@ body {
   }
   
   .portfolio-modal .modal-content img {
+    height: 65%;
+    width: 65%;
     margin-bottom: 30px;
   }
   
   .portfolio-modal .modal-content button {
+    border-color: rgba(231, 112, 112, 0.9);
+    background-color:rgba(231, 112, 112, 0.9);
     cursor: pointer;
   }
   
@@ -169,6 +175,30 @@ body {
     /* IE 9 */
     transform: rotate(90deg);
     background-color: #212529;
+  }
+  .links {
+      text-align: center;
+  }
+  .links a {
+    text-decoration: none;
+    color: black;
+  }
+  .links a:hover {
+      color: rgba(231, 112, 112, 0.9);
+  }
+  .head-m3 {
+      font-size: 20px;;
+      color: rgba(231, 112, 112, 0.9);;
+  }
+  #slider {
+      overflow: hidden;
+  }
+  #slider-figure{
+      position: relative;
+      width: 100%;
+      margin: 0;
+      left: 0;
+      animation: 20s slider infinite;
   }
 
   
@@ -715,5 +745,45 @@ body {
         top: 185vh;
     }
 } */
-
+}
+.middle {
+    position: fixed;
+    top: 10%;
+    left: 96%;
+    transform: translate(-50%,-50%);
+}
+  
+  .sm-container{
+    text-align: center;
+  }
+  
+  .sm-container i{
+    color: black;
+    padding: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  
+  .sm-container i:hover{
+    transform: scale(1.2);
+  }
+  
+  .sm-menu{
+    background: transparent;
+    position: absolute;
+    border-radius: 8px;
+    display: none;
+  }
+  
+  .sm-menu::before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
 

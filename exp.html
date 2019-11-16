@@ -14,6 +14,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
@@ -71,11 +73,11 @@
                       <i class="fa fa-plus fa-3x"></i>
                     </div>
                   </div>
-                  <img class="img-fluid" src="knee7.jpg" alt="">
+                  <img class="img-fluid" src="knee12.jpg" alt="">
                 </a>
                 <div class="portfolio-caption">
                   <h4>GenuSim</h4>
-                  <p class="text-muted">Winner of UIUC Autodesk Designathon 2019 </p>
+                  <p class="text-muted">Winner of UIUC Autodesk Bioengineering Designathon 2019 </p>
                 </div>
               </div>
               <div class="col-md-4 col-sm-6 portfolio-item">
@@ -137,6 +139,7 @@
             </div>
           </div>
         </section>
+        <!---Modal 1-->
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -150,18 +153,24 @@
                   <div class="col-lg-8 mx-auto">
                     <div class="modal-body">
                       <!-- Project Details Go Here -->
-                      <h2 class="text-uppercase">Project Name</h2>
-                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
-                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <h2 class="text-uppercase">NeuroTech @ UIUC</h2>
+                      <p class="item-intro text-muted">An organization dedicated to fostering a community of people passionate about Neurotech. 
+                          Founded on the pillars of Community, Education, and Professional Development.</p>
+                      <img class="img-fluid d-block mx-auto" src="brain-content.jpg" alt="">
+                      <p class="content-content">
+                          <strong>Lead and manage the hardware division of NeuroTech @ UIUC</strong>. Primary focus on <strong>signal processing of electroencephalograph (EEG) data 
+                          using Python/MATLAB</strong>, to transform raw signals into useful data that can be mapped to a <strong>Brain Computer Interface (BCI)</strong>. Plan to compete 
+                          in the NeuroTechX open competition and will submit our own <strong>Printable Circuit Board (PCB) that analyzes EEG signals, using LTSpice and EAGLE</strong>, to be considered for
+                          the fixed competition.
+                          
+                      </p>
                       <ul class="list-inline">
-                        <li>Date: January 2017</li>
-                        <li>Client: Threads</li>
-                        <li>Category: Illustration</li>
+                        <li>Date: September 2019</li>
+                        <li>Category: Club</li>
                       </ul>
                       <button class="btn btn-primary" data-dismiss="modal" type="button">
                         <i class="fa fa-times"></i>
-                        Close Project</button>
+                        Close</button>
                     </div>
                   </div>
                 </div>
@@ -184,18 +193,36 @@
                   <div class="col-lg-8 mx-auto">
                     <div class="modal-body">
                       <!-- Project Details Go Here -->
-                      <h2 class="text-uppercase">Project Name</h2>
-                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <img class="img-fluid d-block mx-auto" src="img/portfolio/02-full.jpg" alt="">
-                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <h2 class="text-uppercase">GenuSim</h2>
+                      <p class="item-intro text-muted">An innovative teaching device that simulates the structure of the knee
+                          to improve medical professionals' ability to diagnose ACL and Meniscus tear injuries.</p>
+                      <img class="img-fluid d-block mx-auto" src="finalgenusim.png" alt="">
+                      <p class="content-content">
+                          New medical students are often unable to diagnose knee injuries due to a lack of exposure and experience
+                          to these injuries as well as a lack of training/practice for knee specific injuries, primarily ACL and Meniscus tears. It is
+                          crucial that medical students be able to practice and learn how to diagnose knee injuries before working on human patients. <br><br>
+                          
+                          To attack this problem, along with a team, I <strong>ideated, designed, and modeled a knee ligament tear simulator</strong> using Fusion 360. <br><br>
+
+                          
+                          Function: The basic function of ligaments in the human body is to provide tension on bones to restrict ROM. To recreate this function, 
+                          we connected six elastic wires to individual harmonic drive motors each of which can alter the tension in the wires. A <strong>taut wire indicates a healthy ligament</strong>, 
+                          while a <strong>slack wire would indicate a complete tear</strong>. Because there aren't only two scenarios when it comes to ligament tears, <strong>each motor can drive to multiple positions to simulate a gradient of tear severity</strong>.<br><br>
+
+                          Model: Aside from the motors mounted on top of the femur, everything in this model is <strong>modeled from scratch</strong>. 
+                          Every bone you see began with a sphere. Through extensive free form modeling I was able to create relatively accurate bones. Each wire was first sketched as a spline to an offset plane
+                          , and was then swept using a circle as the profile.
+                          <!-- <img src="sphere.png" style="width: 30%; height: 30%; margin-left: 0vw; padding-top:-5%;"> -->
+                          <iframe class="model"src="https://myhub.autodesk360.com/ue2fef286/shares/public/SH919a0QTf3c32634dcf9df34f4cd2235c54?mode=embed" width="300" height="400" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0" style="margin: 3vh 11.5vw;"></iframe>
+                        
+                      </p>
                       <ul class="list-inline">
-                        <li>Date: January 2017</li>
-                        <li>Client: Explore</li>
-                        <li>Category: Graphic Design</li>
+                        <li>Date: November 2019</li>
+                        <li>Category: Competition</li>
                       </ul>
                       <button class="btn btn-primary" data-dismiss="modal" type="button">
                         <i class="fa fa-times"></i>
-                        Close Project</button>
+                        Close</button>
                     </div>
                   </div>
                 </div>
@@ -218,18 +245,58 @@
                   <div class="col-lg-8 mx-auto">
                     <div class="modal-body">
                       <!-- Project Details Go Here -->
-                      <h2 class="text-uppercase">Project Name</h2>
-                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <img class="img-fluid d-block mx-auto" src="img/portfolio/03-full.jpg" alt="">
-                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <h2 class="text-uppercase">Tremor Resistant Self-Stabilizing Cane</h2>
+                      <p class="item-intro text-muted">A therapeutic cane that resists tremors from those with muscle degenerative diseases to 
+                           increase stability, safety, and independence of its user.</p>
+                      <img class="img-fluid d-block mx-auto" src="cane-content.webp" alt="">
+                      <p class="content-content">
+                          Seeing the progress made with products targeted at people with tremors, most notably the Liftware spoon, to my friends and I, creating our own
+                          product that worked to ease the lives of those suffering from severe tremors was the most compelling. This product was also created as a tribute to my friend's
+                          grandfather who had been to the hospital on multiple occasions because his tremors from Parkinson's caused him to alter the position of his cane and as a result fall. Realizing that
+                          his grandfather likely wasn't the only one who went through these perils, we realized that there was a good market for the product we wanted to create.
+                          After assessing our target group and the problem we wanted to combat, we came up with the idea to create a cane that resists the forces 
+                          of tremors to prevent unnecessary falls.<br><br>
+
+                          Structure/Components:
+                          <ul style="text-align: left; list-style:disc;">
+                            <li>4-Pronged Wide Base
+                              <ul>
+                                <li>Increases stability and reduces chances of a fall</li>
+                              </ul>
+                            </li>
+                            <li>Secondary Handle
+                              <ul>
+                                <li>Aids in transitioning from standing to seated position or vice versa</li>
+                                <li>Placed 180 degrees from primary handle and staggered in height</li>
+                                <li>Folds updward to increase compactness</li>
+                                <li>Adds elevated surface that can be useful in a public setting, increases independence of user</li>
+                              </ul>
+                            </li>
+                            <li>Ball and Socket Pivot
+                              <ul>
+                                <li>Allows for better movement while maintaining full contact with ground</li>
+                                <li>Allows for cane to essentially move independent of the base while walking</li>
+                              </ul>
+                            </li>
+                            <li>Cylindrical Housing
+                              <ul>
+                                <li>Restricts radius of movement so stick does not pass the center of mass of the cane as a whole.</li>
+                                <li>Provides housing for potential electrical components.</li>
+                              </ul>
+                            </li>
+
+                          </ul>                         
+                      </p>
+                      <p class="content-content">
+                          After multiple concept sketches and brainstorming, we combined the best features from each design to create our final product.
+                      </p>
                       <ul class="list-inline">
-                        <li>Date: January 2017</li>
-                        <li>Client: Finish</li>
-                        <li>Category: Identity</li>
+                        <li>Date: December 2018</li>
+                        <li>Category: Project</li>
                       </ul>
                       <button class="btn btn-primary" data-dismiss="modal" type="button">
                         <i class="fa fa-times"></i>
-                        Close Project</button>
+                        Close</button>
                     </div>
                   </div>
                 </div>
@@ -252,18 +319,23 @@
                   <div class="col-lg-8 mx-auto">
                     <div class="modal-body">
                       <!-- Project Details Go Here -->
-                      <h2 class="text-uppercase">Project Name</h2>
-                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <img class="img-fluid d-block mx-auto" src="img/portfolio/04-full.jpg" alt="">
-                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <h2 class="text-uppercase">American Society of Mechanical Engineers</h2>
+                      <p class="item-intro text-muted">An organization of mechanical engineers that focuses on technical, 'hands-on', social, and corporate activities, as well as 
+                        programs which assist the Department of Mechanical Science and Engineering at UIUC</p>
+                      <img class="img-fluid d-block mx-auto" src="asme-content.jpg" alt="">
+                      <p class="content-content">
+                        I am involved in the <strong>student affairs committee  at ASME UIUC</strong>. We are in charge of running multiple workshops for various
+                        technical clubs on campus as well as all students. These workshops range from the less technical side such as Leadership Workshops and
+                        Conflict Resolution Workshops, to the very technical side such as SolidWorks Workshops and MATLAB Workshops. <strong>I personally ran a detailed workshop on Design
+                        Thinking, and basic SolidWorks functions for Illini Formula Electric and ASME UIUC. </strong>                 
+                      </p>
                       <ul class="list-inline">
-                        <li>Date: January 2017</li>
-                        <li>Client: Lines</li>
-                        <li>Category: Branding</li>
+                        <li>Date: September 2019</li>
+                        <li>Category: Club</li>
                       </ul>
                       <button class="btn btn-primary" data-dismiss="modal" type="button">
                         <i class="fa fa-times"></i>
-                        Close Project</button>
+                        Close</button>
                     </div>
                   </div>
                 </div>
@@ -286,18 +358,24 @@
                   <div class="col-lg-8 mx-auto">
                     <div class="modal-body">
                       <!-- Project Details Go Here -->
-                      <h2 class="text-uppercase">Project Name</h2>
-                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <img class="img-fluid d-block mx-auto" src="img/portfolio/05-full.jpg" alt="">
-                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <h2 class="text-uppercase">Redesign for Recylability</h2>
+                      <p class="item-intro text-muted">Took a Rubik's Cube, created a detailled 3D model, conducted a DFMA analysis, redesigned the product to 
+                        improve its recyclability, and used a 2k factorial Design of Experiment to compare the redesigned product with the original.</p>
+                      <img class="img-fluid d-block mx-auto" style="width: 50%; height: 50%;"src="recyclability-content.webp" alt="">
+                      <p class="content-content">
+                        As a culmination of my Design For Manufacturability class, I was tasked with choosing a product, 
+                        performing a Design for Manufacture and Assembly (DFMA) analysis on the product, creating a CAD model,, 
+                        assembly, and detailed engineering drawings of the product, performing a Manufacturing cost analysis on the product using aPriori, 
+                        redesigning the product, and finally performing a Design of Experiment where I compared the redesigned product with the original. 
+                        
+                      </p>
                       <ul class="list-inline">
-                        <li>Date: January 2017</li>
-                        <li>Client: Southwest</li>
-                        <li>Category: Website Design</li>
+                        <li>Date: May 2019</li>
+                        <li>Category: Project</li>
                       </ul>
                       <button class="btn btn-primary" data-dismiss="modal" type="button">
                         <i class="fa fa-times"></i>
-                        Close Project</button>
+                        Close</button>
                     </div>
                   </div>
                 </div>
@@ -320,18 +398,32 @@
                   <div class="col-lg-8 mx-auto">
                     <div class="modal-body">
                       <!-- Project Details Go Here -->
-                      <h2 class="text-uppercase">Project Name</h2>
-                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                      <img class="img-fluid d-block mx-auto" src="neuron.jpg" alt="">
-                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <h2 class="text-uppercase">Manufacturing Portfolio</h2>
+                      <p class="item-intro text-muted">Check out the reports I've done on a variety of Manufacturing Processes.<br>.</p>
+                      <img class="img-fluid d-block mx-auto" src="manufacturing.webp" alt="">
+                      <p class="content-content">
+                      Each report provides a detailled analysis of the most important manufacturing processes and the relevant equations associated with that manufacturing process.
+                      <div class="links">
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_3b37994c2ee0415f8f31899c90bb2b5a.pdf">Product Disassembly</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_c0a0108da29541c8a10f76f5557f6ea1.pdf">Metals Casting</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_875e2389ce2741aa956525ac59e89c0c.pdf">Sheet Metal Forming</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_67f283038d6e432a9d24085da8ad6bb5.pdf">Machining</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_13cb3f64efda414d82771817560184e7.pdf">3D Printing</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_3dc0a2d127a24a4fa995e5f5c1845252.pdf">Injection Molding</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_d414acca5baf43938822e577a7c0fd6d.pdf">Joining and Assembly</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_e70f8afdfdaa40baad3ac8fed28275fb.pdf">Forging</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_72d8b11223c54f5daa1c1bb29f99d61f.pdf">Composites</a><br>
+                        <a href="https://0927b11d-6ca1-4263-b12a-83c10c10a6c1.filesusr.com/ugd/63a3a0_e72dfb79eec34e2e89a1cbad4227a7a9.pdf">Recylability</a><br>
+                      </div>
+                        
+                      </p>
                       <ul class="list-inline">
-                        <li>Date: January 2017</li>
-                        <li>Client: Window</li>
-                        <li>Category: Photography</li>
+                        <li>Date: March 2019</li>
+                        <li>Category: Project</li>
                       </ul>
                       <button class="btn btn-primary" data-dismiss="modal" type="button">
                         <i class="fa fa-times"></i>
-                        Close Project</button>
+                        Close</button>
                     </div>
                   </div>
                 </div>
@@ -339,68 +431,25 @@
             </div>
           </div>
         </div>
-    <!-- <div class="headers">
-        <h1 class="experience">Experience</h1>
-        <p class="experience-p">Check out some of my past technical experience. <br>Hovering over cards will reveal additional information and links to either the projects or their pages. <br>Make sure to scroll!</p>
-        <h2 class="clubs">Outside Involvement</h2>
-        <h2 class="projects">Projects</h2>
-    </div>
-    <div class="cards">
-        <div class="cardNEURO">
-            <span id="image"></span><span id="image"></span><span id="image"></span><span id="image"></span>
-
-            <div class="img-text">
-                <span class="header-text"><strong>NeuroTech @ UIUC</strong></span>
-                <p>Lead and manage the hardware division. Primary focus on signal processing of electroencephalograph (EEG) data using Python/MATLAB, to transform raw signals into useful data that can be mapped to a Brain Computer Interface (BCI). Will compete in NeuroTechX’s 2019-2020 fixed and open competitions.<a href="home.html"> Read More</a></p>
-                
+        <div class="middle">
+            <div class="sm-container">
+              <i class="show-btn fa fa-user"></i>
+              <div class="sm-menu">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+              </div>
             </div>
-
-        </div>
-        <div class="cardASME">
-            <span id="image"></span><span id="image"></span><span id="image"></span><span id="image"></span>
-
-            <div class="img-text">
-                <span class="header-text"><strong>ASME UIUC</strong></span>
-                <p>Communicate with other UIUC engineering organizations, professors, and external professionals to organize technical workshops for students in mechanical engineering.<a href="home.html"> Read More</a></p>
-            </div>
-        </div>
-    </div>
-    <div class="cards3">
-        <div class="cardMECH">
-            <span id="image"></span><span id="image"></span><span id="image"></span><span id="image"></span>
-
-            <div class="img-text3">
-                <span class="header-text"><strong>Mechanical Engineering</strong></span>
-                <p>Lead and manage the hardware division. Primary focus on signal processing of electroencephalograph (EEG) data using Python/MATLAB, to transform raw signals into useful data that can be mapped to a Brain Computer Interface (BCI). Will compete in NeuroTechX’s 2019-2020 fixed and open competitions.<a href="home.html"> Read More</a></p>
-            </div>
-        </div>
-    </div>
-        <div class="cards2">
-            <div class="cardGENUSIM">
-                <span id="image2"></span><span id="image2"></span><span id="image2"></span><span id="image2"></span>
-
-                <div class="img-text">
-                    <span class="header-text"><strong>GenuSim</strong></span>
-                    <p>Lead and manage the hardware division. Primary focus on signal processing of electroencephalograph (EEG) data using Python/MATLAB, to transform raw signals into useful data that can be mapped to a Brain Computer Interface (BCI). Will compete in NeuroTechX’s 2019-2020 fixed and open competitions.<a href="genusim.html"> Read More</a></p>
-                </div>
-            </div>
-            <div class="cardRECYLABILITY">
-                <span id="image2"></span><span id="image2"></span><span id="image2"></span><span id="image2"></span>
-   
-                <div class="img-text">
-                    <span class="header-text"><strong>Recylability</strong></span>
-                    <p>Communicate with other UIUC engineering organizations, professors, and external professionals to organize technical workshops for students in mechanical engineering.<a href="home.html"> Read More</a></p>
-                </div>
-            </div>
-            <div class="cardCANE">
-                <span id="image2"></span><span id="image2"></span><span id="image2"></span><span id="image2"></span>
-    
-                <div class="img-text">
-                    <span class="header-text"><strong>Tremor Resistant Self-Stabilizing Cane</strong></span>
-                    <p>Lead and manage the hardware division. Primary focus on signal processing of electroencephalograph (EEG) data using Python/MATLAB, to transform raw signals into useful data that can be mapped to a Brain Computer Interface (BCI). Will compete in NeuroTechX’s 2019-2020 fixed and open competitions.<a href="home.html"> Read More</a></p>
-                </div>
-            </div>
-        </div> -->
+          </div>
+      
+      
+          <script>
+            $(".show-btn").click(function(){
+              $(".sm-menu").fadeToggle("fast");
+            });
+          </script>
     
 
 </body>    
