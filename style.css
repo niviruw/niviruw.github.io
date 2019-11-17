@@ -1,15 +1,16 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(//fonts.googleapis.com/css?family=Montserrat:400,700);
 body{
     margin: 0;
     padding: 0;
-    background:url(possible-wallpaper17.jpeg) no-repeat;
-    background-size:cover;
+    /* background:url(wal2.jpeg) no-repeat; */
+    background: url(wa5.jpeg);
+    background-size: cover;
     font-family: 'Montserrat', sans-serif;
     
 }
-.navbar-default {
+/* .navbar-default {
     background-color: rgba(0, 0, 0, 1);
-}
+} */
 .nav-item a:hover { 
     color: #f03c3c !important;
 }
@@ -157,8 +158,8 @@ body{
   }
   .box-img{
     border-radius: 50%;
-    width: 175px;
-    height: 175px;
+    width: 200px;
+    height: 200px;
   }
   .box h1{
     font-size: 40px;
@@ -189,7 +190,7 @@ body{
     transition: all ease-in-out 250ms;
   }
   .box li a:hover{
-    color: rgba(231, 112, 112, 0.9);
+    color: grey;
   }
   
   
