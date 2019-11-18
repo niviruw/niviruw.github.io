@@ -1,7 +1,8 @@
 @import url(//fonts.googleapis.com/css?family=Montserrat:400,700);
 body {
     /* background: linear-gradient(to right, black, rgba(0,0,0,0.9)) no-repeat; */
-    background: black;
+    background: url(leaves.jpeg) no-repeat;
+    /* background-size: cover; */
     font-family: 'Montserrat', sans-serif;
 }
 /*
@@ -85,7 +86,7 @@ body {
   }
   
   #portfolio .portfolio-item .portfolio-caption p {
-    color: black;
+    color: rgba(196, 196, 196, 0.733);
     font-size: 16px;
     font-style: italic;
     margin: 0;
