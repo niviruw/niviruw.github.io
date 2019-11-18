@@ -2,9 +2,12 @@
 body{
     margin: 0;
     padding: 0;
+    height: 100%;
+    width: 100%;
     /* background:url(wal2.jpeg) no-repeat; */
-    background: url(wa5.jpeg);
+    background: url(wa5.jpeg) no-repeat;
     background-size: cover;
+    /* height: 100vh; */
     font-family: 'Montserrat', sans-serif;
     
 }
@@ -18,7 +21,10 @@ body{
     
     width: 40px;
 }
-
+.connect {
+    position: absolute;
+    top: 150vh;
+}
 
 
   
