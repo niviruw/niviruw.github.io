@@ -5,7 +5,7 @@ body{
     height: 100%;
     width: 100%;
     /* background:url(wal2.jpeg) no-repeat; */
-    background: url(wa5.jpeg) no-repeat;
+    /* background: url(wa5.jpeg) no-repeat; */
     background-size: cover;
     /* height: 100vh; */
     font-family: 'Montserrat', sans-serif;
@@ -152,7 +152,7 @@ body{
 
   
   .box{
-    border-radius: 0%;
+    border-radius: 10%;
     width: 450px;
     background: rgba(0, 0, 0, 0.7);
     padding: 30px;
