@@ -15,13 +15,13 @@ body {
     background: transparent !important;
 }
 .nav-item a:hover { 
-    color: white !important;
+    color:white !important;
 }
 .navbar-brand img {
     width: 40px;
 }
 #portfolio .portfolio-item {
-    padding-top: 3%;
+    padding-top: 0.5%;
     right: 0;
     margin: 0 0 15px;
   }
@@ -58,7 +58,7 @@ body {
     color: white;
   }
   #portfolio .portfolio-item .img-fluid:hover {
-      transform: scale(1.2);
+      transform: scale(1);
   }
   
   #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
@@ -253,4 +253,3 @@ body {
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
   }
-
