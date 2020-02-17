@@ -1,0 +1,603 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,400,400i,600,700,800");
+@import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
+html {
+  background: url(../img/back21.jpeg);
+  /* background: rgb(26, 52, 197); */
+  background-size: contain;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: "Nunito", "Open Sans", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  /* margin: 0 auto; */
+}
+
+#Header {
+  font-size: 3em;
+  margin: 1em 5.2em;
+  /* box-sizing: content-box;
+  padding-top: 0;
+  width: 35%;
+  height: 5%;
+  background-color: #4e6386; */
+}
+* {
+  transition: all 0.35s ease-in-out;
+}
+
+.menu-nav {
+  font-size: 1.2em;
+  top: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  float: right;
+}
+
+.nav-item a {
+  color: white;
+  padding-right: 2em;
+  text-decoration: none;
+}
+
+.nav-item a:visited {
+  text-decoration: none;
+}
+
+.nav-item :nth-child(1):hover {
+  color: red;
+}
+
+/* .menu-btn {
+  position: absolute;
+  z-index: 3;
+  right: 35px;
+  top: 35px;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+}
+.menu-btn .btn-line {
+  width: 28px;
+  height: 3px;
+  margin: 0 0 5px 0;
+  background: white;
+  transition: all 0.5s ease-out;
+}
+.menu-btn.close {
+  transform: rotate(180deg);
+}
+.menu-btn.close .btn-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-btn.close .btn-line:nth-child(2) {
+  opacity: 0;
+}
+.menu-btn.close .btn-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+}
+.menu.show {
+  visibility: visible;
+}
+.menu-nav {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  /* z-index: 10; */
+/* }
+.menu-nav {
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 1);
+  background-size: cover;
+  list-style: none;
+  transform: translate3d(0, -100%, 0);
+  transition: all 0.5s ease-out;
+}
+.menu-nav.show {
+  transform: translate3d(0, 0, 0);
+}
+.menu .nav-item {
+  transform: translate3d(600px, 0, 0);
+  transition: all 0.5s ease-out;
+}
+.menu .nav-item.show {
+  transform: translate3d(0, 0, 0);
+}
+.menu .nav-item.current > a {
+  color: #ff4800;
+}
+.menu .nav-link {
+  display: inline-block;
+  position: relative;
+  font-size: 30px;
+  padding: 1rem 0;
+  color: white;
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+}
+
+.nav-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.nav-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.nav-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.nav-item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    align-items: center;
+    text-align: center;
+  }
+  main .lg-heading {
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  main main#home h1 {
+    margin-top: 10vh;
+  }
+} */
+.blog-card {
+  border-radius: 15px;
+  display: block;
+  position: relative;
+  background: white;
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat !important;
+  width: 70%;
+  max-width: 100vw;
+  height: 340px;
+  box-shadow: 4px 8px 28px rgba(39, 44, 49, 0.1),
+    1px 3px 8px rgba(39, 44, 49, 0.075);
+  margin: 1.5em auto;
+  overflow: hidden !important;
+}
+
+.blog-card:hover {
+  box-shadow: 0 0 2px rgba(39, 44, 49, 0.2), 0 3px 16px rgba(39, 44, 49, 0.25);
+  /* transform: translate3D(0, -0.5px, 0); */
+  transform: scale(1.025);
+}
+.blog-card .content-mask {
+  display: inline-block;
+  /* background: rgba(255, 255, 255, 0.9); */
+  width: 65%;
+  height: 100%;
+  padding: 0.75em 0 0.75em 2.5em;
+  overflow: hidden;
+  z-index: -1;
+}
+/* .blog-card .horizontal {
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(
+    to top right,
+    rgba(255, 255, 255, 0.9) 50%,
+    transparent 0
+  );
+  height: 101%;
+  width: 20%;
+  top: -5%;
+  right: 0.8%;
+  overflow: hidden;
+} */
+
+.blog-card.nt {
+  background-image: url(../img/ai.jpg);
+  background-size: contain;
+  z-index: 2;
+}
+
+#content-nt {
+  /* background: #4e6386; */
+  background: black;
+  z-index: -1;
+  width: 54%;
+}
+
+.blog-card.hdcl {
+  background-image: url(../img/uiuc.jpg);
+  padding-right: 10px;
+  background-size: contain;
+  z-index: 2;
+}
+
+#content-hdcl {
+  background: rgb(232, 74, 39);
+  /* background: white; */
+  z-index: -1;
+  width: 60%;
+}
+
+#content-rohp {
+  background: white;
+  z-index: -1;
+  width: 58%;
+}
+
+#hdcl-text {
+  color: white;
+  width: 85%;
+}
+
+#rohp-text {
+  color: black;
+}
+
+.blog-card.rohp {
+  /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+  background-image: url(../img/rohp2.jpg);
+  background-size: contain;
+  z-index: 5;
+  /* background: salmon; */
+}
+
+#content-genusim {
+  background: #545252;
+  z-index: -1;
+  width: 58%;
+}
+
+#genusim-text {
+  width: 80%;
+  color: white;
+}
+
+.blog-card.genusim {
+  /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+  background-image: url(../img/finalgenusim.png);
+  background-size: contain;
+  z-index: 5;
+  /* background: salmon; */
+}
+
+#content-rubiks {
+  background: #e9eaed;
+  z-index: -1;
+  width: 70%;
+}
+
+#rubiks-text {
+  width: 70%;
+  color: black;
+}
+
+.blog-card.rubiks {
+  /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+  background-image: url(../img/rubiks.png);
+  background-size: contain;
+  z-index: 5;
+  /* background: salmon; */
+}
+
+#content-manufac {
+  background: black;
+  z-index: -1;
+  width: 50%;
+}
+
+/* #manufac-rohp {
+  background: black;
+  z-index: -1;
+  width: 58%;
+} */
+
+#manufac-text {
+  color: white;
+}
+
+.blog-card.manufac {
+  /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+  background-image: url(../img/manufacturing.jpeg);
+  background-size: contain;
+  z-index: 5;
+  /* background: salmon; */
+}
+.content-container {
+  margin-right: -5vw;
+}
+.category {
+  display: inline-block;
+  background: #e23f7e;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: center;
+  min-width: 45px;
+  border-radius: 5px;
+  box-shadow: 0 0 1px rgba(172, 28, 56, 0.1), 0 2px 6px rgba(172, 28, 56, 0.175);
+  margin: 3vh 2px 2.5vh;
+  padding: 6px 8px;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.category:hover {
+  box-shadow: 0 0 1px rgba(10, 96, 58, 0.2), 0 3px 6px rgba(39, 44, 49, 0.25);
+}
+h1 {
+  background: transparent;
+  /* color: rgba(0, 0, 0, 0.9); */
+  color: white;
+  font-family: "Nunito", "Open Sans", sans-serif;
+  font-size: 1.75em;
+  font-weight: 800;
+  /* /* letter-spacing: 0.0002rem; */
+  word-spacing: 0.001rem;
+  line-height: 1.2;
+  height: auto;
+  /* border-bottom: 2px solid rgba(204, 204, 204, 0.75); */
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  padding-bottom: 5px;
+}
+
+h2 {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.1em;
+}
+
+p {
+  color: white;
+  font-size: 1em;
+  line-height: 1.4;
+  width: 100%;
+  margin-top: 0.3em;
+  padding-left: 2px;
+  z-index: 9;
+  font-weight: 200;
+}
+.post-detail {
+  /* color: rgba(0, 0, 0, 0.55); */
+  color: white;
+  margin-top: 2vh;
+  padding-left: 2px;
+  vertical-align: middle;
+  font-size: 1.2em;
+}
+.post-detail .icon svg {
+  position: relative;
+  width: 14px;
+  top: 2.25px;
+  margin-right: 7px;
+}
+.post-detail .date {
+  /* color: rgba(0, 0, 0, 0.65); */
+  color: white;
+  font-size: 0.85em;
+}
+
+#SolidWorks {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#Design {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#Python {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#Matlab {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.read-more {
+  cursor: pointer;
+  font-weight: 800;
+  /* background-color: red; */
+  box-sizing: content-box;
+  width: 100%;
+  padding: 7px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  position: relative;
+  text-decoration: none;
+}
+
+.read-more:visited {
+  color: white;
+}
+
+/* #Header:hover {
+  height: 5%;
+} */
+
+/* .credit {
+  position: relative;
+  font-family: "Nunito" Helvetica, sans-serif;
+  font-size: 1.5em;
+  font-weight: 200;
+  text-align: center;
+  bottom: 0.75em;
+  margin-bottom: 10vh;
+}
+.credit .creator-link {
+  color: #000;
+  font-family: "Kaushan Script", "Lato", Helvetica, sans-serif;
+  font-size: 1.05em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all 300ms linear;
+}
+.credit .creator-link:hover {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  transition: all 350ms linear;
+} */
+
+@media screen and (max-width: 1170px) {
+  #Header {
+    /* margin: 2em 2.22em; */
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 1.75em;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+  }
+
+  .blog-card {
+    height: 35%;
+  }
+
+  .post-detail .date {
+    margin-top: 1px;
+    margin-bottom: ;
+  }
+
+  .blog-card.manufac {
+    /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+    background: black;
+    z-index: 5;
+    /* background: salmon; */
+  }
+
+  #content-manufac {
+    background: black;
+    z-index: -1;
+    width: 90%;
+  }
+
+  .blog-card.hdcl {
+    /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+    background: rgb(232, 74, 39);
+    z-index: 5;
+    /* background: salmon; */
+  }
+
+  #content-hdcl {
+    background: rgb(232, 74, 39);
+    z-index: -1;
+    width: 90%;
+  }
+
+  .blog-card.genusim {
+    /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+    background: #545252;
+    z-index: 5;
+    /* background: salmon; */
+  }
+
+  #content-genusim {
+    background: #545252;
+    z-index: -1;
+    width: 100%;
+  }
+
+  .blog-card.rubiks {
+    /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+    background: #e9eaed;
+    z-index: 5;
+    /* background: salmon; */
+  }
+
+  #content-rubiks {
+    background: #e9eaed;
+    z-index: -1;
+    width: 125%;
+  }
+
+  .blog-card.nt {
+    /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+    background: black;
+    z-index: 5;
+    /* background: salmon; */
+  }
+
+  #content-nt {
+    background: black;
+    z-index: -1;
+    width: 75%;
+  }
+
+  .blog-card.blog-card.rohp {
+    /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+    background: white;
+    z-index: 5;
+    /* background: salmon; */
+  }
+
+  #content-rohp {
+    background: white;
+    z-index: -1;
+    width: 87%;
+  }
+}
+
+@media screen and (min-width: 1171px) and (max-width: 1360px) {
+  #Header {
+    /* margin: 2em 2.22em; */
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 1.75em;
+    margin-top: 0.25em;
+    margin-bottom: 0.15em;
+  }
+
+  .blog-card {
+    height: 35%;
+  }
+
+  .blog-card.hdcl {
+    /* background: url("https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2016/12/improving-website-performance-using-a-content-delivery-network-cdn.jpg"); */
+    background-image: url(../img/uiuc.jpg);
+    background-size: contain;
+    z-index: 5;
+    /* background: salmon; */
+  }
+
+  #content-hdcl {
+    background: rgb(232, 74, 39);
+    z-index: -1;
+    width: 58%;
+  }
+
+  #content-genusim {
+    background: #545252;
+    z-index: -1;
+    width: 64.5%;
+  }
+
+  #content-rubiks {
+    top: 0;
+    background: #e9eaed;
+    z-index: -1;
+    width: 63%;
+  }
+
+  #content-nt {
+    background: black;
+    z-index: -1;
+    width: 50%;
+  }
+}
