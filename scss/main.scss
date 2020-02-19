@@ -32,7 +32,7 @@ h3 {
   }
 
   &.sm-heading {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     // padding: 0.2rem 1rem;
     // background: rgba(lighten($primary-color, 2), 0.5);
   }
@@ -68,7 +68,8 @@ main {
         @include easeOut();
       }
     }
-  }
+   }
+
   &#home {
     overflow: hidden;
     h1 {
