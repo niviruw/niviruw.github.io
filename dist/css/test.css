@@ -519,7 +519,7 @@ p {
     /* background: #545252; */
     background: linear-gradient(#A9A9A9,#ACACAC,#B1B1B1,#B2B2B2, #B6B6B6);
     z-index: -1;
-    width: 110%;
+    width: 100%;
   }
 
   .blog-card.rubiks {
@@ -566,6 +566,18 @@ p {
     background: linear-gradient(to right, salmon, white);
     z-index: -1;
     width: 87%;
+  }
+
+  .blog-card.blog-card.imade {
+    background: linear-gradient(to right, #13294B,#E84A27, white);
+    width: 100%;
+  }
+
+  #content-imade {
+    background: linear-gradient(to right, rgb(0, 102, 255),#E84A27, white);
+    width: 100%;
+    box-sizing: border-box;
+  
   }
 }
 
