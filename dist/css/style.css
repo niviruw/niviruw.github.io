@@ -266,10 +266,10 @@ body {
     background: #c32aa3;
   }
   .github:hover {
-    color: #6e5494;
+    color: #28a745;
   }
   .github:hover span { 
-    background: #6e5494;
+    background: #28a745;
   }
   ul li a .twitter {
     color: #1da1f2;
