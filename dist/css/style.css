@@ -5,9 +5,10 @@
 
 body {
     margin: 0;
-    color: black;
     background: rgb(97, 97, 97);
-    /* background-size: cover; */
+    /* background: url(../img/back8.jpeg); */
+    /* background-size: cover;
+    background-color: rgba(0,0,0,0.3); */
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     font-family: "Nunito", "Open Sans", sans-serif;
   }
