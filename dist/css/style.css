@@ -5,12 +5,16 @@
 
 body {
     margin: 0;
-    background: rgb(97, 97, 97);
+    /* background: rgb(97, 97, 97); */
+    background: white;
     /* background: url(../img/back8.jpeg); */
     /* background-size: cover;
     background-color: rgba(0,0,0,0.3); */
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-    font-family: "Nunito", "Open Sans", sans-serif;
+    /* font-family: "Nunito", "Open Sans", sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    /* font-weight: 800; */
   }
   
   .showcase::after {
@@ -34,7 +38,7 @@ body {
   }
 
   .here:visited {
-      color: white;
+      color: black;
       /* text-decoration: none; */
   }
 
@@ -73,14 +77,14 @@ body {
     height: 200px;
     width: 200px;
     border-radius: 50%;
-    border: white solid 3px;
+    border: black solid 3px;
   }
   
   .content .title {
       font-weight: 400;
     font-size: 4em;
     margin-top: 1rem;
-    color: white;
+    color: black;
   }
   
   .content .text {
@@ -184,7 +188,7 @@ body {
     font-size:40px;
     text-align:center;
     text-decoration:none;
-    color:white;
+    color:black;
     margin: 0 30px;
     transition:.5s;
   }
@@ -196,7 +200,7 @@ body {
   ul li a span:nth-child(3){
     width:100%;
     height:1px;
-    background:white;
+    background:black;
   }
   ul li a span:nth-child(1) {
     top:0;
