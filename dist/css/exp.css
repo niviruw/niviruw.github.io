@@ -39,10 +39,10 @@ body {
 
 #illinois {
   position: absolute;
-  /* visibility: hidden; */
+  
   width: 67vw;
   height: 62vh;
-  /* margin-left: 25.75%; */
+  
   -webkit-filter: blur(8px);
   filter: blur(8px);
   transition: ease-in-out 0.5s;
@@ -54,10 +54,10 @@ body {
 #rubiks {
   background: rgb(175, 175, 175);
   position: absolute;
-  /* visibility: hidden; */
+  
   width: 70vw;
   height: 70vh;
-  /* margin-left: 25.75%; */
+  
   -webkit-filter: blur(8px);
   filter: blur(8px);
   transition: ease-in-out 0.5s;
@@ -69,10 +69,10 @@ body {
 
 #genusim {
   position: absolute;
-  /* visibility: hidden; */
+  
   width: 66vw;
   height: 68vh;
-  /* margin-left: 25.75%; */
+  
   -webkit-filter: blur(8px);
   filter: blur(6px);
   transition: ease-in-out 0.5s;
@@ -84,7 +84,7 @@ body {
 
 #neuro {
   position: absolute;
-  /* visibility: hidden; */
+  
   width: 50vw;
   height: 55vh;
   margin-left: 25.75%;
@@ -98,10 +98,10 @@ body {
 
 #imade {
   position: absolute;
-  /* visibility: hidden; */
+  
   width: 56vw;
   height: 54vh;
-  /* margin-left: 25.75%; */
+  
   -webkit-filter: blur(8px);
   filter: blur(8px);
   transition: ease-in-out 0.5s;
@@ -113,10 +113,10 @@ body {
 
 #manufacturing {
   position: absolute;
-  /* visibility: hidden; */
+  
   width: 60vw;
   height: 65vh;
-  /* margin-left: 25.75%; */
+  
   -webkit-filter: blur(8px);
   filter: blur(8px);
   transition: ease-in-out 0.5s;
@@ -126,10 +126,10 @@ body {
 
 #cane {
   position: absolute;
-  /* visibility: hidden; */
+  
   width: 60vw;
   height: 65vh;
-  /* margin-left: 25.75%; */
+  
   -webkit-filter: blur(8px);
   filter: blur(8px);
   transition: ease-in-out 0.5s;
@@ -432,5 +432,101 @@ body {
   }
   .timeline .swiper-slide-content {
     right: 25%;
+  }
+}
+
+/* iPHONE 6/7/8 */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+  #illinois {
+    position: absolute;
+    width: 60vw;
+    height: 30vh;
+    margin-left: 25%;
+    /* margin-top: 125%; */
+  }
+  
+  #rubiks {
+    background: rgb(175, 175, 175);
+    position: absolute;
+    
+    width: 80vw;
+    height: 40vh;
+    
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
+    transition: ease-in-out 0.5s;
+    margin-top: -130%;
+    z-index: -10;
+
+  }
+  
+  #genusim {
+    position: absolute;
+    
+    width: 80vw;
+    height: 30vh;
+    
+    -webkit-filter: blur(8px);
+    filter: blur(6px);
+    transition: ease-in-out 0.5s;
+    margin-top: -130%;
+    z-index: -10;
+  }
+  
+  #neuro {
+    position: absolute;
+    
+    width: 60vw;
+    height: 30vh;
+    margin-left: 25.75%;
+    -webkit-filter: blur(8px);
+    filter: blur(10px);
+    transition: ease-in-out 0.5s;
+    margin-top: -122%;
+    z-index: -10;
+    
+  }
+  
+  #imade {
+    position: absolute;
+    
+    width: 55vw;
+    height: 25vh;
+    
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
+    transition: ease-in-out 0.5s;
+    margin-top: -95%;
+    background-color: #0455A4;
+    z-index: -10;
+  }
+  
+  #manufacturing {
+    position: absolute;
+    
+    width: 80vw;
+    height: 30vh;
+    
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
+    transition: ease-in-out 0.5s;
+    margin-top: -115%;
+    z-index: -10;
+  }
+  
+  #cane {
+    position: absolute;
+    
+    width: 80vw;
+    height: 30vh;
+    
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
+    transition: ease-in-out 0.5s;
+    margin-top: -110%;
+    z-index: -10;
   }
 }
