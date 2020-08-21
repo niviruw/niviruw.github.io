@@ -53,7 +53,7 @@
       cont[0].style.transition = 'ease-in-out 1s'
       
     })
-
+    var zeiss = document.getElementById("zeiss")
     var illinois = document.getElementById("illinois");
     var rubiks = document.getElementById("rubiks");
     var genusim = document.getElementById("genusim");
@@ -61,64 +61,63 @@
     var imade = document.getElementById("imade");
     var cane = document.getElementById("cane");
     var manufacturing = document.getElementById("manufacturing");
+    console.log(container);
+    var imageList = [zeiss, illinois, rubiks, genusim, neuro, imade, cane, manufacturing];
 
-    var imageList = [illinois, rubiks, genusim, neuro, imade, cane, manufacturing];
     container[0].addEventListener('click', function(){
       index = 0;
-      illinois.style.visibility = 'visible';
-      rubiks.style.visibility = 'hidden'
+      zeiss.style.visibility = 'visible';
+      illinois.style.visibility = 'hidden';
       cont[0].style.backgroundColor = colors[0];
       cont[0].style.transition = 'ease-in-out 1s';
     })
 
-    var rubiks = document.getElementById("rubiks");
     container[1].addEventListener('click', function(){
-      illinois.style.visibility = 'hidden';
-      rubiks.style.visibility = 'visible'
-      genusim.style.visibility = 'hidden'
       index = 1;
-      console.log(index)
+      zeiss.style.visibility = 'hidden';
+      illinois.style.visibility = 'visible';
+      rubiks.style.visibility = 'hidden'
       cont[0].style.backgroundColor = colors[1];
       cont[0].style.transition = 'ease-in-out 1s';
     })
 
     container[2].addEventListener('click', function(){
+      illinois.style.visibility = 'hidden';
+      rubiks.style.visibility = 'visible'
+      genusim.style.visibility = 'hidden'
       index = 2;
       console.log(index)
-      rubiks.style.visibility = 'hidden';
-      genusim.style.visibility = 'visible';
-      neuro.style.visibility = 'hidden';
       cont[0].style.backgroundColor = colors[2];
       cont[0].style.transition = 'ease-in-out 1s';
-
     })
 
     container[3].addEventListener('click', function(){
       index = 3;
       console.log(index)
-      genusim.style.visibility = 'hidden';
-      neuro.style.visibility = 'visible';
-      imade.style.visibility = 'hidden';
+      rubiks.style.visibility = 'hidden';
+      genusim.style.visibility = 'visible';
+      neuro.style.visibility = 'hidden';
       cont[0].style.backgroundColor = colors[3];
       cont[0].style.transition = 'ease-in-out 1s';
+
     })
 
     container[4].addEventListener('click', function(){
       index = 4;
-      neuro.style.visibility = 'hidden';
-      imade.style.visibility = 'visible';
-      cane.style.visibility = 'hidden';
       console.log(index)
+      genusim.style.visibility = 'hidden';
+      neuro.style.visibility = 'visible';
+      imade.style.visibility = 'hidden';
       cont[0].style.backgroundColor = colors[4];
       cont[0].style.transition = 'ease-in-out 1s';
     })
 
     container[5].addEventListener('click', function(){
       index = 5;
+      neuro.style.visibility = 'hidden';
+      imade.style.visibility = 'visible';
+      cane.style.visibility = 'hidden';
       console.log(index)
-      imade.style.visibility = 'hidden';
-      cane.style.visibility = 'visible';
-      manufacturing.style.visibility = 'hidden';
       cont[0].style.backgroundColor = colors[5];
       cont[0].style.transition = 'ease-in-out 1s';
     })
@@ -126,13 +125,23 @@
     container[6].addEventListener('click', function(){
       index = 6;
       console.log(index)
-      cane.style.visibility = 'hidden';
-      manufacturing.style.visibility = 'visible';
+      imade.style.visibility = 'hidden';
+      cane.style.visibility = 'visible';
+      manufacturing.style.visibility = 'hidden';
       cont[0].style.backgroundColor = colors[6];
       cont[0].style.transition = 'ease-in-out 1s';
     })
 
-    var colors = ['rgb(232, 74, 39)', 'rgb(175, 175, 175)', 'rgb(175, 175, 175)', '#4E6386', '#0455A4', 'rgb(175, 175, 175)', 'rgb(0,0,0)']
+    container[7].addEventListener('click', function(){
+      index = 7;
+      console.log(index)
+      cane.style.visibility = 'hidden';
+      manufacturing.style.visibility = 'visible';
+      cont[0].style.backgroundColor = colors[7];
+      cont[0].style.transition = 'ease-in-out 1s';
+    })
+
+    var colors = ['#2449a4', 'rgb(232, 74, 39)', 'rgb(175, 175, 175)', 'rgb(175, 175, 175)', '#4E6386', '#0455A4', 'rgb(175, 175, 175)', 'rgb(0,0,0)']
   }
 </script>
 <div class="container">
@@ -140,8 +149,15 @@
   <div class="timeline">
     <div class="swiper-container">
       <div class="swiper-wrapper">
+        <div id="hello" class="swiper-slide" style= "z-index: 1000; background-color: #2449a4" data-year="Carl Zeiss Meditec AG" >
+          <div class="swiper-slide-content"><span class="timeline-year">Carl Zeiss Meditec AG</span>
+            <h4 class="timeline-title">Mechanical engineering Intern</h4>
+            <p class="timeline-text" ></p>
+            <p class="timeline-text" id="test1" onclick="toggleColor()">Read More</p>
+            <img src="images/zeiss.png" id="zeiss">
+          </div>
+        </div>
         <div id="hello" class="swiper-slide" style= "z-index: 1000; background-color: #E84A27" data-year="Human Dynamics and Controls Lab" >
-          
           <div class="swiper-slide-content"><span class="timeline-year">Human Dynamics and Controls Lab</span>
             <h4 class="timeline-title">Undergraduate Research Assistant</h4>
             <p class="timeline-text" >Designing and

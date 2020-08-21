@@ -37,6 +37,21 @@ body {
   transition: ease-in 0.5s;
 }
 
+#zeiss {
+  position: absolute;
+  
+  width: 55vw;
+  height: 80vh;
+  
+  -webkit-filter: blur(8px);
+  filter: blur(8px);
+  transition: ease-in-out 0.5s;
+  margin-top: -126.5%;
+  z-index: -10;
+  margin-left: 25%;
+  /* filter: blur(10px); */
+}
+
 #illinois {
   position: absolute;
   
@@ -144,7 +159,8 @@ body {
           justify-content: center;
   -webkit-box-align: center;
           align-items: center;
-  background-color: rgb(232, 74, 39);
+  /* background-color: rgb(232, 74, 39); */
+  background-color: #2449a4;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
           flex-direction: column;
