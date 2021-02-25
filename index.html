@@ -6,81 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous" />
-    <link rel="stylesheet" href="dist/css/style.css" />
-    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js"></script>
+    <title>Niviru's Website</title>
 </head>
+<body>
+    <section class="main" style="width:auto; margin: 8% 20%; padding: 0;">
+        <!-- <button onclick="myFunction()">Toggle dark mode</button> -->
+        <div style="position: relative; margin-left: auto; margin-right: auto; ">
+            <img src="imgs/profile-pic.jpeg" style="height: 175px; display: block;margin-left: auto; margin-right: auto; border-radius: 50%;">
+        </div>
+        <div style="width:fit-content; margin: 0; padding: 0; margin-left: auto; margin-right: auto; margin-top: -20px; display:block;" class="type-container">
+            <h1 style="font-size: 60px;">Hi I'm
+                <span class="typed-text"></span><span class="cursor">&nbsp;</span></h1>
+        </div>
+        <div style="width:90%; margin: 0; padding: 0; background-color: transparent;margin-left: auto; margin-right: auto; display:block;">
+            <p>I'm a Junior studying Mechanical Engineering and Computer Science at UIUC. I have a strong passion and interest in Computer Vision, Machine Learning, and Robotics.
+            I currently work on <span class="emphasized">Latent Space Steerability and Adversarial Video Generation</span> in the <a href="https://vision.cs.illinois.edu/vision_website/"class="labs">Vision Group</a> and 
+            <span class="emphasized">Autonomous Systems, Explainability, and Reinforcement Learning</span> in the <a href="https://publish.illinois.edu/humancenteredautonomy/"class="labs"">Human-Centered Autonomy Lab</a>. 
+            Previously, I worked in the <a class="labs" href="https://hdcl.mechanical.illinois.edu/">Human Dynamics and Controls Lab </a> on <span class="emphasized">mechanical design and app development</span> for a robotic arm rigidity simulator.
+            Outside of class and research I'm the president of <a class="clubs" href="">i-MADE</a>, a club focused building practical med-tech solutions, and am a Co-Founder of <a class="clubs">NeuroTech@UIUC</a>, a club focused on exploring BCI technology.</p> 
+        </div>
+        <div style="width:fit-content; margin: 0; padding: 0; margin-left: auto; margin-right: auto; display:block;">
+            <ul style="display: inline; margin: 0; padding: 0;">
+                <a href="imgs/Niviru_Wijayaratne_Resume.pdf" class="links">Resume</a>
+                <a href="https://www.linkedin.com/in/niviruw/" class="links">Linkedin</a>
+                <a href="https://github.com/niviruwijayaratne" class="links">Github</a>
+                <a href="mailto:nnw2@illinois.edu" class="links">Email</a>
+            </ul>
+        </div>
+    </section>
+    
+    <script>
+        const typedTextSpan = document.querySelector(".typed-text");
+        const cursorSpan = document.querySelector(".cursor");
+        const textArray = ["Niviru", "Niv"];
+        const typingDelay = 150;
+        const erasingDelay = 150;
+        const newTextDelay = 750; // Delay between current and next text
+        let textArrayIndex = 0;
+        let charIndex = 0;
 
-<header class="showcase">
-    <div class="content">
-        <img src="dist/img/FullSizeRender.jpeg" class="logo" alt="Traversy Media">
-        <div class="title">
-            Hi, I'm Niv
-        </div>
-        <div class="text">
-            <!-- Click <a class="here" href="dist/test.html"><strong>here</strong></a> to check out some of my projects and
-            experiences! -->
-            <a class="here" href="exp.html">Experience and Projects</a><br>
-            <!-- <a class="here">About Me</a> -->
-        </div>
-        <!-- <div class="icons">
-            <div class="twitter">
-                <a href="https://twitter.com/_PACNIVS14">
-                    <i class="fab fa-twitter fa-2x"></i>
-                </a>
-            </div>
-            <div class="facebook">
-                <a href="https://www.facebook.com/profile.php?id=100010490052758">
-                    <i class="fab fa-facebook fa-2x"></i>
-                </a>
-            </div>
-            <div class="linkedin">
-                <a href="https://www.linkedin.com/in/niviruw/">
-                    <i class="fab fa-linkedin fa-2x"></i>
-                </a>
-            </div>
-            <div class="github">
-                <a href="https://github.com/niviruwijayaratne">
-                    <i class="fab fa-github fa-2x"></i>
-                </a>
-            </div>
-        </div> -->
-        <ul>
-            <li>
-                <a class="facebook" href="https://www.facebook.com/profile.php?id=100010490052758">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-            </li>
-            <li>
-                <a class="twitter" href="https://twitter.com/_PACNIVS14">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <i class="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-            </li>
-            <li>
-                <a class="instagram" href="mailto:nnw2@illinois.edu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                </a>
-            </li>
-            <li>
-                <a class="github" href="https://github.com/niviruwijayaratne">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <i class="fab fa-github" aria-hidden="true"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-</header>
+        function type() {
+            if (charIndex < textArray[textArrayIndex].length) {
+                if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            } 
+            else {
+                cursorSpan.classList.remove("typing");
+                setTimeout(erase, newTextDelay);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 3) {
+                if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+                charIndex--;
+                setTimeout(erase, erasingDelay);
+            } 
+            else {
+                cursorSpan.classList.remove("typing");
+                textArrayIndex++;
+                if(textArrayIndex>=textArray.length) textArrayIndex=0;
+                cursorSpan.style.animation = "none";
+                cursorSpan.style.backgroundColor = "transparent";
+                return;
+                // setTimeout(type, typingDelay + 1100);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+            if(textArray.length) setTimeout(type, newTextDelay + 250);
+        });
+    </script>
+</body>

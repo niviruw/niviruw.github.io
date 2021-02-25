@@ -1,0 +1,139 @@
+@import url(https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap);
+
+html {
+    margin: auto;
+    /* background: rgb(97, 97, 97); */
+    /* background: url(../img/back8.jpeg); */
+    /* background-size: cover;
+    background-color: rgba(0,0,0,0.3); */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    /* font-family: "Nunito", "Open Sans", sans-serif; */
+    font-family: 'Raleway', sans-serif;
+    /* font-style: italic; */
+
+    /* font-weight: 800; */
+}
+
+body {
+    padding: 25px;
+    background: white;
+    color: black;
+    font-size: 25px;
+  }
+
+p {
+    font-size: 19px;
+    margin-top: -25px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.links {
+    font-size: 19px;
+    margin-right: 36px;
+    color: black;
+    text-decoration: none;
+    position: relative;
+}
+
+.links:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    background-color: salmon;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.links:hover:before {
+    visibility: visible;
+    width: 100%;
+}
+
+.emphasized {
+    /* color: rgb(236, 99, 84); */
+    /* font-weight: bolder; */
+    font-style: italic;
+}
+
+.labs {
+    /* color:rgb(112, 184, 187); */
+    color: rgb(236, 99, 84);
+    font-style: italic;
+    position: relative;
+    text-decoration: none;
+    /* color: black; */
+}
+
+.labs:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(236, 99, 84);
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.labs:hover:before {
+    visibility: visible;
+    width: 100%;
+}
+
+.clubs {
+    /* color:mediumseagreen;
+     */
+    /* color: rgb(236, 99, 84); */
+    color: black;
+    font-style: italic;
+    position: relative;
+    text-decoration: none;
+}
+
+.clubs:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(236, 99, 84);
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.clubs:hover:before {
+    visibility: visible;
+    width: 100%
+}
+
+.type-container h1 span.typed-text {
+    /* font-weight: normal; */
+    color: rgb(236, 99, 84);
+    margin: 0;
+    padding: 0;
+  }
+  .type-container h1 span.cursor {
+    display: inline-block;
+    background-color: black;
+    padding: 0;
+    margin: 0;
+    width: 3px;
+    animation: blink 1s infinite;
+  }
+  .type-container h1 span.cursor.typing {
+    animation: none;
+  }
+
+  @keyframes blink {
+    0%  { background-color: black; }
+    49% { background-color: black; }
+    50% { background-color: transparent; }
+    99% { background-color: transparent; }
+    100%  { background-color: black; }
+}
