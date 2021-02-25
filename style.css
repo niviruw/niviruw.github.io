@@ -88,8 +88,8 @@ p {
 .clubs {
     /* color:mediumseagreen;
      */
-    /* color: rgb(236, 99, 84); */
-    color: black;
+    color: rgb(236, 99, 84);
+    /* color: black; */
     font-style: italic;
     position: relative;
     text-decoration: none;
