@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-description: <a href="#">Affiliations</a>. Address. Contacts. Moto. Etc.
+description: Prev ML/CV @ 3M, R&D @ Zeiss
 
 profile:
   align: right
@@ -13,9 +13,12 @@ news: false  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
+Hi! My name is Niv and I'm a fourth year Mechanical Engineering and Computer Science student at the University of Illinois at Urbana-Champaign.
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I'm currently an undergraduate research assistant at UIUC working with [Professor Shenlong Wang](https://shenlong.web.illinois.edu/) on photorealistic rendering for autonomous vehicles. I'm also interested in 3D Reconstruction and Novel View Synthesis.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+Before that I worked with [Professor Katie Driggs-Campbell](https://krdc.web.illinois.edu/) and [Yuan Shen](https://yshen47.github.io/) in the [Human-Centered Autonomy Lab](https://publish.illinois.edu/humancenteredautonomy/) on driver attention prediction and explaniability for AVs.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+Outside of school I love to workout, play soccer and spikeball, and listen to classical music. Please feel free to reach out, I'm always willing to chat!
+
+
