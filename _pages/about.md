@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-description: Prev ML/CV @ 3M, R&D @ Zeiss
+description: 3D Vision fanatic, Prev ML/CV @ 3M, R&D @ Zeiss
 
 profile:
   align: right
