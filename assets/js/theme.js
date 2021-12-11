@@ -38,8 +38,6 @@ let transTheme = () => {
 
 
 let initTheme = (theme) => {
-  console.log(theme)
-  console.log(localStorage.getItem("theme"))
   if (theme != localStorage.getItem("theme")) {
 	setTheme(localStorage.getItem("theme"))
   }
