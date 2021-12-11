@@ -13,9 +13,9 @@ news: false  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
-Hi! My name is Niv and I'm a fourth year Mechanical Engineering and Computer Science student at the University of Illinois at Urbana-Champaign.
+Hi! My name is Niv and I'm a fourth year Mechanical Engineering and Computer Science undergrad at the University of Illinois at Urbana-Champaign.
 
-I'm currently an undergraduate research assistant at UIUC working with [Professor Shenlong Wang](https://shenlong.web.illinois.edu/) on photorealistic rendering for autonomous vehicles. I'm also interested in 3D Reconstruction and Novel View Synthesis.
+I'm currently an undergraduate research assistant at UIUC working with [Professor Shenlong Wang](https://shenlong.web.illinois.edu/) on photorealistic rendering for autonomous vehicles.
 
 Before that I worked with [Professor Katie Driggs-Campbell](https://krdc.web.illinois.edu/) and [Yuan Shen](https://yshen47.github.io/) in the [Human-Centered Autonomy Lab](https://publish.illinois.edu/humancenteredautonomy/) on driver attention prediction and explaniability for AVs.
 
