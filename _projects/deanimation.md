@@ -1,10 +1,11 @@
 ---
 layout: page
-title: de-animation
+title: De-Animation
 description: Implementation of "Selectively De-Animating Video" from SIGGRAPH 2012 
 img: assets/img/projects/deanimation/guitar_average_before_after.jpg
 redirect: https://github.com/niviruwijayaratne/de-animation
 importance: 3
+github: https://github.com/niviruwijayaratne/de-animation
 category: fun
 ---
 

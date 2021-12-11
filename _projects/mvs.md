@@ -1,11 +1,12 @@
 ---
 layout: page
-title: multi-view stereo
+title: Multi-View Stereo
 description: My implementation of "Accurate, Dense, and Robust Multi-View Stereopsis" from CVPR 2007.
 img: assets/img/projects/mvs/epipolar_matching_merged.gif
 redirect: https://github.com/niviruwijayaratne/furukawa_ponce_mvs
 importance: 1
 category: fun
+github: https://github.com/niviruwijayaratne/furukawa_ponce_mvs
 ---
 
 Every project has a beautiful feature showcase page.

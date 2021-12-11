@@ -1,10 +1,11 @@
 ---
 layout: page
-title: lane_detection
+title: Lane Detection
 description: Lane detection pipeline implemented with OpenCV
 img: assets/img/projects/lane_detection/video_gif.gif
 redirect: https://github.com/niviruwijayaratne/lane_detection
 importance: 2
+github: https://github.com/niviruwijayaratne/lane_detection
 category: fun
 ---
 

@@ -5,6 +5,7 @@ description: Collection of projects using ROS, Gazebo, and the UR3 6-axis Robot
 img: assets/img/projects/robotics/tower_of_hanoi.gif
 redirect: https://github.com/niviruwijayaratne/robotics-projects 
 importance: 4
+github: https://github.com/niviruwijayaratne/robotics-projects
 category: fun
 ---
 
