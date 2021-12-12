@@ -6,7 +6,7 @@ img: assets/img/projects/robotics/tower_of_hanoi.gif
 redirect: https://github.com/niviruwijayaratne/robotics-projects 
 importance: 4
 github: https://github.com/niviruwijayaratne/robotics-projects
-category: fun
+category: vision
 ---
 
 Every project has a beautiful feature showcase page.

@@ -6,7 +6,7 @@ img: assets/img/projects/deanimation/guitar_average_before_after.jpg
 redirect: https://github.com/niviruwijayaratne/de-animation
 importance: 3
 github: https://github.com/niviruwijayaratne/de-animation
-category: fun
+category: vision
 ---
 
 Every project has a beautiful feature showcase page.

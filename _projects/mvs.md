@@ -5,7 +5,7 @@ description: My implementation of "Accurate, Dense, and Robust Multi-View Stereo
 img: assets/img/projects/mvs/epipolar_matching_merged.gif
 redirect: https://github.com/niviruwijayaratne/furukawa_ponce_mvs
 importance: 1
-category: fun
+category: vision
 github: https://github.com/niviruwijayaratne/furukawa_ponce_mvs
 ---
 

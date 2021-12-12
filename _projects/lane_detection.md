@@ -6,7 +6,7 @@ img: assets/img/projects/lane_detection/video_gif.gif
 redirect: https://github.com/niviruwijayaratne/lane_detection
 importance: 2
 github: https://github.com/niviruwijayaratne/lane_detection
-category: fun
+category: vision
 ---
 
 Every project has a beautiful feature showcase page.
