@@ -386,7 +386,50 @@ article h3 { font-size: 1.05rem; font-weight: 500; margin: 20px 0 6px; }
 .note p:last-child { margin-bottom: 0; }
 .note strong { font-weight: 500; }
 /* Writeup contents: Code link plus jump links to each section */
-.toc { margin: 4px 0 8px; }
+.toc, .page-links { margin: 4px 0 8px; }
+.toc { list-style: none; padding: 0; }
+/* Narrow screens: the section links sit in the same row as the Code link */
+@media (max-width: 1039.98px) {
+  .page-links .toc { display: contents; }
+}
+/* Wide screens: the section links move into the left margin, vertically centered, and stay put
+   while scrolling. The section being read is highlighted, with a marker beside its link
+   (see toc.js). The text column keeps its width. */
+@media (min-width: 1040px) {
+  .toc {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(50% - 494px);
+    width: 164px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding-left: 14px;
+  }
+  .toc li { margin: 0; }
+  .toc a { text-decoration: none; opacity: 0.55; transition: opacity 0.2s ease-in-out; }
+  .toc a:hover, .toc a.active { opacity: 1; }
+  .toc::before, .toc::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 2px;
+    border-radius: 1px;
+  }
+  .toc::before { top: 0; bottom: 0; background: var(--rule); }
+  /* Marker beside the current link; it slides to the next link when the section changes */
+  .toc::after {
+    top: var(--marker-top, 0px);
+    height: var(--marker-height, 0px);
+    background: currentColor;
+    opacity: 0;
+    transition: top 0.2s ease-in-out, height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  .toc.has-active::after { opacity: 1; }
+  .toc.no-slide::after { transition: none; }
+}
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 16px; }
 article pre {
