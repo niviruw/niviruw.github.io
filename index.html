@@ -86,7 +86,7 @@
 
   <section>
     <h2>Projects</h2>
-    <ul class="plain" id="projects">
+    <ul class="plain collapsible" id="projects">
       <li>
         <a href="projects/virtual-correspondences.html">Virtual Correspondences</a>
         <span class="muted">— implementation of <a href="https://openaccess.thecvf.com/content/CVPR2022/html/Ma_Virtual_Correspondence_Humans_as_a_Cue_for_Extreme-View_Geometry_CVPR_2022_paper.html">Virtual Correspondence: Humans as a Cue for Extreme-View Geometry</a> from CVPR 2022</span>
@@ -125,7 +125,14 @@
 
   <section>
     <h2>Publications &amp; Patents</h2>
-    <ul class="plain">
+    <ul class="plain collapsible" id="publications">
+      <li>
+        <div class="row">
+          <span><a href="https://cs.uwaterloo.ca/~dvogel/gi2026/papers/1100b.pdf">Content-Aware Pixel Art Rendering with Non-Square Pixels</a></span>
+          <span class="when">2026</span>
+        </div>
+        <p class="detail">Z. Z. Wang, J. Echevarria, <span class="me">N. Wijayaratne</span>, C. S. Kaplan · Graphics Interface (GI)</p>
+      </li>
       <li>
         <div class="row">
           <span><a href="https://patents.justia.com/patent/20260212079">Systems, Media, and Methods for Metasurface Development</a></span>
@@ -189,14 +196,14 @@
   })();
 </script>
 <script>
-  // Show the first few projects; "+ N more projects" reveals the rest. Without JavaScript the full list shows.
-  (function () {
+  // Show the first few items of a list; "+ N more <noun>" reveals the rest. Without JavaScript the full list shows.
+  function collapsible(id, noun) {
     var VISIBLE = 3;
-    var list = document.getElementById('projects');
+    var list = document.getElementById(id);
     var items = list.querySelectorAll(':scope > li');
     if (items.length <= VISIBLE) return;
     // Remember whether the list was expanded for this visit, so coming back from a project keeps it
-    var KEY = 'projectsExpanded';
+    var KEY = id + 'Expanded';
     var startOpen = false;
     try { startOpen = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
     function remember(open) { try { sessionStorage.setItem(KEY, open ? '1' : '0'); } catch (e) {} }
@@ -206,7 +213,7 @@
     more.type = 'button';
     more.className = 'show-more';
     var hiddenCount = items.length - VISIBLE;
-    function label(open) { return open ? '− Show fewer' : '+ ' + hiddenCount + ' more projects'; }
+    function label(open) { return open ? '− Show fewer' : '+ ' + hiddenCount + ' more ' + noun; }
     more.textContent = label(startOpen);
     more.setAttribute('aria-expanded', String(startOpen));
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -251,7 +258,7 @@
         });
         requestAnimationFrame(function () { list.classList.add('revealed'); });
       } else {
-        // Collapsed height = where the first extra project starts (measured without hiding anything,
+        // Collapsed height = where the first extra item starts (measured without hiding anything,
         // so the fade-out isn't interrupted)
         var collapsed = items[VISIBLE].getBoundingClientRect().top - list.getBoundingClientRect().top;
         list.classList.remove('revealed');
@@ -259,7 +266,9 @@
       }
     });
     list.after(more);
-  })();
+  }
+  collapsible('projects', 'projects');
+  collapsible('publications', 'publications');
 </script>
 </body>
 </html>

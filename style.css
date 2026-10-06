@@ -143,14 +143,14 @@ ul.plain > li { margin-bottom: 10px; }
   transition: opacity 0.2s ease-in-out;
 }
 .show-more:hover, .show-more:focus-visible { opacity: 1; }
-/* Extra projects fade in while the list grows (see the View more script in index.html) */
+/* Extra list items fade in while the list grows (see the View more script in index.html) */
 /* flow-root keeps the last item's bottom margin inside the list, so its height doesn't jump
    when the animation switches overflow on and off */
-#projects { display: flow-root; }
+.collapsible { display: flow-root; }
 /* Project titles a touch bolder than body text, like publication titles */
 #projects > li > a { font-weight: 400; }
-#projects > .extra { transition: opacity 0.6s ease-in-out; }
-#projects:not(.revealed) > .extra { opacity: 0; }
+.collapsible > .extra { transition: opacity 0.6s ease-in-out; }
+.collapsible:not(.revealed) > .extra { opacity: 0; }
 
 /* Experience: title on the left, dates on the right; stacks on narrow screens */
 .row {
