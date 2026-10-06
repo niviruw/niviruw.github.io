@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Robotics Projects · Niviru Wijayaratne</title>
+  <meta name="description" content="Tower of Hanoi, forward and inverse kinematics, and vision-based pick-and-place on a UR3 arm with ROS.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+  <script data-goatcounter="https://niviruwijayaratne.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../track.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← Back</a>
+
+  <article>
+    <h1>Robotics Projects</h1>
+    <p>
+      Labs from ECE 470: Introduction to Robotics, programming a UR3 6-axis arm with ROS, both in
+      the Gazebo simulator and on the real robot.
+    </p>
+    <ul class="links toc">
+      <li><a href="https://github.com/niviruwijayaratne/robotics-projects">Code</a></li>
+      <li><a href="#hanoi">Tower of Hanoi</a></li>
+      <li><a href="#fk">Forward kinematics</a></li>
+      <li><a href="#other">Other labs</a></li>
+    </ul>
+
+    <section id="hanoi">
+      <h2>Tower of Hanoi</h2>
+      <figure class="fig">
+        <video src="robotics/tower_of_hanoi.mp4" poster="robotics/tower_of_hanoi_poster.jpg" width="600" height="338" autoplay muted loop playsinline aria-label="UR3 arm moving colored blocks between three tower positions"></video>
+      </figure>
+      <p>
+        The arm solves Tower of Hanoi with three blocks and a suction-cup gripper. Each tower
+        position and block height has two stored joint configurations: one touching the block and
+        one just above it. Separate sets are stored for the simulator and the real robot. Every move
+        follows the same pattern: go above the block, drop down, turn on suction, lift, move above
+        the destination, lower, release, lift. After each grab, the program reads the gripper's
+        suction sensor and stops if no block was picked up.
+      </p>
+    </section>
+
+    <section id="fk">
+      <h2>Forward kinematics</h2>
+      <figure class="fig">
+        <video src="robotics/forward_kinematics.mp4" poster="robotics/forward_kinematics_poster.jpg" width="600" height="338" autoplay muted loop playsinline aria-label="UR3 arm moving through commanded joint configurations"></video>
+      </figure>
+      <p>
+        Given six joint angles, forward kinematics computes where the gripper ends up, using the
+        product-of-exponentials formulation: each joint gets a screw axis <i>S<sub>i</sub></i> from its
+        rotation axis and a point on that axis, and <i>M</i> is the gripper's pose at the home position.
+      </p>
+      <math display="block">
+        <mi>T</mi><mo>(</mo><mi>θ</mi><mo>)</mo><mo>=</mo>
+        <msup><mi>e</mi><mrow><mo>[</mo><msub><mi>S</mi><mn>1</mn></msub><mo>]</mo><msub><mi>θ</mi><mn>1</mn></msub></mrow></msup>
+        <msup><mi>e</mi><mrow><mo>[</mo><msub><mi>S</mi><mn>2</mn></msub><mo>]</mo><msub><mi>θ</mi><mn>2</mn></msub></mrow></msup>
+        <mo>⋯</mo>
+        <msup><mi>e</mi><mrow><mo>[</mo><msub><mi>S</mi><mn>6</mn></msub><mo>]</mo><msub><mi>θ</mi><mn>6</mn></msub></mrow></msup>
+        <mi>M</mi>
+      </math>
+    </section>
+
+    <section id="other">
+      <h2>Other labs</h2>
+      <ul>
+        <li><strong>Inverse kinematics.</strong> A closed-form, elbow-up solution that takes a target gripper position and yaw and solves for all six joint angles, checked with the forward kinematics above.</li>
+        <li><strong>Vision-based pick and place.</strong> A camera finds colored blocks with HSV thresholding and blob detection. Their pixel locations are converted to world coordinates, and inverse kinematics picks them up and places them.</li>
+      </ul>
+    </section>
+  </article>
+</main>
+</body>
+</html>

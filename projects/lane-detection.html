@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lane Detection · Niviru Wijayaratne</title>
+  <meta name="description" content="Classical computer vision lane detection with OpenCV: calibration, thresholding, bird's-eye warping and polynomial lane fits.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+  <script data-goatcounter="https://niviruwijayaratne.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../track.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← Back</a>
+
+  <article>
+    <h1>Autonomous Lane Detection</h1>
+    <p>
+      A deep dive into computer vision for autonomous driving. I built a classical lane-detection
+      pipeline in OpenCV and picked up a lot of vision theory along the way.
+    </p>
+    <ul class="links toc">
+      <li><a href="https://github.com/niviruwijayaratne/lane_detection">Code</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#pipeline">Pipeline</a></li>
+      <li><a href="#next">Next steps</a></li>
+    </ul>
+
+    <section id="demo">
+      <h2>Demo</h2>
+      <figure class="fig">
+        <video src="lane-detection/lane_detection.mp4" poster="lane-detection/lane_detection_poster.jpg" width="600" height="338" autoplay muted loop playsinline aria-label="Highway driving footage with the detected lane shaded green and the lane lines highlighted"></video>
+        <figcaption>
+          The detected lane is shaded green. The insets show the thresholded frame, the bird's-eye view
+          and the fitted lane lines, with each line's estimated curvature on the right.
+        </figcaption>
+      </figure>
+      <p>
+        I shot the video on my phone, by hand, on a bumpy road, so results would be much better with a
+        properly mounted camera.
+      </p>
+    </section>
+
+    <section id="pipeline">
+      <h2>Pipeline</h2>
+      <ol>
+        <li><strong>Camera calibration.</strong> Find chessboard corners in a set of calibration photos, estimate the camera matrix and distortion coefficients, and undistort every frame.</li>
+        <li><strong>Thresholding.</strong> Build a binary mask of likely lane pixels by combining a Sobel gradient threshold (strong horizontal gradients at lane-like angles) with a color threshold in HLS space (high saturation, which picks out painted lines).</li>
+        <li><strong>Bird's-eye view.</strong> Warp the mask with a perspective transform so the lane lines look roughly parallel from above.</li>
+        <li><strong>Finding the lines.</strong> On the first frame, a histogram of the bottom half of the image locates each line's base. Nine sliding windows then follow each line up the image. On later frames, the search stays within a margin of the previous fit.</li>
+        <li><strong>Fitting.</strong> Fit a second-order polynomial <i>x</i> = <i>ay</i><sup>2</sup> + <i>by</i> + <i>c</i> to each line's pixels, and convert from pixels to meters to estimate each line's radius of curvature.</li>
+        <li><strong>Overlay.</strong> Fill the region between the lines, warp it back into the original view, and blend it onto the frame.</li>
+      </ol>
+    </section>
+
+    <section id="next">
+      <h2>Next steps</h2>
+      <p>
+        Replace the hand-tuned thresholds with a learned segmentation model (U-Net). The repo has a
+        starting notebook.
+      </p>
+    </section>
+  </article>
+</main>
+</body>
+</html>

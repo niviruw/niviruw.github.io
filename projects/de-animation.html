@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>De-Animation · Niviru Wijayaratne</title>
+  <meta name="description" content="Implementation of &quot;Selectively De-Animating Video&quot; from SIGGRAPH 2012.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+  <script data-goatcounter="https://niviruwijayaratne.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../track.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← Back</a>
+
+  <article>
+    <h1>De-Animation</h1>
+    <p>
+      Implementation of <a href="https://dl.acm.org/doi/10.1145/2185520.2185562">"Selectively De-Animating Video"</a>
+      from SIGGRAPH 2012.
+    </p>
+    <ul class="links toc">
+      <li><a href="https://github.com/niviruwijayaratne/de-animation">Code</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+
+    <section id="results">
+      <h2>Results</h2>
+      <p>
+        Average image of the video in the selected regions. Drag the line to reveal the de-animated result, and use the arrows above for different examples.
+      </p>
+      <div class="slides" id="deanim">
+        <div class="slides-nav">
+          <button type="button" class="prev" aria-label="Previous video">←</button>
+          <span class="slides-label" aria-live="polite"><span class="name">Guitar</span> <span class="count">1 / 2</span></span>
+          <button type="button" class="next" aria-label="Next video">→</button>
+        </div>
+        <div class="compare" role="slider" tabindex="0" aria-label="Reveal the after image" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="before" src="de-animation/guitar_average_before.jpg" alt="Guitar video, average image before de-animation" width="140" height="140" draggable="false">
+          <img class="after" src="de-animation/guitar_average_after.jpg" alt="Guitar video, average image after de-animation" width="140" height="140" draggable="false">
+          <span class="compare-label after-label">After</span>
+          <span class="compare-label before-label">Before</span>
+          <span class="compare-line"><span class="compare-handle"></span></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach">
+      <h2>Approach</h2>
+      <ol>
+        <li>Detect and track "anchor" features using the Kanade-Lucas-Tomasi feature tracker.</li>
+        <li>Define a 64 x 32 rectilinear mesh over each frame and represent each feature location as a bilinear interpolation of the vertices of the mesh quad that encloses it.</li>
+        <li>Set up and solve for the initial warp, following Equation 3 in Bai et al.</li>
+        <li>Texture map the input video onto the initial output mesh.</li>
+        <li>Use the initial warp as input and detect "floating" feature tracks.</li>
+        <li>Solve for the refined warp, following Equation 5 in Bai et al.</li>
+        <li>Texture map the input video onto the refined mesh.</li>
+      </ol>
+    </section>
+
+    <section id="references">
+      <h2>References</h2>
+      <ul>
+        <li><a href="http://graphics.berkeley.edu/papers/Bai-SDV-2012-08/Bai-SDV-2012-08_large.pdf">Bai, Jiamin, et al. "Selectively de-animating video." ACM Trans. Graph. 31.4 (2012): 66-1.</a></li>
+        <li><a href="https://github.com/TomSchimansky/GuitarTuner">Custom Tkinter Button</a></li>
+      </ul>
+    </section>
+  </article>
+</main>
+<script>
+  // Before/after slideshow: drag the line to the right to reveal the after image.
+  (function () {
+    var scenes = [
+      { name: 'Guitar', file: 'guitar', size: 140 },
+      { name: 'Model', file: 'model', size: 220 }
+    ];
+    var root = document.getElementById('deanim');
+    var cmp = root.querySelector('.compare');
+    var before = cmp.querySelector('.before'), after = cmp.querySelector('.after');
+    var name = root.querySelector('.name'), count = root.querySelector('.count');
+    var i = 0, pos = 0, dragging = false;
+
+    function setPos(p) {
+      pos = Math.max(0, Math.min(100, p));
+      cmp.style.setProperty('--pos', pos + '%');
+      cmp.setAttribute('aria-valuenow', Math.round(pos));
+    }
+    function fromPointer(e) {
+      var r = cmp.getBoundingClientRect();
+      setPos((e.clientX - r.left) / r.width * 100);
+    }
+    function show(k) {
+      i = (k + scenes.length) % scenes.length;
+      var s = scenes[i];
+      before.src = 'de-animation/' + s.file + '_average_before.jpg';
+      after.src = 'de-animation/' + s.file + '_average_after.jpg';
+      before.alt = s.name + ' video, average image before de-animation';
+      after.alt = s.name + ' video, average image after de-animation';
+      before.width = before.height = after.width = after.height = s.size;
+      name.textContent = s.name;
+      count.textContent = (i + 1) + ' / ' + scenes.length;
+      setPos(50);
+    }
+
+    cmp.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      cmp.setPointerCapture(e.pointerId);
+      fromPointer(e);
+    });
+    cmp.addEventListener('pointermove', function (e) { if (dragging) fromPointer(e); });
+    cmp.addEventListener('pointerup', function () { dragging = false; });
+    cmp.addEventListener('pointercancel', function () { dragging = false; });
+    cmp.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        e.stopPropagation();
+        setPos(pos + (e.key === 'ArrowRight' ? 5 : -5));
+      }
+    });
+
+    root.querySelector('.prev').addEventListener('click', function () { show(i - 1); });
+    root.querySelector('.next').addEventListener('click', function () { show(i + 1); });
+    document.addEventListener('keydown', function (e) {
+      if (e.altKey || e.ctrlKey || e.metaKey || /input|textarea|select/i.test(e.target.tagName)) return;
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    show(0);
+  })();
+</script>
+</body>
+</html>

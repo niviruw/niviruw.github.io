@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZoomShop · Niviru Wijayaratne</title>
+  <meta name="description" content="Implementation of ZoomShop: depth-aware editing of photographic composition.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+  <script data-goatcounter="https://niviruwijayaratne.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../track.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← Back</a>
+
+  <article>
+    <h1>ZoomShop</h1>
+    <p>
+      Implementation of <a href="https://doi.org/10.1111/cgf.14458">"ZoomShop: Depth-Aware Editing of Photographic Composition"</a>
+      (Liu et al., Computer Graphics Forum 2022). ZoomShop lets you change the size and
+      foreshortening of things at different depths in a photo after it's taken, for example making
+      a distant mountain range loom larger without touching the foreground.
+    </p>
+    <ul class="links toc">
+      <li><a href="#demo">Try It</a></li>
+      <li><a href="#background">Background</a></li>
+      <li><a href="#implementation">Implementation</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#limitations">Limitations</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+
+    <section id="demo">
+      <h2>Try It</h2>
+      <p>
+        Select a value on the <em>Depth Range</em> slider to select a depth range to scale. Then scale it with the <em>Scale</em> slider to
+        resize just that layer.
+      </p>
+      <div class="slides" id="zoomshop">
+        <div class="slides-nav">
+          <button type="button" class="prev" aria-label="Previous scene">←</button>
+          <span class="slides-label" aria-live="polite"><span class="name">Mountains and Lake</span> <span class="count">1 / 3</span></span>
+          <button type="button" class="next" aria-label="Next scene">→</button>
+        </div>
+        <div class="zs-stage">
+          <canvas aria-label="ZoomShop editor: click to select a depth layer"></canvas>
+          <span class="zs-loading">Loading…</span>
+        </div>
+        <div class="zs-controls">
+          <label class="zs-slider">Scale
+            <input type="range" class="scale" min="0.5" max="2.5" step="0.01" value="1.6">
+            <output class="scale-out">1.60×</output>
+          </label>
+          <label class="zs-slider">Depth Range
+            <input type="range" class="tol" min="0.01" max="0.4" step="0.01" value="0.1">
+            <output class="tol-out">±0.10</output>
+          </label>
+          <div class="zs-buttons">
+            <label><input type="checkbox" class="show-sel" checked> Show selection</label>
+            <button type="button" class="hold">Hold for original</button>
+            <button type="button" class="reset">Reset</button>
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        <p>
+          This is a lightweight JS port of my Python code for demo purposes. It uses the same projection, but holes are filled with a quick push-pull blur instead of the grid
+          fill and content-aware fill used for the results below, and the edit fades out at the edges of
+          the selected depth range. Depth maps were regenerated with MiDaS (DPT-Large).</p>
+      </div>
+    </section>
+
+    <section id="background">
+      <h2>Background</h2>
+      <p>
+        A standard (linear perspective) camera with focal length <i>f</i> and image half-width and
+        half-height <i>P<sub>w</sub></i>, <i>P<sub>h</sub></i> maps a 3D point (<i>X</i>, <i>Y</i>, <i>Z</i>)
+        to image coordinates in [−1, 1]:
+      </p>
+      <math display="block">
+        <mi>u</mi><mo>=</mo><mfrac><mi>f</mi><mrow><msub><mi>P</mi><mi>w</mi></msub><mi>Z</mi></mrow></mfrac><mi>X</mi><mo>,</mo>
+        <mspace width="1em"/>
+        <mi>v</mi><mo>=</mo><mfrac><mi>f</mi><mrow><msub><mi>P</mi><mi>h</mi></msub><mi>Z</mi></mrow></mfrac><mi>Y</mi>
+      </math>
+      <p>
+        ZoomShop generalizes this by replacing the depth-dependent denominator with a function
+        <i>b</i>(<i>z</i>) that the user controls, where <i>λ</i> = <i>P<sub>w</sub></i> / <i>P<sub>h</sub></i>:
+      </p>
+      <math display="block">
+        <mi>u</mi><mo>=</mo><mfrac><mi>X</mi><mrow><mi>λ</mi><mi>b</mi><mo>(</mo><mi>z</mi><mo>)</mo></mrow></mfrac><mo>,</mo>
+        <mspace width="1em"/>
+        <mi>v</mi><mo>=</mo><mfrac><mi>Y</mi><mrow><mi>b</mi><mo>(</mo><mi>z</mi><mo>)</mo></mrow></mfrac>
+      </math>
+      <p>
+        Setting <i>b</i>(<i>z</i>) = <i>P<sub>h</sub>z</i> / <i>f</i> recovers the normal camera, and
+        scaling <i>b</i> uniformly is just zooming in and cropping. The interesting edits come from
+        making <i>b</i> non-linear in depth:
+      </p>
+      <ul>
+        <li><strong>Scale.</strong> Scaling <i>b</i> differently over different depth ranges resizes only the things at those depths.</li>
+        <li><strong>Foreshortening.</strong> Changing the slope ∂<i>b</i>/∂<i>z</i> acts like changing the focal length over a depth range, giving more or less foreshortening.</li>
+      </ul>
+      <figure class="fig" id="fig-1">
+        <img src="zoomshop/zoom_crop.jpg" alt="A lighthouse on a cliff at scales 1.0, 2.5 and 5.0, each more zoomed in" width="1400" height="529" loading="lazy">
+        <figcaption><span class="fig-num">Figure 1:</span> Scaling <i>b</i>(<i>z</i>) uniformly by <i>s</i> is the same as zooming in and cropping.</figcaption>
+      </figure>
+    </section>
+
+    <section id="implementation">
+      <h2>Implementation</h2>
+      <ol>
+        <li><strong>Depth.</strong> Run <a href="https://github.com/isl-org/MiDaS">MiDaS</a> on the photo to get a disparity map <i>d</i>, normalize it to [0, 1], and convert it to (non-metric) depth.</li>
+        <li><strong>Back-project.</strong> Invert the camera model, with the paper's vertical field of view of 55°, to turn every pixel into a colored 3D point.</li>
+        <li><strong>Select and edit.</strong> Pick depth ranges (clicking a pixel selects everything within ±<i>ε</i> of its depth) and choose a scale for each, which makes <i>b</i>(<i>z</i>) non-linear.</li>
+        <li><strong>Re-project.</strong> Project the edited points back into the image. For scaling, this works out to scaling each selected point's image coordinates about the image center.</li>
+        <li><strong>Fill holes.</strong> Pixels that no point lands on are filled with an iterative Poisson-equation grid fill (<a href="https://github.com/ajdawson/gridfill">gridfill</a>), and anything left with Photoshop's Content-Aware Fill, as the ZoomShop authors do.</li>
+      </ol>
+      <figure class="fig narrow" id="fig-2">
+        <img src="zoomshop/selection_tool.jpg" alt="Bike path photo with the background buildings and trees highlighted green and the path highlighted blue" width="1000" height="751" loading="lazy">
+        <figcaption><span class="fig-num">Figure 2:</span> My minimal depth selection tool: clicking a pixel highlights every pixel within ±<i>ε</i> of its depth. Right-clicking switches color to start another selection.</figcaption>
+      </figure>
+      <figure class="fig" id="fig-3">
+        <img src="zoomshop/preprocessing.jpg" alt="Pipeline: input image, MiDaS, disparity map, and views of the resulting 3D point cloud" width="1400" height="551" loading="lazy">
+        <figcaption><span class="fig-num">Figure 3:</span> Preprocessing: MiDaS predicts disparity, which is converted to depth and back-projected into a 3D point cloud.</figcaption>
+      </figure>
+      <figure class="fig" id="fig-4">
+        <img src="zoomshop/render_pipeline.jpg" alt="Five panels: input lake image, selected depth regions in green and yellow, re-projected points with gaps, grid-filled result, and final content-aware filled output" width="976" height="1100" loading="lazy">
+        <figcaption><span class="fig-num">Figure 4:</span> (a) Input. (b) Selected depth regions. (c) Re-projected points after scaling. (d) After grid fill. (e) After Content-Aware Fill.</figcaption>
+      </figure>
+      <div class="note">
+        <p><strong>Differences from the paper.</strong>
+          The paper builds a per-pixel mesh, but it isn't clear how its vertices are triangulated, so
+          I render the per-pixel points directly and fill the gaps afterwards. I also didn't build the
+          paper's full interface: depth ranges and scales were picked with a minimal click-to-select
+          tool and tuned by hand.</p>
+      </div>
+    </section>
+
+    <section id="results">
+      <h2>Results</h2>
+      <figure class="fig" id="fig-5">
+        <img src="zoomshop/gargoyle_result.jpg" alt="Gargoyle overlooking Paris, input and edited output where the distant skyline and Eiffel Tower are larger" width="1400" height="464" loading="lazy">
+        <figcaption><span class="fig-num">Figure 5:</span> Gargoyle overlooking Paris: input (left) and output (right). The distant city and skyline are scaled up while the gargoyle stays the same.</figcaption>
+      </figure>
+      <figure class="fig" id="fig-6">
+        <img src="zoomshop/versailles_result.jpg" alt="Palace of Versailles, input and edited output where the palace in the distance is larger" width="1400" height="364" loading="lazy">
+        <figcaption><span class="fig-num">Figure 6:</span> Palace of Versailles: input (left) and output (right). The palace is scaled up while the fountain in front stays the same.</figcaption>
+      </figure>
+    </section>
+
+    <section id="limitations">
+      <h2>Limitations and next steps</h2>
+      <ul>
+        <li>Results depend heavily on the depth map. MiDaS output is noisy, and parts of the same object can land at quite different depths. The ZoomShop authors clean up the disparity map by hand in Photoshop (5 minutes to 3 hours for a novice); I used MiDaS output directly to keep the workflow simple.</li>
+        <!-- <li>Implement ZoomShop's third edit, moving objects at the same depth, which uses a warp optimization.</li> -->
+        <li>Build a fuller editing interface, and look into cleaner depth prediction so manual cleanup isn't needed.</li>
+      </ul>
+    </section>
+
+    <section id="references">
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://doi.org/10.1111/cgf.14458">Sean J. Liu, Maneesh Agrawala, Stephen DiVerdi, and Aaron Hertzmann. "ZoomShop: Depth-Aware Editing of Photographic Composition." Computer Graphics Forum, 2022.</a></li>
+        <li><a href="https://doi.org/10.1145/3072959.3073687">Abhishek Badki, Orazio Gallo, Jan Kautz, and Pradeep Sen. "Computational Zoom: A Framework for Post-Capture Image Composition." ACM TOG, 2017.</a></li>
+        <li><a href="https://arxiv.org/abs/1907.01341">René Ranftl, Katrin Lasinger, et al. "Towards Robust Monocular Depth Estimation: Mixing Datasets for Zero-Shot Cross-Dataset Transfer." 2019.</a></li>
+        <li><a href="https://arxiv.org/abs/2103.13413">René Ranftl, Alexey Bochkovskiy, and Vladlen Koltun. "Vision Transformers for Dense Prediction." 2021. (DPT, used for the demo's depth maps)</a></li>
+        <li><a href="https://github.com/ajdawson/gridfill">Andrew Dawson. gridfill: Fill missing values in a grid.</a></li>
+      </ul>
+    </section>
+  </article>
+</main>
+<script src="zoomshop-demo.js"></script>
+<script>
+  // Scene slideshow for the ZoomShop editor. Presets select a far depth layer and enlarge it.
+  (function () {
+    var scenes = [
+      { name: 'Mountains and Lake', file: 'mountains_and_lake', pick: [0.55, 0.33], tol: 0.1, scale: 1.6 },
+      { name: 'Gargoyle', file: 'gargoyle', pick: [0.52, 0.42], tol: 0.08, scale: 1.8 },
+      { name: 'Lighthouse', file: 'lighthouse', pick: [0.45, 0.4], tol: 0.1, scale: 1.5 }
+    ];
+    var root = document.getElementById('zoomshop');
+    var canvas = root.querySelector('canvas'), loading = root.querySelector('.zs-loading');
+    var scale = root.querySelector('.scale'), scaleOut = root.querySelector('.scale-out');
+    var tol = root.querySelector('.tol'), tolOut = root.querySelector('.tol-out');
+    var showSel = root.querySelector('.show-sel'), hold = root.querySelector('.hold');
+    var name = root.querySelector('.name'), count = root.querySelector('.count');
+    var editor = createZoomShop(canvas);
+    editor.set('showSel', showSel.checked);
+    var i = 0, token = 0;
+
+    function setScale(v) { scale.value = v; scaleOut.textContent = Number(v).toFixed(2) + '×'; editor.set('scale', Number(v)); }
+    function setTol(v) { tol.value = v; tolOut.textContent = '±' + Number(v).toFixed(2); editor.set('tol', Number(v)); }
+    function applyPreset() {
+      var s = scenes[i];
+      setScale(s.scale);
+      setTol(s.tol);
+      editor.pick(s.pick[0], s.pick[1], true);
+    }
+    function show(k) {
+      i = (k + scenes.length) % scenes.length;
+      var s = scenes[i], t = ++token;
+      name.textContent = s.name;
+      count.textContent = (i + 1) + ' / ' + scenes.length;
+      loading.hidden = false;
+      editor.load('zoomshop/' + s.file + '.jpg', 'zoomshop/' + s.file + '_disparity.png').then(function () {
+        if (t !== token) return;
+        loading.hidden = true;
+        applyPreset();
+      });
+    }
+
+    canvas.addEventListener('click', function (e) {
+      var r = canvas.getBoundingClientRect();
+      editor.pick((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
+    });
+    scale.addEventListener('input', function () { setScale(scale.value); });
+    tol.addEventListener('input', function () { setTol(tol.value); });
+    showSel.addEventListener('change', function () { editor.set('showSel', showSel.checked); });
+    function original(on) { editor.set('original', on); }
+    hold.addEventListener('pointerdown', function () { original(true); });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) { hold.addEventListener(ev, function () { original(false); }); });
+    root.querySelector('.reset').addEventListener('click', applyPreset);
+    root.querySelector('.prev').addEventListener('click', function () { show(i - 1); });
+    root.querySelector('.next').addEventListener('click', function () { show(i + 1); });
+    document.addEventListener('keydown', function (e) {
+      if (e.altKey || e.ctrlKey || e.metaKey || /input|textarea|select/i.test(e.target.tagName)) return;
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    show(0);
+  })();
+</script>
+</body>
+</html>

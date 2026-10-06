@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Two-View Stereo · Niviru Wijayaratne</title>
+  <meta name="description" content="Depth from disparity with simple window matching on rectified stereo pairs.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+  <script data-goatcounter="https://niviruwijayaratne.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../track.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← Back</a>
+
+  <article>
+    <h1>Two-View Stereo</h1>
+    <p>
+      A small implementation of depth from disparity on the <a href="https://vision.middlebury.edu/stereo/data/scenes2005/">Middlebury 2005 stereo dataset</a>.
+    </p>
+    <ul class="links toc">
+      <li><a href="https://github.com/niviruwijayaratne/two-view-stereo">Code</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#approach">Approach</a></li>
+    </ul>
+
+    <section id="results">
+      <h2>Results</h2>
+      <p>
+        Point clouds from a 21 × 21 window. Use the arrows (or your arrow keys) to switch scenes.
+        Drag the point cloud to rotate it and scroll or pinch to zoom; double-click resets the view.
+      </p>
+      <div class="slides" id="stereo">
+        <div class="slides-nav">
+          <button type="button" class="prev" aria-label="Previous scene">←</button>
+          <span class="slides-label" aria-live="polite"><span class="name">Art</span> <span class="count">1 / 8</span></span>
+          <button type="button" class="next" aria-label="Next scene">→</button>
+        </div>
+        <div class="stereo-pair">
+          <figure><img class="left" src="two-view-stereo/art_left.jpg" alt="Art scene, left view" width="463" height="370"><figcaption>Left</figcaption></figure>
+          <figure><img class="right" src="two-view-stereo/art_right.jpg" alt="Art scene, right view" width="463" height="370"><figcaption>Right</figcaption></figure>
+        </div>
+        <figure class="stereo-cloud">
+          <canvas aria-label="Interactive 3D point cloud"></canvas>
+          <video class="fallback" muted loop playsinline hidden></video>
+          <figcaption>Point cloud</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="approach">
+      <h2>Approach</h2>
+      <p>
+        The input pairs are already rectified, so a point in the left image appears on the same row
+        in the right image, shifted horizontally by its disparity <i>d</i>.
+      </p>
+      <ol>
+        <li>For each pixel in the left image, take a 21 × 21 window around it.</li>
+        <li>In the right image, start at the same pixel location and slide the window left along the row, up to 90 pixels, computing the sum of squared differences (SSD) at each position. We only search to the left because every point shifts left in the right image; capping the search at 90 pixels removed most false matches.</li>
+        <li>The position with the lowest cost is the match, and the horizontal offset is the disparity.</li>
+        <li>Convert disparity to depth with the camera's focal length <i>f</i> (3740 px) and baseline <i>B</i> (160 mm), plus the dataset's disparity offset.</li>
+        <math display="block">
+          <mi>Z</mi><mo>=</mo><mfrac><mrow><mi>f</mi><mi>B</mi></mrow><mi>d</mi></mfrac>
+        </math>
+        <li>Back-project every pixel to 3D, color it from the left image, and render the point cloud.</li>
+      </ol>
+      <!-- <p>
+        The repo also includes an interactive tool: click a pixel in the left image to see its search
+        row, its best match in the right image, and the matching cost across all disparities.
+      </p> -->
+    </section>
+
+  </article>
+</main>
+<script src="pointcloud.js"></script>
+<script>
+  // Scene slideshow: arrows or arrow keys switch scenes; the point cloud viewer falls back to the rendered video.
+  (function () {
+    var scenes = ['Art', 'Books', 'Dolls', 'Drumsticks', 'Dwarves', 'Laundry', 'Moebius', 'Reindeer'];
+    var root = document.getElementById('stereo');
+    var left = root.querySelector('.left'), right = root.querySelector('.right');
+    var name = root.querySelector('.name'), count = root.querySelector('.count');
+    var canvas = root.querySelector('canvas'), video = root.querySelector('.fallback');
+    var viewer = window.createPointViewer && createPointViewer(canvas);
+    var i = 0;
+
+    function file(k, suffix) { return 'two-view-stereo/' + scenes[k].toLowerCase() + suffix; }
+    function useVideo(k) {
+      canvas.hidden = true;
+      video.hidden = false;
+      video.src = file(k, '_pointcloud.mp4');
+      video.play();
+    }
+    function show(k) {
+      i = (k + scenes.length) % scenes.length;
+      var s = scenes[i];
+      left.src = file(i, '_left.jpg'); left.alt = s + ' scene, left view';
+      right.src = file(i, '_right.jpg'); right.alt = s + ' scene, right view';
+      name.textContent = s;
+      count.textContent = (i + 1) + ' / ' + scenes.length;
+      if (viewer) {
+        var k2 = i;
+        viewer.load(file(i, '.bin')).catch(function () { useVideo(k2); viewer = null; });
+        viewer.prefetch(file((i + 1) % scenes.length, '.bin'));
+      } else {
+        useVideo(i);
+      }
+      new Image().src = file((i + 1) % scenes.length, '_left.jpg');
+      new Image().src = file((i + 1) % scenes.length, '_right.jpg');
+    }
+
+    root.querySelector('.prev').addEventListener('click', function () { show(i - 1); });
+    root.querySelector('.next').addEventListener('click', function () { show(i + 1); });
+    document.addEventListener('keydown', function (e) {
+      if (e.altKey || e.ctrlKey || e.metaKey || /input|textarea|select/i.test(e.target.tagName)) return;
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    show(0);
+  })();
+</script>
+</body>
+</html>

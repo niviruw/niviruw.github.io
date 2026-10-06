@@ -1,0 +1,512 @@
+:root {
+  --bg: #f2efe8; /* warm paper tone, softer than near-white */
+  --text: #000;
+  --body-weight: 340; /* a touch heavier on light backgrounds for legibility */
+  --muted: #000;
+  --rule: #dcd8ce;
+  --underline: #aaa69c;
+  --code-bg: #e8e4db;
+  --label-bg: rgba(242, 239, 232, 0.85);
+  --serif: "Newsreader", "Times New Roman", Times, serif;
+  color-scheme: light;
+}
+
+/* Dark mode: follows the system setting unless the toggle (theme.js) picked a theme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161513;
+    --text: #e9e6df;
+    --body-weight: 300;
+    --muted: #e9e6df;
+    --rule: #34322d;
+    --underline: #6e6a62;
+    --code-bg: #22201d;
+    --label-bg: rgba(22, 21, 19, 0.85);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161513;
+  --text: #e9e6df;
+  --body-weight: 300;
+  --muted: #e9e6df;
+  --rule: #34322d;
+  --underline: #6e6a62;
+  --code-bg: #22201d;
+  --label-bg: rgba(22, 21, 19, 0.85);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: var(--body-weight);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 72px 20px 96px;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 550;
+  margin: 32px 0 8px;
+}
+
+p { margin: 0 0 10px; }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--underline);
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+a:hover { text-decoration-color: currentColor; }
+
+.muted { color: var(--muted); }
+
+/* Name: the part after "Niv" collapses; see the script in index.html */
+.name { display: inline-flex; cursor: default; }
+.name .rest {
+  overflow: hidden;
+  white-space: pre;
+  max-width: var(--w, none);
+  transition: max-width 0.7s ease-in-out;
+}
+.name.short .rest { max-width: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .name .rest { transition: none; }
+}
+
+/* Intro: name and links on top, then the bio with the photo beside it.
+   The photo stretches to the bio's height without making that row taller. */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 170px;
+  grid-template-areas: "head head" "bio photo";
+  column-gap: 24px;
+}
+.intro header { grid-area: head; margin-bottom: 20px; }
+.intro .bio { grid-area: bio; }
+.bio p:last-child { margin-bottom: 0; }
+.photo {
+  grid-area: photo;
+  width: 100%;
+  height: 0;
+  min-height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.plain > li { margin-bottom: 10px; }
+.show-more {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-style: italic;
+  opacity: 0.75;
+  transition: opacity 0.2s ease-in-out;
+}
+.show-more:hover, .show-more:focus-visible { opacity: 1; }
+/* Extra projects fade in while the list grows (see the View more script in index.html) */
+/* flow-root keeps the last item's bottom margin inside the list, so its height doesn't jump
+   when the animation switches overflow on and off */
+#projects { display: flow-root; }
+/* Project titles a touch bolder than body text, like publication titles */
+#projects > li > a { font-weight: 400; }
+#projects > .extra { transition: opacity 0.6s ease-in-out; }
+#projects:not(.revealed) > .extra { opacity: 0; }
+
+/* Experience: title on the left, dates on the right; stacks on narrow screens */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 16px;
+}
+.row .when { color: var(--muted); white-space: nowrap; }
+.row > :first-child { font-weight: 400; }
+.detail { color: var(--muted); margin: 0; }
+/* Your name in publication author lists */
+.me { font-weight: 500; }
+
+/* Skills */
+dl.skills { margin: 0; }
+dl.skills > div { margin-bottom: 4px; }
+dl.skills dt { display: inline; font-weight: 500; }
+dl.skills dt::after { content: ": "; }
+dl.skills dd { display: inline; margin: 0; }
+
+footer {
+  margin-top: 44px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+}
+
+/* Writeup pages */
+article h1 { margin-bottom: 4px; }
+article h2 { margin-top: 28px; }
+article img { max-width: 100%; height: auto; }
+article ol, article ul { margin: 0 0 10px; padding-left: 22px; }
+article li { margin-bottom: 4px; }
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+}
+/* Before/after comparison: the after image is revealed left of the line as it moves right */
+.compare {
+  --pos: 50%;
+  position: relative;
+  max-width: 440px;
+  margin: 0 auto;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.compare img { display: block; width: 100%; height: auto; border-radius: 4px; pointer-events: none; }
+.compare .after {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+.compare-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  margin-left: -1px;
+  background: #fff;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+.compare-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+.compare-handle::before {
+  content: "‹ ›";
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  line-height: 26px;
+  font-size: 15px;
+  color: #000;
+}
+.compare-label {
+  position: absolute;
+  top: 8px;
+  padding: 1px 6px;
+  font-size: 0.85em;
+  background: var(--label-bg);
+  border-radius: 3px;
+}
+.after-label { left: 8px; opacity: 0; }
+.before-label { right: 8px; }
+.compare[aria-valuenow]:not([aria-valuenow="0"]) .after-label { opacity: 1; }
+.compare[aria-valuenow="100"] .before-label { opacity: 0; }
+.compare:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+/* Slideshow (two-view stereo): nav, stereo pair on top, interactive point cloud below */
+.slides { margin: 12px 0 16px; }
+.slides-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.slides-nav button {
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 6px 12px;
+  color: inherit;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.slides-nav button:hover { border-color: currentColor; }
+.slides-label .count { margin-left: 8px; }
+.stereo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.stereo-pair figure, .stereo-cloud { margin: 0; }
+.stereo-pair img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.stereo-pair figcaption, .stereo-cloud figcaption { margin-top: 4px; font-size: 0.9em; }
+.stereo-cloud { margin-top: 14px; }
+.stereo-cloud canvas, .stereo-cloud video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  touch-action: none;
+  cursor: grab;
+}
+.stereo-cloud canvas:active { cursor: grabbing; }
+.stereo-cloud video { object-fit: contain; background: #fff; cursor: auto; }
+.stereo-cloud [hidden] { display: none; }
+.fig video { display: block; width: 100%; height: auto; border-radius: 2px; }
+/* ZoomShop demo */
+.zs-stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  background: var(--rule);
+  cursor: crosshair;
+}
+.zs-stage { position: relative; }
+.zs-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9em;
+}
+.zs-loading[hidden] { display: none; }
+.zs-caption { margin: 6px 0 0; font-size: 0.9em; }
+.zs-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+  margin-top: 12px;
+  font-size: 0.95em;
+}
+.zs-slider { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; }
+.zs-slider input { width: 100%; accent-color: var(--text); }
+.zs-slider output { min-width: 3.4em; text-align: right; font-variant-numeric: tabular-nums; }
+.zs-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+.zs-buttons input { accent-color: var(--text); }
+.zs-buttons button {
+  font: inherit;
+  padding: 3px 10px;
+  color: inherit;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.zs-buttons button:hover { border-color: currentColor; }
+@media (max-width: 480px) {
+  .zs-controls { grid-template-columns: 1fr; }
+}
+/* Figures side by side at the same height, so their captions line up. Each figure sets
+   --ar (image width / height); widths are shared in proportion to it. */
+.fig-pair { display: flex; gap: 16px; align-items: flex-start; margin: 12px auto 16px; }
+.fig-pair > .fig, .fig-pair > img { flex: var(--ar, 1) 1 0; min-width: 0; margin: 0; }
+.fig .fig-pair { margin: 0 auto 4px; }
+@media (max-width: 480px) { .fig-pair.stack-on-phone { flex-direction: column; } }
+/* Confusion matrix: row labels in the first column */
+article table.confusion { width: auto; }
+.confusion tbody th { padding-right: 20px; }
+.confusion td, .confusion thead th { text-align: right; padding-right: 20px; }
+/* Figures and their captions are centered in write-ups */
+article figcaption { text-align: center; }
+/* Full-width figures with captions */
+.fig { margin: 12px 0 16px; }
+.fig img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.fig figcaption { margin-top: 4px; font-size: 0.9em; }
+.fig.narrow { max-width: 440px; margin-left: auto; margin-right: auto; }
+/* Metric and setup tables */
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 16px;
+  font-variant-numeric: tabular-nums;
+}
+article th, article td {
+  text-align: left;
+  padding: 4px 12px 4px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+article th { font-weight: 500; }
+/* Display equations (native MathML, no library) */
+math[display="block"] { margin: 10px 0 14px; overflow-x: auto; overflow-y: hidden; }
+article h3 { font-size: 1.05rem; font-weight: 500; margin: 20px 0 6px; }
+/* Equations and asides */
+.math { text-align: center; margin: 12px 0 14px; }
+.note {
+  margin: 16px 0;
+  padding: 2px 0 2px 14px;
+  border-left: 2px solid var(--rule);
+}
+.note p:last-child { margin-bottom: 0; }
+.note strong { font-weight: 500; }
+/* Writeup contents: Code link plus jump links to each section */
+.toc { margin: 4px 0 8px; }
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 16px; }
+article pre {
+  overflow-x: auto;
+  padding: 10px;
+  background: var(--code-bg);
+  font-size: 0.85rem;
+}
+.back { display: inline-block; margin-bottom: 36px; }
+
+@media (max-width: 480px) {
+  main { padding: 40px 16px 64px; }
+  h2 { margin-top: 28px; }
+  /* On phones the photo sits above the name instead of beside the bio */
+  .intro { grid-template-columns: 1fr; grid-template-areas: "photo" "head" "bio"; }
+  .photo { width: 120px; height: 120px; min-height: 0; margin-bottom: 16px; }
+  .row { flex-direction: column; }
+}
+
+/* Smooth light/dark switch: theme.js wraps the change in a View Transition, which cross-fades a
+   snapshot of the page in the old theme into the new one, so everything fades together. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
+/* Light/dark toggle (theme.js) */
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: var(--text);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+.theme-toggle:hover, .theme-toggle:focus-visible { opacity: 1; border-color: var(--rule); }
+.theme-toggle svg { width: 16px; height: 16px; }
+
+/* Figure and table numbers in captions (write-ups), e.g. "Figure 3:" / "Table 1:" */
+.fig-num { font-weight: 500; }
+figure[id^="fig-"] { scroll-margin-top: 16px; }
+article table caption {
+  caption-side: bottom;
+  margin-top: 6px;
+  font-size: 0.9em;
+  text-align: center;
+}
+table[id^="table-"] { scroll-margin-top: 16px; }
+
+/* Images with a light and a dark version: show the one matching the theme */
+img.theme-dark { display: none; }
+:root[data-theme="dark"] img.theme-light { display: none; }
+:root[data-theme="dark"] img.theme-dark { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img.theme-light { display: none; }
+  :root:not([data-theme="light"]) img.theme-dark { display: block; }
+}
+.fig img.topdown { margin: 8px auto 0; width: auto; max-width: 100%; max-height: 380px; }
+.fig.projection img { width: auto; max-width: 100%; max-height: 520px; margin: 0 auto; }
+/* Interactive pose viewer (pose-viewer.js); the static image shows until WebGL is ready */
+.pose-viewer { position: relative; }
+.pose-viewer canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  touch-action: none;
+  cursor: grab;
+}
+.pose-viewer canvas:active { cursor: grabbing; }
+.pose-viewer.is-live > img.pose-fallback { display: none !important; }
+.pose-viewer-readout { margin-top: 6px; font-size: 0.85em; }
+.pose-viewer-readout pre { margin: 0 0 4px; white-space: pre-wrap; }
+/* Two-state toggle (e.g. before/after bundle adjustment) */
+.state-toggle { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; margin: 4px 0 10px; }
+.state-toggle button {
+  font: inherit; font-size: 0.9em; color: inherit; background: none; border: 0; padding: 4px 12px; cursor: pointer;
+}
+.state-toggle button + button { border-left: 1px solid var(--rule); }
+.state-toggle button[aria-pressed="true"] { background: var(--code-bg); }
+/* 3D pose viewer and top-down view side by side */
+.pose-row { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; align-items: center; }
+.pose-row .pose-viewer canvas { aspect-ratio: 4 / 3; }
+.fig .pose-row img.topdown { margin: 0 auto; width: 100%; height: auto; max-height: none; }
+@media (max-width: 480px) {
+  .pose-row { grid-template-columns: 1fr; }
+  .fig .pose-row img.topdown { width: auto; max-width: 100%; max-height: 340px; }
+}
+/* Interactive feature-match figure: photo pair with SVG match layers, and a method selector */
+.match-viewer { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 12px; align-items: center; }
+.match-stage { position: relative; }
+.match-stage img { display: block; width: 100%; height: auto; border-radius: 2px; }
+.match-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.match-layer { opacity: 0; transition: opacity 0.35s ease; }
+.match-layer.on { opacity: 1; }
+.match-line { stroke: #3cc83c; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.match-end { fill: #2a78d6; stroke: #fff; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.match-select { display: flex; flex-direction: column; gap: 6px; }
+.match-select button {
+  font: inherit; font-size: 0.9em; color: inherit; text-align: left; line-height: 1.3;
+  background: none; border: 1px solid var(--rule); border-radius: 6px; padding: 6px 10px; cursor: pointer;
+}
+.match-select button:hover { border-color: currentColor; }
+.match-select button[aria-checked="true"] { background: var(--code-bg); border-color: currentColor; }
+.match-select .name { display: block; }
+.match-select .count { display: block; font-size: 0.85em; opacity: 0.7; }
+@media (max-width: 560px) {
+  .match-viewer { grid-template-columns: 1fr; }
+  .match-select { flex-direction: row; flex-wrap: wrap; }
+  .match-select button { flex: 1 1 0; }
+}
+@media (prefers-reduced-motion: reduce) { .match-layer { transition: none; } }

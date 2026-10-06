@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IKEA-GAFR · Niviru Wijayaratne</title>
+  <meta name="description" content="Key-step recognition and single-view, sketch-based 3D reconstruction from IKEA furniture assembly manuals.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+  <script data-goatcounter="https://niviruwijayaratne.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../track.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← Back</a>
+
+  <article>
+    <h1>IKEA-GAFR</h1>
+    <p>
+      Geometry-Aware Furniture Reconstruction: a pipeline that identifies key steps in an IKEA
+      assembly manual and reconstructs a part-segmented 3D point cloud of the furniture at each
+      step, from the manual's line drawing alone.
+    </p>
+    <ul class="links toc">
+      <li><a href="https://github.com/yeojinyeojin/IKEA-GAFR">Code</a></li>
+      <li><a href="#motivation">Motivation</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#key-steps">Key-Step Recognition</a></li>
+      <li><a href="#reconstruction">3D Reconstruction</a></li>
+      <li><a href="#training">Training Setup</a></li>
+      <li><a href="#limitations">Limitations</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+
+    <section id="motivation">
+      <h2>Motivation</h2>
+      <p>
+        IKEA furniture usually comes as primitive parts + a visual manual that shows, step by step, how
+        the parst fit together. The drawings are often unclear and can provide confusing or ambiguous 3D information about what
+        the furniture should look like at a given step.
+      </p>
+      <p>
+        IKEA-GAFR takes a manual as input and outputs a 3D reconstruction for each assembly step, acting as a
+        "coach" (or gaffer) for the build. More broadly, the project tackles single-view
+        reconstruction from sketches. Turning visual manuals into machine-readable 3D is also a step
+        toward automated assembly in robotics and AR/VR.
+      </p>
+    </section>
+
+    <section id="data">
+      <h2>Data</h2>
+      <p>
+        We used the <a href="https://arxiv.org/abs/2302.01881">IKEA-Manual</a> dataset (Wang et al.),
+        which provides 102 IKEA objects with CAD models of each part, per-step camera and part poses,
+        per-step segmentation masks, key-step page numbers and assembly trees. We prepared it in four steps.
+      </p>
+      <ol>
+        <li><strong>Per-step models.</strong> We combined the part primitives to get a 3D model of the furniture at each step. (Figure 1)</li>
+        <li><strong>Key-step labels.</strong> We labeled bounding boxes and relevant/irrelevant classes on manual pages with the <a href="https://doi.org/10.1145/3343031.3350535">VIA annotation tool</a>.</li>
+        <li><strong>Part-wise density maps.</strong> For each model, we sampled a point cloud per part (with point counts proportional to part area) and projected the points into the image with the given camera. Counting how many points land on each pixel gives a density map. Because we know which part each point came from, we also get a separate density map for each part. (Figure 2)</li>
+        <li><strong>Sketch-style pretraining data.</strong> IKEA-Manual is small, so we pretrained on <a href="https://arxiv.org/abs/1812.02713">PartNet</a> renderings converted to line drawings. Canny edges and <a href="https://arxiv.org/abs/1901.00542">Photo-Sketching</a> both captured outer contours but missed edges between parts, so we ran edge detection on each part separately and merged the results, using depth (from the PyTorch3D renderer) to decide which edges are visible. (Figure 3)</li>
+      </ol>
+      <figure class="fig" id="fig-1">
+        <img src="ikea-gafr/per_step_models.jpg" alt="A bench shown at three assembly steps, gaining parts at each step" width="1400" height="354" loading="lazy">
+        <figcaption><span class="fig-num">Figure 1:</span> Per-step 3D models built from the part primitives.</figcaption>
+      </figure>
+      <figure class="fig narrow" id="fig-2">
+        <img src="ikea-gafr/density_map.jpg" alt="A chair render and its density map, with color showing how many points project to each pixel" width="1400" height="641" loading="lazy">
+        <figcaption><span class="fig-num">Figure 2:</span> A model and its density map.</figcaption>
+      </figure>
+      <figure class="fig narrow" id="fig-3">
+        <img src="ikea-gafr/sketch_extraction.jpg" alt="A chair and a desk rendered from PartNet, converted to line drawings with Canny, PhotoSketch, and part-wise Canny; only part-wise Canny keeps the inner edges" width="1400" height="824" loading="lazy">
+        <figcaption><span class="fig-num">Figure 3:</span> Turning PartNet renderings into line drawings. Part-wise Canny keeps the edges between parts.</figcaption>
+      </figure>
+    </section>
+
+    <section id="key-steps">
+      <h2>Key-Step Recognition</h2>
+      <p>
+        The first stage of our pipeline splits a manual PDF into page images and runs an object detector on each page to find the
+        key steps. Following IKEA-Manual, a key step is one that shows new information about how parts
+        are oriented relative to each other. Steps about screws or hand interactions are marked
+        irrelevant. We used a <a href="https://github.com/ultralytics/yolov5">YOLOv5</a> detector with
+        one head for relevance and one for bounding boxes. We chose a single-shot detector to keep
+        latency low, so the full pipeline can run in real time.
+      </p>
+
+      <h3>Results</h3>
+      <p>
+        We trained the detector from scratch on 953 manually labeled manual pages covering 6 furniture
+        categories and 19 models. 341 of the pages contain key steps, with 1-3 key steps per page.
+      </p>
+      <table id="table-1">
+        <caption><span class="fig-num">Table 1:</span> Key-step detector results on the validation set, by class.</caption>
+        <thead>
+          <tr><th>Class</th><th>mAP@0.5</th><th>mAP@0.5:0.95</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>All</td><td>0.807</td><td>0.669</td></tr>
+          <tr><td>Relevant (key step)</td><td>0.725</td><td>0.605</td></tr>
+          <tr><td>Irrelevant</td><td>0.888</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Because the detector was trained from scratch on a very small dataset, these numbers should be read as a proof of concept.
+      </p>
+      <div class="fig-pair stack-on-phone">
+      <figure class="fig" style="--ar: 1.414" id="fig-4">
+        <img src="ikea-gafr/keystep_predictions.jpg" alt="Four manual steps with predicted boxes: two labeled irrelevant (0.66, 0.86) and two labeled relevant (0.81, 0.64)" width="1400" height="990" loading="lazy">
+        <figcaption><span class="fig-num">Figure 4:</span> Detector predictions on validation pages.</figcaption>
+      </figure>
+      <figure class="fig" style="--ar: 1.5" id="fig-5">
+        <img src="ikea-gafr/pr_curve.jpg" alt="Precision-recall curve: irrelevant 0.888, relevant 0.725, all classes 0.807 mAP at 0.5" width="1400" height="933" loading="lazy">
+        <figcaption><span class="fig-num">Figure 5:</span> Precision-recall curve of the best model.</figcaption>
+      </figure>
+      </div>
+    </section>
+
+    <section id="reconstruction">
+      <h2>3D Reconstruction</h2>
+
+      <h3>Part-Segmented Point Clouds</h3>
+      <p>
+        Once key-steps have been identified, the next step is to turn those key steps into a sequence of 3D parts. Our model builds on <a href="https://arxiv.org/abs/2208.06880">SketchSampler</a>,
+        which reconstructs from sketches by first predicting a density map: the probability that a
+        3D point projects to each pixel. A line drawing has far fewer depth cues than a photo, and we
+        think this is why the sketch-to-3D baselines we tested did not generalize to unseen manuals. The general intuition is that it is easier to move from 2D to 2.5D (density map) to 3D (point cloud) than directly moving from 2D to 3D, so 
+        forcing the model to first predict density maps allows it to learn underlying 3D structure that makes the reconstruction task more tractable.
+      </p>
+      <p>
+        Compared to SketchSampler, we also predict <strong>part-wise density maps</strong> in addition to the
+        whole-object density map. We believe this addition allows the model to reason not only about the overall furniture geometry but individual part geometry as well, allowing for segmentation on top of the reconstruction that SketchSampler does. Our overall pipeline is described below:
+      </p>
+      <ol>
+        <li>An encoder-decoder turns the input sketch into a feature map.</li>
+        <li>A second network predicts the object density map and the per-part density maps.</li>
+        <li>2D points are sampled from the object density map and encoded into class embeddings using the per-part maps.</li>
+        <li>For each sampled point, its local image feature, class embedding and a noise vector go into a network that predicts the point's depth and part label. The noise vector helps disambiguate different 3D points that project to the same pixel.</li>
+      </ol>
+      <figure class="fig" id="fig-6">
+        <img src="ikea-gafr/model_overview.jpg" alt="Model diagram: a manual image goes through image translation, then density maps per class feed segmented point cloud generation, which predicts depth and part for each 2D point" width="1400" height="323" loading="lazy">
+        <figcaption><span class="fig-num">Figure 6:</span> Model overview, adapted from the SketchSampler diagram.</figcaption>
+      </figure>
+
+      <h3 id="losses">Losses</h3>
+      <p>
+        We train with four losses. <math><mi>P</mi></math> is the ground-truth point cloud, <math><mover><mi>P</mi><mo>^</mo></mover></math> is the predicted point cloud,
+        and <math><msub><mi>D</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math> is the value of a density map at <span style="white-space:nowrap">pixel (<math><mi>i</mi><mo>,</mo><mi>j</mi></math>)</span>.
+      </p>
+
+      <p><strong>1. Chamfer distance</strong> (<math><msub><mi>ℒ</mi><mtext>cd</mtext></msub></math>) measures how well the predicted point cloud matches the ground truth:</p>
+      <math display="block">
+        <msub><mi>ℒ</mi><mtext>cd</mtext></msub><mo>=</mo>
+        <munder><mo>∑</mo><mrow><mi>p</mi><mo>∈</mo><mi>P</mi></mrow></munder><munder><mo movablelimits="false">min</mo><mrow><mover><mi>p</mi><mo>^</mo></mover><mo>∈</mo><mover><mi>P</mi><mo>^</mo></mover></mrow></munder><msubsup><mrow><mo>‖</mo><mi>p</mi><mo>−</mo><mover><mi>p</mi><mo>^</mo></mover><mo>‖</mo></mrow><mn>2</mn><mn>2</mn></msubsup>
+        <mo>+</mo>
+        <munder><mo>∑</mo><mrow><mover><mi>p</mi><mo>^</mo></mover><mo>∈</mo><mover><mi>P</mi><mo>^</mo></mover></mrow></munder><munder><mo movablelimits="false">min</mo><mrow><mi>p</mi><mo>∈</mo><mi>P</mi></mrow></munder><msubsup><mrow><mo>‖</mo><mover><mi>p</mi><mo>^</mo></mover><mo>−</mo><mi>p</mi><mo>‖</mo></mrow><mn>2</mn><mn>2</mn></msubsup>
+      </math>
+      <p>
+        The first term moves every ground-truth point <math><mi>p</mi></math> toward its nearest predicted point
+        <math><mover><mi>p</mi><mo>^</mo></mover></math>, so no part of the object is missed; the second moves every predicted point toward
+        its nearest ground-truth point, so no stray points are added.
+      </p>
+
+      <p><strong>2. Density loss</strong> (<math><msub><mi>ℒ</mi><mtext>d</mtext></msub></math>) is an absolute (L1) error on the whole-object density map:</p>
+      <math display="block">
+        <msub><mi>ℒ</mi><mtext>d</mtext></msub><mo>=</mo><munder><mo>∑</mo><mrow><mi>i</mi><mo>,</mo><mi>j</mi></mrow></munder><mo stretchy="false">|</mo><msub><mi>D</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>−</mo><msub><mover><mi>D</mi><mo>^</mo></mover><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">|</mo>
+      </math>
+      <p>
+        where <math><msub><mi>D</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math> and <math><msub><mover><mi>D</mi><mo>^</mo></mover><mrow><mi>i</mi><mi>j</mi></mrow></msub></math> are the ground-truth and predicted share of the
+        object's 3D points that project to <span style="white-space:nowrap">pixel (<math><mi>i</mi><mo>,</mo><mi>j</mi></math>)</span>.
+      </p>
+
+      <p><strong>3. Part-density loss</strong> (<math><msub><mi>ℒ</mi><mtext>sd</mtext></msub></math>) is a per-pixel cross-entropy on the part-wise density maps:</p>
+      <math display="block">
+        <msub><mi>ℒ</mi><mtext>sd</mtext></msub><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mrow><mi>c</mi><mo>=</mo><mn>1</mn></mrow><mi>C</mi></munderover><munder><mo>∑</mo><mrow><mi>i</mi><mo>,</mo><mi>j</mi></mrow></munder>
+        <mo stretchy="false">[</mo><msubsup><mi>D</mi><mrow><mi>i</mi><mi>j</mi></mrow><mi>c</mi></msubsup><mi>log</mi><mo>&#x2061;</mo><msubsup><mover><mi>D</mi><mo>^</mo></mover><mrow><mi>i</mi><mi>j</mi></mrow><mi>c</mi></msubsup><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msubsup><mi>D</mi><mrow><mi>i</mi><mi>j</mi></mrow><mi>c</mi></msubsup><mo stretchy="false">)</mo><mi>log</mi><mo>&#x2061;</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msubsup><mover><mi>D</mi><mo>^</mo></mover><mrow><mi>i</mi><mi>j</mi></mrow><mi>c</mi></msubsup><mo stretchy="false">)</mo><mo stretchy="false">]</mo>
+      </math>
+      <p>
+        where <math><msubsup><mi>D</mi><mrow><mi>i</mi><mi>j</mi></mrow><mi>c</mi></msubsup></math> is the density map of part <math><mi>c</mi></math> alone (the share of part
+        <math><mi>c</mi></math>'s points that project to <span style="white-space:nowrap">pixel (<math><mi>i</mi><mo>,</mo><mi>j</mi></math>)</span>) and
+        <math><mi>C</mi></math> is the number of parts. We believe this supervises segmentation indirectly, and also
+        gives the reconstruction more structure.
+      </p>
+
+      <p>
+        <strong>4. Segmentation loss</strong> (<math><msub><mi>ℒ</mi><mtext>seg</mtext></msub></math>), the location-aware loss from
+        <a href="https://arxiv.org/abs/1810.00461">3D-PSRNet</a>, supervises the part labels of the
+        final point cloud directly:
+      </p>
+      <math display="block">
+        <msub><mi>ℒ</mi><mtext>seg</mtext></msub><mo>=</mo>
+        <mfrac><mn>1</mn><mrow><mo stretchy="false">|</mo><mi>P</mi><mo stretchy="false">|</mo></mrow></mfrac><munder><mo>∑</mo><mrow><mi>p</mi><mo>∈</mo><mi>P</mi></mrow></munder><mi>CE</mi><mo stretchy="false">(</mo><msub><mi>y</mi><mi>p</mi></msub><mo>,</mo><msub><mover><mi>y</mi><mo>^</mo></mover><mrow><mi>nn</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mfrac><mn>1</mn><mrow><mo stretchy="false">|</mo><mover><mi>P</mi><mo>^</mo></mover><mo stretchy="false">|</mo></mrow></mfrac><munder><mo>∑</mo><mrow><mover><mi>p</mi><mo>^</mo></mover><mo>∈</mo><mover><mi>P</mi><mo>^</mo></mover></mrow></munder><mi>CE</mi><mo stretchy="false">(</mo><msub><mi>y</mi><mrow><mi>nn</mi><mo stretchy="false">(</mo><mover><mi>p</mi><mo>^</mo></mover><mo stretchy="false">)</mo></mrow></msub><mo>,</mo><msub><mover><mi>y</mi><mo>^</mo></mover><mover><mi>p</mi><mo>^</mo></mover></msub><mo stretchy="false">)</mo>
+      </math>
+      <p>
+        where <math><msub><mi>y</mi><mi>p</mi></msub></math> is the part label of ground-truth point <math><mi>p</mi></math>, <math><msub><mover><mi>y</mi><mo>^</mo></mover><mover><mi>p</mi><mo>^</mo></mover></msub></math> the
+        predicted part probabilities of predicted point <math><mover><mi>p</mi><mo>^</mo></mover></math>, <math><mrow><mi>nn</mi><mo stretchy="false">(</mo><mo>·</mo><mo stretchy="false">)</mo></mrow></math> the nearest point
+        in the other cloud, and CE the softmax cross-entropy. Each point is compared with its nearest
+        neighbour in both directions, so labels are checked without needing a one-to-one match
+        between the two clouds.
+      </p>
+
+      <p><strong>Total loss.</strong> The four losses are combined as a weighted sum:</p>
+      <math display="block">
+        <mi>ℒ</mi><mo>=</mo>
+        <msub><mi>λ</mi><mn>1</mn></msub><msub><mi>ℒ</mi><mtext>cd</mtext></msub><mo>+</mo>
+        <msub><mi>λ</mi><mn>2</mn></msub><msub><mi>ℒ</mi><mtext>d</mtext></msub><mo>+</mo>
+        <msub><mi>λ</mi><mn>3</mn></msub><msub><mi>ℒ</mi><mtext>seg</mtext></msub><mo>+</mo>
+        <msub><mi>λ</mi><mn>4</mn></msub><msub><mi>ℒ</mi><mtext>sd</mtext></msub>
+      </math>
+      <p>
+        with the loss weights tuned on PartNet and IKEA-Manual.
+      </p>
+
+      <h3>Results</h3>
+      <p>
+        Even after fewer than 5 epochs of training on PartNet, the model captures the overall shape
+        and is learning a plausible part segmentation. Colors only distinguish parts and have no
+        semantic meaning.
+      </p>
+      <figure class="fig narrow" id="fig-7">
+        <img src="ikea-gafr/pointcloud_results.jpg" alt="Three rows of input line drawing, ground-truth part-colored point cloud, and predicted point cloud for two tables and a chair" width="1376" height="1400" loading="lazy">
+        <figcaption><span class="fig-num">Figure 7:</span> Input sketch, ground truth and prediction.</figcaption>
+      </figure>
+
+      <h3>Loss Ablation</h3>
+      <p>
+        To check the approach on real manual drawings, we trained only on IKEA-Manual and added the
+        losses above one at a time. Chamfer distance and density MAE alone seem to provide a rough shape. Adding the
+        part-density loss gives more structure and a softer push toward sensible parts. Adding the
+        segmentation loss cleans up the segmentation further. These results likely come from a
+        slightly overfit model; the goal was a proof of concept.
+      </p>
+      <figure class="fig" id="fig-8">
+        <img src="ikea-gafr/loss_ablation.jpg" alt="An input manual drawing and three predicted point clouds, with segmentation getting cleaner as losses are added" width="1400" height="350" loading="lazy">
+        <figcaption><span class="fig-num">Figure 8:</span> Predictions as each loss is added.</figcaption>
+      </figure>
+      <!-- <p> -->
+        <!-- Loss weights for the ablation: <i>λ</i><sub>1</sub> = 5, <i>λ</i><sub>2</sub> = 10,000,
+        <i>λ</i><sub>3</sub> = 3, <i>λ</i><sub>4</sub> = 50. -->
+      <!-- </p> -->
+    </section>
+
+    <section id="training">
+      <h2>Training Setup</h2>
+      <table id="table-2">
+        <caption><span class="fig-num">Table 2:</span> Training settings for the key-step detector and the point cloud model.</caption>
+        <thead>
+          <tr><th></th><th>Key-step detector</th><th>Point cloud model</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Input size</td><td>640 × 640</td><td>128 × 128</td></tr>
+          <tr><td>Batch size</td><td>16</td><td>32</td></tr>
+          <tr><td>Optimizer</td><td>Adam, cosine LR from 1e-3</td><td>Adam (β = 0.9, 0.999), LR 1e-3</td></tr>
+          <tr><td>Epochs</td><td>30</td><td>&lt; 5</td></tr>
+          <!-- <tr><td>Other</td><td>Autoanchor off; RTX 3090</td><td>16,824 ground-truth points</td></tr> -->
+        </tbody>
+      </table>
+    </section>
+
+    <section id="limitations">
+      <h2>Limitations and Next Steps</h2>
+      <ul>
+        <li>The point cloud model was pretrained on PartNet for fewer than 5 epochs. We expect much better shapes and part labels with longer training.</li>
+        <!-- <li>The four loss weights still need proper tuning.</li> -->
+        <li>PartNet pretraining used complete objects. Partially assembled objects would better match what manuals show.</li>
+        <li>Each step is predicted independently. Using the previous step's prediction to initialize the next one would let the model use the whole manual.</li>
+      </ul>
+    </section>
+
+    <section id="references">
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://arxiv.org/abs/2302.01881">Ruocheng Wang et al. "IKEA-Manual: Seeing Shape Assembly Step by Step." 2023.</a></li>
+        <li><a href="https://arxiv.org/abs/2208.06880">Chenjian Gao et al. "SketchSampler: Sketch-based 3D Reconstruction via View-dependent Depth Sampling." 2022.</a></li>
+        <li><a href="https://arxiv.org/abs/1810.00461">Priyanka Mandikal, Navaneet K L, and R. Venkatesh Babu. "3D-PSRNet: Part Segmented 3D Point Cloud Reconstruction from a Single Image." 2018.</a></li>
+        <li><a href="https://arxiv.org/abs/1812.02713">Kaichun Mo et al. "PartNet: A Large-scale Benchmark for Fine-grained and Hierarchical Part-level 3D Object Understanding." 2018.</a></li>
+        <li><a href="https://zenodo.org/record/3908559">Glenn Jocher et al. "ultralytics/yolov5: v7.0." 2022.</a></li>
+        <li><a href="https://arxiv.org/abs/1901.00542">Mengtian Li et al. "Photo-Sketching: Inferring Contour Drawings from Images." 2019.</a></li>
+        <li><a href="https://doi.org/10.1145/3343031.3350535">Abhishek Dutta and Andrew Zisserman. "The VIA Annotation Software for Images, Audio and Video." ACM MM 2019.</a></li>
+        <li><a href="https://arxiv.org/abs/2007.08501">Nikhila Ravi et al. "Accelerating 3D Deep Learning with PyTorch3D." 2020.</a></li>
+      </ul>
+    </section>
+  </article>
+</main>
+</body>
+</html>

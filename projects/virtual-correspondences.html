@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Virtual Correspondences · Niviru Wijayaratne</title>
+  <meta name="description" content="Implementation of &quot;Virtual Correspondence: Humans as a Cue for Extreme-View Geometry&quot; (CVPR 2022).">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+  <script data-goatcounter="https://niviruwijayaratne.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../track.js" defer></script>
+  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }</script>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← Back</a>
+
+  <article>
+    <h1>Virtual Correspondences</h1>
+    <p>
+      Implementation of <a href="https://openaccess.thecvf.com/content/CVPR2022/html/Ma_Virtual_Correspondence_Humans_as_a_Cue_for_Extreme-View_Geometry_CVPR_2022_paper.html">"Virtual Correspondence: Humans as a Cue for Extreme-View Geometry"</a>
+      (Ma et al., CVPR 2022).
+    </p>
+    <ul class="links toc">
+      <li><a href="https://github.com/niviruwijayaratne/virtual-correspondences/">Code</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#background">Background</a></li>
+      <li><a href="#implementation">Implementation</a></li>
+      <li><a href="#limitations">Limitations</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+
+    <section id="results">
+      <h2>Results</h2>
+      <p>
+        Below are comparisons of <a href="https://arxiv.org/abs/1911.11763">SuperGlue</a> on three image pairs
+        each taken by two cameras at the same instant from roughly opposite sides of the person. With little to no overlap between views, 
+        SuperGlue finds matches mostly in the background, and most of
+        them are wrong. Virtual correspondences give a dense set of matches on the person. Because the
+        predicted SMPL meshes aren't perfect, some correspondences are noisy and fall off the body, but
+        RANSAC rejects them as outliers when estimating the pose. These results estimate the 3D body with
+        <a href="https://arxiv.org/abs/2411.08128">CameraHMR</a> rather than PARE, which the paper uses (see Implementation).
+      </p>
+      <div class="slides" id="vc">
+        <div class="slides-nav">
+          <button type="button" class="prev" aria-label="Previous scene">←</button>
+          <span class="slides-label" aria-live="polite"><span class="name">Foot stall</span> <span class="count">1 / 3</span></span>
+          <button type="button" class="next" aria-label="Next scene">→</button>
+        </div>
+        <figure class="fig" id="fig-1">
+          <div class="match-viewer">
+            <div class="match-stage">
+              <img data-img="pair" src="virtual-correspondences/foot-stall/camhmr/pair.jpg" alt="Camera 1's photo (left) and camera 2's photo (right), with the selected method's matches drawn between them" width="1400" height="928">
+              <svg class="match-lines" aria-hidden="true"></svg>
+            </div>
+            <div class="match-select" role="radiogroup" aria-label="Feature matching method"></div>
+          </div>
+          <figcaption><span class="fig-num">Figure 1:</span> Feature matches between Camera 1 (left) and Camera 2 (right) for various feature selection methods and virtual correspondences.</figcaption>
+        </figure>
+        <p>
+          <!-- With little to no overlap between views, SuperGlue finds matches mostly in the background, and most of
+          them are wrong. Virtual correspondences give a dense set of matches on the person. Because the
+          predicted SMPL meshes aren't perfect, some correspondences are noisy and fall off the body, but
+          RANSAC rejects them as outliers when estimating the pose. -->
+        </p>
+
+        <h3>Recovered pose</h3>
+        <p>
+          The pose from the essential matrix is refined with bundle adjustment: one SMPL body, seen by both
+          cameras, is fitted together with camera 2's pose so that every sampled DensePose pixel in both photos
+          reprojects onto its own point on the body (details under Implementation).
+        </p>
+        <figure class="fig" id="fig-2">
+          <div class="pose-row">
+            <div class="pose-viewer" data-state="after" data-scenes='{"after": "virtual-correspondences/foot-stall/camhmr/after/scene.json"}'>
+              <img class="theme-light pose-fallback" data-img="pose_light" src="virtual-correspondences/foot-stall/camhmr/after/pose_light.jpg" alt="3D view of the two recovered cameras as frustums showing their photos, with the body between them" width="1253" height="870" loading="lazy">
+              <img class="theme-dark pose-fallback" data-img="pose_dark" src="virtual-correspondences/foot-stall/camhmr/after/pose_dark.jpg" alt="" width="1253" height="870" loading="lazy">
+            </div>
+            <div class="pose-top">
+              <img class="theme-light topdown" data-img="topdown_light" src="virtual-correspondences/foot-stall/camhmr/after/topdown_light.jpg" alt="Top-down view of the two recovered cameras, their distances to the person and the angle between them around the person" width="665" height="823" loading="lazy">
+              <img class="theme-dark topdown" data-img="topdown_dark" src="virtual-correspondences/foot-stall/camhmr/after/topdown_dark.jpg" alt="" width="665" height="823" loading="lazy">
+            </div>
+          </div>
+          <figcaption><span class="fig-num">Figure 2:</span> The recovered cameras and body after bundle adjustment</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="background">
+      <h2>Background</h2>
+      <p>
+        Classic correspondence methods (SIFT, SuperGlue, etc.) need image overlap in order to match features: regions with similar appearance are considered matches and are thought to view the same point in 3D. With extreme viewpoint
+        changes, such as one camera behind a person and one in front, there is little or nothing to match.
+      </p>
+      <p>
+        Ma et al. introduce <em>virtual correspondences</em>: pairs of pixels whose camera rays
+        intersect in 3D, even if they image different surface points and look nothing alike.
+        Formally, pixels <i>p</i><sub>1</sub> and <i>p</i><sub>2</sub> are virtual correspondences if
+        there exist depths <i>d</i><sub>1</sub>, <i>d</i><sub>2</sub> such that
+      </p>
+      <p class="math">
+        <i>r</i><sub><i>p</i>1</sub>(<i>d</i><sub>1</sub>) = <i>r</i><sub><i>p</i>2</sub>(<i>d</i><sub>2</sub>),
+        &nbsp; where &nbsp;
+        <i>r<sub>p</sub></i>(<i>d</i>) = <i>R</i><sup>T</sup>(<i>d K</i><sup>−1</sup><i>p</i> − <i>t</i>) and <i>K, R, t</i> are the intrinsic and extrinsic parameters of the camera
+      </p>
+      <p>
+        To find such pairs without knowing the camera poses, the paper uses humans as a shape prior.
+        It recovers a 3D body mesh (SMPL, via PARE) in one image and dense body-surface coordinates
+        (DensePose) in the other. A ray through a pixel on someone's back in one view exits through
+        their front, allowing for a match to a pixel on their stomach in the other view. These correspondences can then be used to estimate the essential-matrix which can be decomposed into
+        the relative <i>R, t</i> between the cameras. Furthermore, instead of triangulating correspondences, this approach uses each ray's first intersection with the estimated body mesh as its 3D point for bundle adjustment.
+      </p>
+    </section>
+
+    <section id="implementation">
+      <h2>Implementation</h2>
+      <p>
+        We followed the paper's overall pipeline. For clarity, here is the two-view, one-person case;
+        the same steps extend to more people (with the additional constraint of Re-ID) and more views.
+      </p>
+      <ol>
+        <li>Estimate the SMPL body parameters of the person in image 1.</li>
+        <li>Compute the DensePose mapping of the same person in image 2. This gives IUV coordinates for every pixel on the person: <i>I</i> is the body part, and <i>U</i>, <i>V</i> are coordinates on that part's surface chart.</li>
+        <li>Map each IUV coordinate from image 2 to an XYZ point on the SMPL mesh estimated from image 1.</li>
+        <li>Project those XYZ points into image 1. Each projected point and its source pixel in image 2 form a correspondence.</li>
+        <li>Estimate the essential matrix with the 5-point algorithm and RANSAC, and decompose it into a relative rotation and translation.</li>
+        <li>Refine that pose with bundle adjustment.</li>
+      </ol>
+      <figure class="fig" id="fig-3">
+        <img src="virtual-correspondences/smpl_mesh.jpg" alt="Soccer player mid-kick, and the same image with the estimated SMPL body mesh overlaid in colored body parts" width="1400" height="638" loading="lazy">
+        <figcaption><span class="fig-num">Figure 3:</span> Step 1: input image (left) and the estimated SMPL mesh (right).</figcaption>
+      </figure>
+      <figure class="fig" id="fig-4">
+        <img src="virtual-correspondences/densepose_to_smpl.jpg" alt="DensePose points from the second image mapped onto the SMPL mesh, and green lines connecting matched pixels between two views of the player" width="1400" height="503" loading="lazy">
+        <figcaption><span class="fig-num">Figure 4:</span> Steps 3–4: DensePose points from image 2 mapped onto the image 1 SMPL mesh (left), and the resulting virtual correspondences (right).</figcaption>
+      </figure>
+
+      <!-- <div class="note">
+        <p><strong>Difference from the paper.</strong>
+          The paper casts a ray through each pixel of the base image, intersects it with the SMPL
+          mesh, and then searches the other image's DensePose map for pixels that land on those
+          intersection points. It isn't clear how to back-project pixels under the weak-perspective
+          camera model that PARE (and most human mesh recovery methods) use. So we went the other
+          direction: map DensePose pixels from image 2 onto the mesh, then project them into image 1
+          with the same rendering function used to draw the mesh overlay. This gives the same kind
+          of correspondences without needing to back-project.</p>
+      </div> -->
+    </section>
+
+    <section id="limitations">
+      <h2>Limitations</h2>
+      <p>
+        As the paper notes, the method depends heavily on the predicted shape prior: if the object's
+        shape is unknown or estimated badly, it can't produce virtual correspondences. 
+        
+        <!-- We also found
+        that the initial pose estimates depend heavily on the quality of the camera intrinsics, which
+        could be a real limitation for photos taken in the wild. -->
+      </p>
+    </section>
+
+    <section id="references">
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://openaccess.thecvf.com/content/CVPR2022/html/Ma_Virtual_Correspondence_Humans_as_a_Cue_for_Extreme-View_Geometry_CVPR_2022_paper.html">Wei-Chiu Ma et al. "Virtual Correspondence: Humans as a Cue for Extreme-View Geometry." CVPR 2022.</a></li>
+        <li><a href="https://arxiv.org/abs/2104.08527">Muhammed Kocabas et al. "PARE: Part Attention Regressor for 3D Human Body Estimation." 2021.</a></li>
+        <li><a href="https://arxiv.org/abs/2411.08128">Priyanka Patel and Michael J. Black. "CameraHMR: Aligning People with Perspective." 3DV 2025.</a></li>
+        <li><a href="https://arxiv.org/abs/1802.00434">Rıza Alp Güler, Natalia Neverova, and Iasonas Kokkinos. "DensePose: Dense Human Pose Estimation in the Wild." 2018.</a></li>
+        <li><a href="https://arxiv.org/abs/1607.08128">Federica Bogo et al. "Keep it SMPL: Automatic Estimation of 3D Human Pose and Shape from a Single Image." 2016.</a></li>
+        <li><a href="https://github.com/open-mmlab/mmhuman3d">MMHuman3D Contributors. "OpenMMLab 3D Human Parametric Model Toolbox and Benchmark." 2021.</a></li>
+        <li><a href="https://arxiv.org/abs/1911.11763">Paul-Edouard Sarlin et al. "SuperGlue: Learning Feature Matching with Graph Neural Networks." CVPR 2020.</a></li>
+      </ul>
+    </section>
+  </article>
+</main>
+<script src="pose-viewer.js" defer></script>
+<script>
+  // Scenes (arrows / arrow keys): every image, the 3D viewer and the caption numbers follow the current scene.
+  // Results use CameraHMR bodies (assets under <scene>/camhmr/).
+  (function () {
+    var SCENES = [{"name":"Foot Stall","dir":"foot-stall","counts":{"superglue":83,"vc":85334},"sizes":{"superglue":[1400,929],"vc":[1400,929],"after":{"pose":[1253,870],"topdown":[665,823],"overlay1":[1050,1400],"overlay2":[1050,1400]}}},{"name":"Chest Stall","dir":"chest-stall","counts":{"superglue":65,"vc":130349},"sizes":{"superglue":[1400,929],"vc":[1400,929],"after":{"pose":[1253,864],"topdown":[549,823],"overlay1":[1050,1400],"overlay2":[1050,1400]}}},{"name":"Neck Stall","dir":"neck-stall","counts":{"superglue":29,"vc":85245},"sizes":{"superglue":[1400,929],"vc":[1400,929],"after":{"pose":[1253,870],"topdown":[439,823],"overlay1":[1050,1400],"overlay2":[1050,1400]}}}];
+    var P = 'virtual-correspondences/';
+    var root = document.getElementById('vc');
+    var viewer = root.querySelector('.pose-viewer');
+    var i = 0;
+    function text(key, value) { root.querySelectorAll('[data-text="' + key + '"]').forEach(function (el) { el.textContent = value; }); }
+    function img(key, src, wh) {
+      root.querySelectorAll('[data-img="' + key + '"]').forEach(function (el) { el.width = wh[0]; el.height = wh[1]; el.src = src; });
+    }
+    // Match figure: one photo pair, with each method's matches drawn as an SVG layer over it. Add a method by
+    // adding it here (and to run_baselines.py's matches.json export).
+    var METHODS = [
+      { key: 'superglue', name: 'SuperGlue', note: 'baseline' },
+      { key: 'vc', name: 'Virtual correspondences', shown: 25 }
+    ];
+    var matches = (function () {
+      var stage = root.querySelector('.match-stage'), svg = stage.querySelector('svg');
+      var select = root.querySelector('.match-select'), NS = 'http://www.w3.org/2000/svg';
+      var cache = {}, current = 0, auto = null, base = null;
+      var buttons = METHODS.map(function (m, k) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('role', 'radio');
+        b.innerHTML = '<span class="name"></span><span class="count"></span>';
+        b.querySelector('.name').textContent = m.name;
+        b.addEventListener('click', function () { stopAuto(); pick(k); });
+        select.appendChild(b);
+        return b;
+      });
+      function el(tag, attrs) {
+        var e = document.createElementNS(NS, tag);
+        Object.keys(attrs).forEach(function (a) { e.setAttribute(a, attrs[a]); });
+        return e;
+      }
+      function draw(data) {
+        svg.setAttribute('viewBox', '0 0 ' + data.width + ' ' + data.height);
+        svg.textContent = '';
+        var r = data.width * 0.0032;
+        METHODS.forEach(function (m, k) {
+          var g = el('g', { 'class': 'match-layer' + (k === current ? ' on' : '') });
+          var lines = (data.methods[m.key] || { lines: [] }).lines;
+          if (m.shown && lines.length > m.shown) {  // evenly spaced subset
+            var step = lines.length / m.shown;
+            lines = Array.from({ length: m.shown }, function (_, j) { return lines[Math.floor(j * step)]; });
+          }
+          lines.forEach(function (l) {
+            g.appendChild(el('line', { x1: l[0], y1: l[1], x2: l[2], y2: l[3], 'class': 'match-line' }));
+          });
+          lines.forEach(function (l) {
+            g.appendChild(el('circle', { cx: l[0], cy: l[1], r: r, 'class': 'match-end' }));
+            g.appendChild(el('circle', { cx: l[2], cy: l[3], r: r, 'class': 'match-end' }));
+          });
+          svg.appendChild(g);
+          var info = data.methods[m.key], n = info ? info.count : 0;
+          var label = n.toLocaleString('en-US') + ' matches' + (m.shown && n > m.shown ? ' · ' + m.shown + ' shown' : '');
+          buttons[k].querySelector('.count').textContent = label + (m.note ? ' · ' + m.note : '');
+        });
+      }
+      function pick(k) {
+        current = k;
+        buttons.forEach(function (b, j) { b.setAttribute('aria-checked', String(j === k)); });
+        svg.querySelectorAll('.match-layer').forEach(function (g, j) { g.classList.toggle('on', j === k); });
+      }
+      function stopAuto() { if (auto) { clearInterval(auto); auto = null; } }
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        auto = setInterval(function () { pick((current + 1) % METHODS.length); }, 1500);
+      }
+      pick(0);
+      return {
+        load: function (dir, size) {
+          base = dir;
+          var img = stage.querySelector('img');
+          img.width = size[0]; img.height = size[1]; img.src = dir + 'pair.jpg';
+          var p = cache[dir] || (cache[dir] = fetch(dir + 'matches.json').then(function (r) { return r.json(); }));
+          p.then(function (data) { if (base === dir) draw(data); });
+        }
+      };
+    })();
+
+    function update() {
+      var sc = SCENES[i], z = sc.sizes.after, d = P + sc.dir + '/camhmr/';
+      root.querySelector('.name').textContent = sc.name;
+      root.querySelector('.count').textContent = (i + 1) + ' / ' + SCENES.length;
+      matches.load(d, sc.sizes.superglue);
+      ['pose_light', 'pose_dark'].forEach(function (k) { img(k, d + 'after/' + k + '.jpg', z.pose); });
+      ['topdown_light', 'topdown_dark'].forEach(function (k) { img(k, d + 'after/' + k + '.jpg', z.topdown); });
+      var scenes = JSON.stringify({ after: d + 'after/scene.json' });
+      if (viewer.dataset.scenes !== scenes) viewer.dataset.scenes = scenes;
+    }
+    function show(k) { i = (k + SCENES.length) % SCENES.length; update(); }
+    root.querySelector('.prev').addEventListener('click', function () { show(i - 1); });
+    root.querySelector('.next').addEventListener('click', function () { show(i + 1); });
+    document.addEventListener('keydown', function (e) {
+      if (e.altKey || e.ctrlKey || e.metaKey || /input|textarea|select/i.test(e.target.tagName)) return;
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    update();
+  })();
+</script>
+</body>
+</html>

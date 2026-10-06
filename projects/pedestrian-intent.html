@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedestrian Intent Estimation · Niviru Wijayaratne</title>
+  <meta name="description" content="Predicting whether a pedestrian will cross from 2D pose, using SSD detection, OpenPose keypoints and a random forest trained on JAAD.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../theme.js"></script>
+  <script data-goatcounter="https://niviruwijayaratne.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script src="../track.js" defer></script>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← Back</a>
+
+  <article>
+    <h1>Pedestrian Intent Estimation</h1>
+    <p>
+      Predicting whether a pedestrian is about to cross the street from how they're standing and
+      moving. Pedestrians are detected with SSD, their 2D pose is estimated with OpenPose, and a
+      classifier trained on the <a href="https://arxiv.org/abs/1609.04741">JAAD</a> driving dataset
+      predicts crossing or not crossing from a short window of poses. Based on Fang and López,
+      <a href="https://arxiv.org/abs/1807.10580">"Is the Pedestrian Going to Cross? Answering by 2D Pose Estimation"</a>.
+    </p>
+    <ul class="links toc">
+      <li><a href="https://github.com/niviruwijayaratne/pedestrian-intent-estimation">Code</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#next">Next steps</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+
+    <section id="results">
+      <h2>Results</h2>
+
+      <h3>Pose estimation</h3>
+      <figure class="fig">
+        <img src="pedestrian-intent/pose_frame.jpg" alt="Dashcam frame of a parking lot with a pose skeleton drawn on a pedestrian next to a white car" width="1400" height="788" loading="lazy">
+        <figcaption>Estimated pose on a JAAD dashcam frame.</figcaption>
+      </figure>
+      <figure class="fig">
+        <div class="fig-pair" style="max-width: 420px">
+          <img src="pedestrian-intent/pose_frame_crop.jpg" alt="Close-up of the pedestrian with colored limbs and joints overlaid" width="400" height="320" loading="lazy" style="--ar: 1.25">
+          <img src="pedestrian-intent/pose_crop.jpg" alt="A pedestrian crop with a full-body pose skeleton overlaid" width="88" height="238" loading="lazy" style="--ar: 0.37">
+        </div>
+        <figcaption>Close-up of the frame above (left) and pose on a detected pedestrian crop (right).</figcaption>
+      </figure>
+
+      <h3>Crossing classifier</h3>
+      <p>
+        Evaluated on a held-out 20% of the 5,766 pose windows (1,154 windows):
+      </p>
+      <table>
+        <thead>
+          <tr><th>Class</th><th>Precision</th><th>Recall</th><th>F1</th><th>Windows</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Not crossing</td><td>0.98</td><td>0.92</td><td>0.95</td><td>514</td></tr>
+          <tr><td>Crossing</td><td>0.94</td><td>0.99</td><td>0.96</td><td>640</td></tr>
+          <tr><td>Overall accuracy</td><td colspan="4">0.956</td></tr>
+        </tbody>
+      </table>
+      <table class="confusion">
+        <thead>
+          <tr><th></th><th>Predicted not crossing</th><th>Predicted crossing</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Not crossing</th><td>471</td><td>43</td></tr>
+          <tr><th>Crossing</th><td>8</td><td>632</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <p><strong>Caveat.</strong>
+          The windows overlap (each starts one frame after the previous one) and were split into
+          train and test at random, so windows from the same pedestrian appear in both. These numbers
+          are likely optimistic; a split by video or by pedestrian would give a fairer estimate.</p>
+      </div>
+    </section>
+
+    <section id="approach">
+      <h2>Approach</h2>
+      <ol>
+        <li><strong>Detection.</strong> A <a href="https://github.com/amdegroot/ssd.pytorch">SSD300</a> detector pretrained on PASCAL VOC finds people in each frame.</li>
+        <li><strong>Pose.</strong> A PyTorch port of <a href="https://github.com/DavexPro/pytorch-pose-estimation">OpenPose</a> estimates 2D body keypoints inside each detected box.</li>
+        <li><strong>Pose features.</strong> From 9 body keypoints, each frame becomes 396 features: horizontal and vertical distances and two angles for every pair of keypoints (144), plus the interior angles of every triangle of keypoints (252).</li>
+        <li><strong>Windows.</strong> Features from 14 consecutive frames are stacked into one 5,544-dimensional sample. Training windows come from JAAD's high-visibility pedestrians, sliding one frame at a time and skipping any window with occlusion.</li>
+        <li><strong>Classifier.</strong> A random forest (400 trees, max depth 15) predicts whether the pedestrian is crossing.</li>
+      </ol>
+      <p>
+        The repo also includes ROS and Gazebo files for simulating vehicle control.
+      </p>
+    </section>
+
+    <section id="next">
+      <h2>Next steps</h2>
+      <ul>
+        <li>Track pedestrians across frames (e.g. DeepSORT), so each person's pose history stays together when running on full videos.</li>
+        <li>Evaluate on a split by video, so the test set only has unseen pedestrians.</li>
+        <li>Try 3D pose instead of 2D.</li>
+      </ul>
+    </section>
+
+    <section id="references">
+      <h2>References</h2>
+      <ul>
+        <li><a href="https://arxiv.org/abs/1807.10580">Zhijie Fang and Antonio M. López. "Is the Pedestrian Going to Cross? Answering by 2D Pose Estimation." IEEE Intelligent Vehicles Symposium, 2018.</a></li>
+        <li><a href="https://arxiv.org/abs/1609.04741">Iuliia Kotseruba, Amir Rasouli, and John K. Tsotsos. "Joint Attention in Autonomous Driving (JAAD)." 2016.</a></li>
+        <li><a href="https://openaccess.thecvf.com/content_ICCV_2019/html/Rasouli_PIE_A_Large-Scale_Dataset_and_Models_for_Pedestrian_Intention_Estimation_ICCV_2019_paper.html">Amir Rasouli et al. "PIE: A Large-Scale Dataset and Models for Pedestrian Intention Estimation and Trajectory Prediction." ICCV 2019.</a></li>
+        <li><a href="https://github.com/amdegroot/ssd.pytorch">ssd.pytorch</a></li>
+        <li><a href="https://github.com/DavexPro/pytorch-pose-estimation">pytorch-pose-estimation</a></li>
+      </ul>
+    </section>
+  </article>
+</main>
+</body>
+</html>
